@@ -19,7 +19,7 @@ npm run preview   # Preview production build
 
 ## Qué es este repo
 
-Un sistema de propuestas comerciales para Flowbit. Cada propuesta es un sitio single-page scrolleable con secciones navegables. Toda la data de una propuesta vive en `src/data/proposal.ts` — los componentes son layouts reutilizables que reciben props.
+Un sistema de propuestas comerciales para Flowbit. Cada propuesta es un sitio single-page scrolleable con secciones navegables. El repo soporta **múltiples propuestas al mismo tiempo**: cada cliente tiene su propio archivo `src/data/{slug}.ts` exportando un `ProposalData`, y `src/data/proposal.ts` es el registry que mapea slugs a propuestas. La URL pública es `/propuestas/{slug}` (React Router ya configurado en `src/App.tsx`). Los componentes son layouts reutilizables que reciben props.
 
 ## Antes de crear una nueva propuesta
 
@@ -37,13 +37,66 @@ Datos mínimos requeridos:
 
 Si el usuario da la mayoría pero faltan 1-2 datos, preguntar solo por los faltantes. No bloquear por datos menores que se puedan asumir razonablemente.
 
-## Cómo crear una nueva propuesta
+### Excepción: invocación desde el pipeline automatizado
 
-Solo edita `src/data/proposal.ts`. La propuesta es un objeto con:
-- `logo`: URL del logo para el header
-- `sections[]`: array ordenado de secciones, cada una con un `layout` y su data
+Cuando este repo lo usa Claude Code en modo headless (`claude -p`) como parte del pipeline de n8n (Telegram → ASISTENTE → wrapper HTTP → Claude Code), la validación de datos **ya se hizo aguas arriba** por el agente ASISTENTE antes de llegar aquí. En ese caso:
+
+- NO preguntes nada. El user prompt viene con todos los datos ya estructurados en JSON.
+- Detecta si es una propuesta NUEVA (no existe `src/data/{slug}.ts`) o una ITERACIÓN (el archivo ya existe) y sigue el flujo correspondiente de las secciones "Cómo crear una propuesta NUEVA" o "Cómo ITERAR una propuesta existente".
+- Al terminar el archivo, ejecuta `git add`, `git commit` con mensaje descriptivo (ej: `"Nueva propuesta: Tacos El Paisa V01"` o `"Cigar Society V02 — ajustes de precio"`), y `git push origin main`. Vercel auto-deploya.
+- Responde ÚNICAMENTE en formato JSON estricto con los metadatos del commit para que el wrapper los pueda parsear:
+  ```json
+  {
+    "slug": "tacos-el-paisa",
+    "version": "V01",
+    "isNew": true,
+    "commitSha": "<sha corto>",
+    "previewUrl": "https://flowbit.studio/propuestas/tacos-el-paisa"
+  }
+  ```
+- Si algo falla (git push, conflicto, error de tipo), responde con `{"error": "<descripción>", "stage": "<donde falló>"}` y NO hagas commits parciales.
+
+## Arquitectura de archivos de propuestas
+
+- `src/data/types.ts` — Todos los tipos TypeScript (`ProposalData`, `HeroSection`, `CardCarouselSection`, etc.). Fuente de verdad.
+- `src/data/{slug}.ts` — Un archivo por cliente. Exporta default un `ProposalData`. Ejemplos existentes: `cigar-society.ts`, `martiniano.ts`.
+- `src/data/proposal.ts` — Registry. Importa cada archivo de cliente y lo registra en `proposals: Record<string, ProposalData>`. También re-exporta todos los tipos de `types.ts` para compatibilidad.
+
+## Cómo crear una propuesta NUEVA
+
+1. Crea `src/data/{slug}.ts` donde `{slug}` es kebab-case del nombre del cliente o proyecto (ej: `tacos-el-paisa.ts`).
+2. El archivo exporta default un objeto `ProposalData` con:
+   - `logo`: URL del logo para el header
+   - `sections[]`: array ordenado de secciones, cada una con un `layout` y su data
+3. En `src/data/proposal.ts`:
+   a. Añade el import: `import tacosElPaisa from './tacos-el-paisa'`
+   b. Regístralo en el objeto `proposals`: `'tacos-el-paisa': tacosElPaisa,`
+4. La propuesta queda accesible en `/propuestas/tacos-el-paisa`.
 
 Agrega, quita o reordena secciones según lo que el proyecto necesite. El header/nav se genera automáticamente desde las secciones que tengan `navLabel`.
+
+## Cómo ITERAR una propuesta existente (cambio de versión)
+
+Cuando el cliente pide ajustes sobre una propuesta que ya generaste antes:
+
+1. **NO crees un archivo nuevo.** Edita el existente `src/data/{slug}.ts`.
+2. Lee el valor actual del campo `Versión` en el hero meta (ej: `'V01'`).
+3. Incrementa la versión: `V01 → V02 → V03` y así. Formato siempre dos dígitos con `V` mayúscula.
+4. Sobrescribe el archivo completo con los cambios pedidos + la nueva versión.
+5. **NO toques `src/data/proposal.ts`** — el slug y el registry no cambian en iteraciones, solo el contenido del archivo del cliente.
+
+## Hero meta — siempre obligatorio
+
+El `meta` del hero SIEMPRE tiene exactamente estos 4 campos, en este orden, aunque algunos valores sean placeholders:
+
+```ts
+meta: [
+  { label: 'Dirigido a', value: '<nombre de la persona>' },
+  { label: 'Fecha', value: '<Mes Año>' },
+  { label: 'Versión', value: 'V01' },      // incrementar solo en iteraciones
+  { label: 'Vigencia', value: '30 días' },
+]
+```
 
 ### Layouts disponibles
 
@@ -84,7 +137,7 @@ No se usa `card-carousel` porque no hay multi-marca. No se usa `card-grid` porqu
 
 ### Tipos completos
 
-Todos los tipos están exportados desde `src/data/proposal.ts`: `HeroSection`, `CardCarouselSection`, `StickyListSection`, `CardGridSection`, `StickyCardsSection`, `StepCarouselSection`, `CTASection`, `ProposalData`.
+Todos los tipos están **definidos** en `src/data/types.ts` y re-exportados desde `src/data/proposal.ts` por compatibilidad: `ProposalMeta`, `HeroSection`, `CardCarouselSection`, `StickyListSection`, `CardGridSection`, `StickyCardsSection`, `StepCarouselSection`, `CTASection`, `ProposalData`. Al importarlos desde un archivo de cliente, usa siempre `from './types'`.
 
 ## Convenciones de diseño
 
