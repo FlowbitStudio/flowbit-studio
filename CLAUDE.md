@@ -98,6 +98,31 @@ meta: [
 ]
 ```
 
+## Catálogo de servicios de Flowbit
+
+Flowbit es un estudio multidisciplinario, NO solo una agencia de desarrollo. El catálogo completo de servicios que puedes sugerir en propuestas incluye:
+
+### Servicios core
+- **Sistematización / Desarrollo de software** — apps, sitios web, e-commerce, automatizaciones, integraciones, sistemas internos, dashboards, SaaS. Este es el servicio más común y suele ser el alcance principal de las propuestas.
+- **Diagnóstico** — análisis previo al desarrollo de cualquier proyecto. **Precio fijo: $10,000 MXN.** Ver regla obligatoria más abajo.
+
+### Servicios creativos
+- **Diseño gráfico** — branding, identidad visual, guías de marca, sistemas gráficos, papelería, piezas editoriales, decks.
+- **Animación** — motion graphics, animaciones para redes, lottie para UI, intros/outros, explainers animados.
+- **Video** — producción audiovisual, edición, video institucional, reels, video para campañas, testimoniales.
+- **Fotografía** — sesión fotográfica de producto, lifestyle, corporativa, foto para e-commerce, foto de eventos.
+
+### Servicios de crecimiento / operación
+- **SEO técnico y de contenido** — optimización on-page, schema, Core Web Vitals, estrategia de keywords.
+- **Analytics y tracking** — GA4, GTM, eventos custom, dashboards de performance, integración con pixels.
+- **Estrategia de contenido y redes** — plan editorial, plantillas de redes sociales, calendarios de publicación.
+- **Soporte y mantenimiento** — planes mensuales de soporte técnico, actualizaciones, monitoreo, backups.
+- **Capacitación y onboarding** — training del equipo del cliente para usar el sistema entregado.
+
+### Cómo usar este catálogo
+
+Al generar la propuesta, identifica qué servicios complementarios tendrían sentido según la naturaleza del proyecto y sugiérelos en `servicios_adicionales` (ver regla 2 más abajo). Un proyecto de e-commerce probablemente necesite fotografía de producto + SEO + capacitación; un proyecto de branding podría necesitar animación + fotografía + estrategia de redes; un proyecto de SaaS probablemente necesite video explainer + onboarding + soporte mensual.
+
 ## Reglas de contenido obligatorias (toda propuesta)
 
 Estas 3 reglas aplican SIEMPRE, independientemente del tipo de propuesta.
@@ -112,28 +137,50 @@ Toda propuesta debe tener al menos un `quote` — un texto inspirador/reflexivo 
 
 ### 2. Siempre sugerir servicios adicionales aplicables
 
-Toda propuesta debe incluir un layout `card-grid` con `servicios_adicionales` — **incluso si el brief del cliente no los menciona**. Piensa qué servicios complementarios agregarían valor al proyecto según su naturaleza, y sugiérelos con precios estimados razonables.
+Toda propuesta debe incluir un layout `card-grid` con `servicios_adicionales` — **incluso si el brief del cliente no los menciona**. Pincha del **catálogo de servicios de Flowbit** (sección arriba) los servicios complementarios que tengan sentido para la naturaleza del proyecto, y sugiérelos como add-ons opcionales.
 
-Ejemplos de servicios adicionales típicos según el tipo de proyecto:
-- **E-commerce**: SEO técnico, analytics setup, integración con ERP, capacitación del equipo, soporte post-launch (mensual)
-- **Landing / Marketing site**: A/B testing setup, integración con CRM, campañas de email marketing, mantenimiento mensual
-- **SaaS / App**: Onboarding de usuarios, documentación técnica, soporte priorizado, feature roadmap
-- **Branding + web**: Guía de marca, plantillas de redes sociales, sesión fotográfica de producto
+#### Diagnóstico — SIEMPRE obligatorio
 
-Incluye 2-4 servicios adicionales. Deja claro en la descripción del layout `card-grid` que son **add-ons opcionales** no incluidos en el precio total de la propuesta. Si los servicios vienen del brief del cliente, úsalos primero; si sobran espacios, completa con sugerencias de Flowbit.
+El primer item del `servicios_adicionales` de CUALQUIER propuesta DEBE ser el **Diagnóstico**, con precio **fijo $10,000 MXN**. Este precio NO se estima, NO lleva prefijo "Desde"/"Estimado", es un número firme en V01, V02, V03 y en iteraciones futuras. El diagnóstico es un servicio estándar de Flowbit que siempre se ofrece.
+
+Estructura exacta de la entrada:
+
+```ts
+{
+  nombre: 'Diagnóstico',
+  precio: '$10,000 MXN',
+  descripcion: 'Análisis inicial del proyecto: levantamiento de requerimientos, auditoría técnica del estado actual, definición de alcance detallado y roadmap de implementación. Necesario antes de arrancar cualquier desarrollo.',
+  label: 'fijo'
+}
+```
+
+#### Servicios adicionales sugeridos (después del Diagnóstico)
+
+Después del Diagnóstico, añade **2-4 servicios adicionales más** del catálogo de Flowbit que apliquen al proyecto. Ejemplos de combinaciones típicas:
+
+- **E-commerce** → Fotografía de producto + SEO técnico + Analytics + Soporte mensual
+- **Landing / Marketing site** → Fotografía corporativa + SEO + Estrategia de contenido + Soporte
+- **SaaS / App** → Video explainer (animación) + Onboarding/capacitación + Soporte priorizado
+- **Branding + web** → Diseño gráfico (manual de marca) + Fotografía de producto + Animación para redes + Plantillas de redes
+- **Proyecto con componente visual fuerte** → siempre incluir Fotografía y/o Video del catálogo
+
+Deja claro en el `description` del layout `card-grid` que el **Diagnóstico es fijo** y que los demás son **add-ons opcionales** con precios estimados, no incluidos en el precio total de la propuesta.
 
 ### 3. Primera iteración (V01) = costos estimados
 
 Cuando generes una propuesta **NUEVA** (V01 — el archivo `src/data/{slug}.ts` NO existe previamente), los precios deben tratarse como **estimaciones** sujetas a refinamiento:
 
 - Si el brief da un `precio_total` pero no un `desglose`, tú generas el desglose estimado por componente (módulos, fases, servicios).
-- En las descripciones de los precios del `sticky-cards` y en el `card-grid` de servicios adicionales, usa un tono de estimación cuando aplique — prefijos como "Desde", "Estimado" o "Aprox." son apropiados para servicios adicionales.
-- En el campo `consideraciones` de la propuesta (que va al final o dentro del sticky-cards como contexto), **siempre** agrega una línea: *"Propuesta inicial (V01). Los precios aquí presentados son estimaciones y pueden ajustarse en siguientes iteraciones según el alcance final definido con el cliente."*
+- En las descripciones de los precios del `sticky-cards` y en el `card-grid` de servicios adicionales, usa un tono de estimación cuando aplique — prefijos como "Desde", "Estimado" o "Aprox." son apropiados para los servicios adicionales.
+- En el campo `consideraciones` de la propuesta (que va al final o dentro del sticky-cards como contexto), **siempre** agrega una línea: *"Propuesta inicial (V01). Los precios aquí presentados son estimaciones (excepto el Diagnóstico que es fijo) y pueden ajustarse en siguientes iteraciones según el alcance final definido con el cliente."*
+
+**Excepción importante** — el precio del **Diagnóstico siempre es $10,000 MXN firme**, aunque estemos en V01. NO lo presentes como estimación, NO le pongas prefijo "Desde"/"Estimado", NO varíes el número. Es el único precio fijo desde la primera iteración.
 
 Cuando **iteres una propuesta existente (V02+)**, esta regla NO aplica:
 - Los precios ya fueron discutidos con el cliente, trátalos como firmes.
 - NO agregues el disclaimer de "propuesta inicial".
 - En el `consideraciones`, si había la nota de V01, bórrala o reemplázala por una nota de iteración: *"Actualizada tras feedback del cliente el <fecha>."*
+- El Diagnóstico sigue siendo $10,000 MXN (no cambia nunca).
 
 ### Layouts disponibles
 
