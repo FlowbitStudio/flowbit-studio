@@ -19,10 +19,12 @@ export type {
 
 import cigarSociety from './cigar-society'
 import martiniano from './martiniano'
+import testWrapper from './test-wrapper'
 import type { ProposalData } from './types'
 
 // Registra aquí cada propuesta con su slug (usado en la URL)
 export const proposals: Record<string, ProposalData> = {
   'cigar-society': cigarSociety,
   'martiniano': martiniano,
+  'test-wrapper': testWrapper,
 }
