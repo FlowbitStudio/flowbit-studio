@@ -98,6 +98,43 @@ meta: [
 ]
 ```
 
+## Reglas de contenido obligatorias (toda propuesta)
+
+Estas 3 reglas aplican SIEMPRE, independientemente del tipo de propuesta.
+
+### 1. Siempre incluir un `quote`
+
+Toda propuesta debe tener al menos un `quote` — un texto inspirador/reflexivo de 1-2 oraciones que resuma la filosofía, propuesta de valor o visión del proyecto. El quote se renderea en pantalla completa (100vh) como momento de descanso visual entre secciones, y aporta mucha presencia a la propuesta.
+
+- **Si la propuesta es multi-módulo**: usa el campo `quote` del layout `card-carousel` (ver `cigar-society.ts` como referencia, el quote va después del array de cards).
+- **Si la propuesta NO es multi-módulo** (`es_multimodulo: false`): incluye IGUAL un `card-carousel` con 1-3 cards que representen pilares del proyecto (no módulos — ejemplo: "Diseño", "Desarrollo", "Soporte continuo") más el `quote`. El quote es el objetivo principal de la sección; las cards son el vehículo.
+- **Tono del quote**: debe sonar a manifiesto o visión, no a descripción técnica. Ejemplo del estilo de Flowbit: "Cuatro marcas, un solo ecosistema. Cada bar vive su identidad mientras comparte la misma infraestructura." Evita frases genéricas tipo "Calidad y compromiso".
+
+### 2. Siempre sugerir servicios adicionales aplicables
+
+Toda propuesta debe incluir un layout `card-grid` con `servicios_adicionales` — **incluso si el brief del cliente no los menciona**. Piensa qué servicios complementarios agregarían valor al proyecto según su naturaleza, y sugiérelos con precios estimados razonables.
+
+Ejemplos de servicios adicionales típicos según el tipo de proyecto:
+- **E-commerce**: SEO técnico, analytics setup, integración con ERP, capacitación del equipo, soporte post-launch (mensual)
+- **Landing / Marketing site**: A/B testing setup, integración con CRM, campañas de email marketing, mantenimiento mensual
+- **SaaS / App**: Onboarding de usuarios, documentación técnica, soporte priorizado, feature roadmap
+- **Branding + web**: Guía de marca, plantillas de redes sociales, sesión fotográfica de producto
+
+Incluye 2-4 servicios adicionales. Deja claro en la descripción del layout `card-grid` que son **add-ons opcionales** no incluidos en el precio total de la propuesta. Si los servicios vienen del brief del cliente, úsalos primero; si sobran espacios, completa con sugerencias de Flowbit.
+
+### 3. Primera iteración (V01) = costos estimados
+
+Cuando generes una propuesta **NUEVA** (V01 — el archivo `src/data/{slug}.ts` NO existe previamente), los precios deben tratarse como **estimaciones** sujetas a refinamiento:
+
+- Si el brief da un `precio_total` pero no un `desglose`, tú generas el desglose estimado por componente (módulos, fases, servicios).
+- En las descripciones de los precios del `sticky-cards` y en el `card-grid` de servicios adicionales, usa un tono de estimación cuando aplique — prefijos como "Desde", "Estimado" o "Aprox." son apropiados para servicios adicionales.
+- En el campo `consideraciones` de la propuesta (que va al final o dentro del sticky-cards como contexto), **siempre** agrega una línea: *"Propuesta inicial (V01). Los precios aquí presentados son estimaciones y pueden ajustarse en siguientes iteraciones según el alcance final definido con el cliente."*
+
+Cuando **iteres una propuesta existente (V02+)**, esta regla NO aplica:
+- Los precios ya fueron discutidos con el cliente, trátalos como firmes.
+- NO agregues el disclaimer de "propuesta inicial".
+- En el `consideraciones`, si había la nota de V01, bórrala o reemplázala por una nota de iteración: *"Actualizada tras feedback del cliente el <fecha>."*
+
 ### Layouts disponibles
 
 | Layout | Componente | Cuándo usarlo |
