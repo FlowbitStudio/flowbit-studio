@@ -1,0 +1,169 @@
+.pasos {
+  background: var(--black);
+  padding: 80px 0;
+}
+
+/* Header: título + desc + flechas */
+.pasos-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 32px;
+  align-items: start;
+  padding: 0 var(--page-padding);
+  margin-bottom: 48px;
+}
+
+.pasos-title {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--white);
+}
+
+.pasos-desc {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--light-gray);
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+/* Full-bleed scroll container */
+.pasos-scroll {
+  overflow-x: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  width: 100%;
+}
+
+.pasos-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.pasos-cards {
+  display: flex;
+}
+
+.paso-card {
+  scroll-snap-align: start;
+  min-height: 549px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.35s ease;
+}
+
+.paso-card:hover {
+  background: var(--blue);
+}
+
+.paso-card:hover .paso-tag {
+  color: var(--black);
+}
+
+.paso-card:hover .paso-title {
+  color: var(--black);
+}
+
+.paso-card:hover .paso-desc {
+  color: var(--white);
+}
+
+.paso-card-content {
+  padding: 0 31px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.paso-tag {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--blue);
+  text-transform: uppercase;
+  transition: color 0.35s ease;
+}
+
+.paso-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1;
+  max-width: 330px;
+  transition: color 0.35s ease;
+}
+
+.paso-desc {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gray);
+  text-transform: uppercase;
+  line-height: 1.6;
+  max-width: 280px;
+  transition: color 0.35s ease;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .pasos-header {
+    grid-template-columns: 1fr;
+  }
+
+  .pasos-scroll {
+    overflow-x: auto;
+  }
+
+  .pasos-cards {
+    width: calc(70vw * 5);
+  }
+
+  .paso-card {
+    flex: 0 0 70vw;
+    width: 70vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .pasos-cards {
+    width: calc(80vw * 5);
+  }
+
+  .paso-card {
+    flex: 0 0 80vw;
+    width: 80vw;
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pasos {
+    padding: 60px 0;
+  }
+
+  .pasos-header {
+    padding: 0 20px;
+  }
+
+  .pasos-title {
+    font-size: 36px;
+  }
+
+  .pasos-cards {
+    width: calc(85vw * 5);
+  }
+
+  .paso-card {
+    flex: 0 0 85vw;
+    width: 85vw;
+    min-height: 350px;
+  }
+
+  .paso-title {
+    font-size: 24px;
+  }
+}

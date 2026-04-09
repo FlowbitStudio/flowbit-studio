@@ -1,0 +1,184 @@
+.inversion {
+  background: var(--light-gray);
+}
+
+/* Grid full bleed 50/50 */
+.inversion-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  align-items: start;
+}
+
+/* Izquierda: sticky con espacio para el header */
+.inversion-left {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Texto arriba — mismo padding que las demás secciones */
+.inversion-text {
+  padding: 100px var(--page-padding) 32px;
+  flex-shrink: 0;
+}
+
+.inversion-title {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--black);
+  margin-bottom: 16px;
+}
+
+.inversion-terms {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  text-transform: uppercase;
+  line-height: 1.6;
+  color: var(--black);
+  max-width: 500px;
+}
+
+/* Imagen ocupa todo el espacio restante */
+.inversion-image {
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.inversion-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Derecha: cards scrolleables, grid de 2 cols que llena todo */
+.inversion-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: dense;
+}
+
+.inversion-card {
+  min-height: 441px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px 35px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.35s ease;
+}
+
+.inversion-card:hover {
+  background: var(--blue);
+}
+
+.inversion-card:hover .inversion-card-inner {
+  color: var(--white);
+}
+
+.inversion-card--wide {
+  grid-column: 1 / -1;
+}
+
+.inversion-card-inner {
+  color: var(--black);
+  transition: color 0.35s ease;
+}
+
+.inversion-card-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.inversion-card-desc {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  line-height: 1.6;
+  max-width: 352px;
+  margin-bottom: 24px;
+}
+
+.inversion-card-label {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.inversion-card-price {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Una sola card: sección estática de 70vh, sin sticky */
+.inversion:has(.inversion-card:only-child) .inversion-grid {
+  min-height: 70vh;
+  align-items: stretch;
+}
+
+.inversion:has(.inversion-card:only-child) .inversion-left {
+  position: static;
+  height: auto;
+  min-height: 70vh;
+  justify-content: center;
+}
+
+.inversion:has(.inversion-card:only-child) .inversion-card {
+  min-height: 0;
+  height: 100%;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .inversion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .inversion-left {
+    position: static;
+    height: auto;
+  }
+
+  .inversion-image {
+    height: 300px;
+    flex: none;
+  }
+
+  .inversion-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .inversion-card {
+    min-height: 300px;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .inversion-text {
+    padding: 60px 20px 24px;
+  }
+
+  .inversion-title {
+    font-size: 32px;
+  }
+
+  .inversion-card {
+    padding: 32px 24px;
+    min-height: 250px;
+  }
+}

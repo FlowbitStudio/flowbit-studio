@@ -1,0 +1,48 @@
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'GT America Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+  background: #fff;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+:root {
+  --blue: #1786FF;
+  --gray: #687787;
+  --light-gray: #e0e0e0;
+  --black: #000;
+  --white: #fff;
+  --font-display: 'Mark Pro', 'Helvetica Neue', 'Arial', sans-serif;
+  --font-mono: 'GT America Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+  --page-padding: 32px;
+}
+
+/* Fade-in on scroll */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s cubic-bezier(0.25, 0.1, 0.25, 1),
+              transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.fade-in-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

@@ -1,0 +1,157 @@
+.arquitectura {
+  background: var(--black);
+  color: var(--white);
+  padding: 80px 0;
+}
+
+/* Header — keeps inner padding */
+.arq-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 48px;
+  padding: 0 var(--page-padding);
+}
+
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--blue);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.arq-title {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.arq-desc {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--light-gray);
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+/* Cards carousel — full bleed, no margins */
+.arch-cards-scroll {
+  overflow-x: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  width: 100%;
+}
+
+.arch-cards-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.arch-cards {
+  display: flex;
+}
+
+.arch-card {
+  scroll-snap-align: start;
+  padding: 80px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 600px;
+  background: var(--black);
+  transition: background 0.35s ease;
+  cursor: pointer;
+}
+
+.arch-card:hover {
+  background: var(--blue);
+}
+
+.arch-card-img {
+  height: 140px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+}
+
+.arch-card-bottom {
+  margin-top: auto;
+}
+
+.arch-card-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.arch-card-desc {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+.arch-card-list {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  line-height: 1.8;
+  padding-left: 20px;
+}
+
+
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .arq-header {
+    grid-template-columns: 1fr;
+  }
+
+  .arch-cards-scroll {
+    overflow-x: auto;
+  }
+
+  .arch-cards {
+    width: calc(80vw * 4);
+  }
+
+  .arch-card {
+    flex: 0 0 80vw;
+    width: 80vw;
+    min-height: 500px;
+    padding: 60px 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .arquitectura {
+    padding: 60px 0;
+  }
+
+  .arq-header {
+    padding: 0 20px;
+  }
+
+  .arq-title {
+    font-size: 36px;
+  }
+
+  .arch-cards {
+    width: calc(85vw * 4);
+  }
+
+  .arch-card {
+    flex: 0 0 85vw;
+    width: 85vw;
+    min-height: 420px;
+    padding: 40px 20px;
+  }
+
+}

@@ -1,0 +1,43 @@
+.nav-arrows {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-arrow-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid var(--gray);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.nav-arrow-btn--dark {
+  color: #fff;
+}
+
+.nav-arrow-btn--dark:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #fff;
+}
+
+.nav-arrow-btn--light {
+  color: var(--black);
+  border-color: var(--gray);
+}
+
+.nav-arrow-btn--light:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: var(--black);
+}
+
+@media (max-width: 600px) {
+  .nav-arrow-btn {
+    width: 48px;
+    height: 48px;
+  }
+}

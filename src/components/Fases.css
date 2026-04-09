@@ -1,0 +1,191 @@
+.fases {
+  background: var(--black);
+  color: var(--white);
+  padding: 0 var(--page-padding) 80px;
+}
+
+.fases-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--gray);
+  margin-bottom: 48px;
+}
+
+/* Two-column layout: title left, phases right */
+.fases-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+/* Left column — sticky title */
+.fases-left {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+
+.fases-title {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Right column — all phase blocks */
+.fases-right {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Each phase block */
+.phase-block {
+  margin-bottom: 0;
+}
+
+/* Phase head: label left, badge right */
+.phase-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.phase-label {
+  /* stacked text */
+}
+
+.phase-number {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--blue);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.phase-number--gray {
+  color: var(--gray);
+}
+
+.phase-type {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.phase-badge {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 7px 18px;
+  white-space: nowrap;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.phase-badge--blue {
+  background: var(--blue);
+  color: var(--black);
+}
+
+.phase-badge--gray {
+  background: var(--gray);
+  color: var(--black);
+}
+
+/* Phase title + desc */
+.phase-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.phase-desc {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--light-gray);
+  text-transform: uppercase;
+  line-height: 1.6;
+  max-width: 679px;
+  margin-bottom: 28px;
+}
+
+/* Entregable items */
+.phase-item {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 28px;
+}
+
+.phase-item-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--gray);
+  position: absolute;
+  left: 0;
+  top: 4px;
+}
+
+.phase-item-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--gray);
+  margin-bottom: 8px;
+}
+
+.phase-item-list {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--gray);
+  text-transform: uppercase;
+  line-height: 1.7;
+  padding-left: 20px;
+  max-width: 539px;
+}
+
+.phase-list-standalone {
+  padding-left: 20px;
+  margin-bottom: 28px;
+}
+
+/* Separator between phases */
+.phase-separator {
+  width: 100%;
+  height: 1px;
+  background: var(--gray);
+  margin: 48px 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .fases-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .fases-left {
+    position: static;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .fases {
+    padding: 0 20px 60px;
+  }
+
+  .fases-title {
+    font-size: 36px;
+  }
+
+  .phase-title {
+    font-size: 24px;
+  }
+
+  .phase-head {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

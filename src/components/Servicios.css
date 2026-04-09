@@ -1,0 +1,136 @@
+.servicios {
+  background: var(--light-gray);
+  padding: 80px 0 0;
+}
+
+/* Header — keeps inner padding */
+.servicios-header {
+  padding: 0 var(--page-padding);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 12px 32px;
+  margin-bottom: 60px;
+}
+
+.servicios-header .section-tag {
+  grid-column: 1 / -1;
+}
+
+.servicios-title {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--black);
+}
+
+.servicios-desc {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--black);
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+/* Cards — full bleed, edge to edge */
+.servicios-cards {
+  display: flex;
+  width: 100%;
+}
+
+.servicio-card {
+  flex: 1 1 0;
+  min-height: 441px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px 50px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.35s ease;
+}
+
+.servicio-card:hover {
+  background: var(--blue);
+}
+
+/* Text colors: default gray, white on hover */
+.servicio-card-inner {
+  color: var(--gray);
+  transition: color 0.35s ease;
+}
+
+.servicio-card:hover .servicio-card-inner {
+  color: var(--white);
+}
+
+.servicio-card-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.servicio-card-desc {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  line-height: 1.6;
+  max-width: 352px;
+  margin-bottom: 24px;
+}
+
+.servicio-card-label {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.servicio-card-price {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .servicios-header {
+    grid-template-columns: 1fr;
+  }
+
+  .servicios-cards {
+    flex-direction: column;
+  }
+
+  .servicio-card {
+    border-left: 1px solid var(--gray);
+    min-height: 320px;
+  }
+
+  .servicio-card:hover + .servicio-card {
+    border-left-color: var(--gray);
+  }
+}
+
+@media (max-width: 600px) {
+  .servicios {
+    padding: 60px 0;
+  }
+
+  .servicios-header {
+    padding: 0 20px;
+  }
+
+  .servicios-title {
+    font-size: 32px;
+  }
+
+  .servicio-card {
+    padding: 32px 24px;
+    min-height: 280px;
+  }
+}

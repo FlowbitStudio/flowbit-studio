@@ -1,0 +1,24 @@
+.scroll-reveal {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--page-padding);
+}
+
+.scroll-reveal-text {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 96px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--white);
+}
+
+.scroll-reveal-word {
+  will-change: opacity;
+}
+
+@media (max-width: 600px) {
+  .scroll-reveal {
+    padding: 0 20px;
+  }
+}
