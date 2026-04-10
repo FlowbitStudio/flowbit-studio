@@ -66,7 +66,7 @@ Cuando este repo lo usa Claude Code en modo headless (`claude -p`) como parte de
 
 1. Crea `src/data/{slug}.ts` donde `{slug}` es kebab-case del nombre del cliente o proyecto (ej: `tacos-el-paisa.ts`).
 2. El archivo exporta default un objeto `ProposalData` con:
-   - `logo`: URL del logo para el header
+   - `logo`: **SIEMPRE** el string literal `'/favicon.svg'`. NUNCA inventes URLs (figma, placeholder, etc.) — el favicon.svg en `public/` ES el logo oficial de Flowbit, y Vite lo sirve desde la raíz del dominio. NO dejes el campo vacío.
    - `sections[]`: array ordenado de secciones, cada una con un `layout` y su data
 3. En `src/data/proposal.ts`:
    a. Añade el import: `import tacosElPaisa from './tacos-el-paisa'`

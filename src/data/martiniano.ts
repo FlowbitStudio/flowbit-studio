@@ -1,7 +1,7 @@
 import type { ProposalData } from './types'
 
 const martiniano: ProposalData = {
-  logo: 'https://www.figma.com/api/mcp/asset/e6917789-972d-4e29-a612-ebd2f5eb466a',
+  logo: '/favicon.svg',
 
   sections: [
     {

@@ -1,7 +1,7 @@
 import type { ProposalData } from './types'
 
 const testWrapper: ProposalData = {
-  logo: 'https://flowbit.studio/logo.svg',
+  logo: '/favicon.svg',
   sections: [
     {
       layout: 'hero',

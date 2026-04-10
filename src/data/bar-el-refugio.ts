@@ -1,7 +1,7 @@
 import type { ProposalData } from './types'
 
 const barElRefugio: ProposalData = {
-  logo: '',
+  logo: '/favicon.svg',
 
   sections: [
     {
