@@ -14,8 +14,39 @@ npm run preview   # Preview production build
 ## Tech Stack
 
 - **React 19** + **TypeScript 6** + **Vite 8**
-- Plain CSS with component-scoped files (no Tailwind, no CSS modules)
-- CSS custom properties defined in `src/index.css`
+- **react-router-dom** para multi-proposal routing (`/propuestas/:id`)
+- Plain CSS con archivos component-scoped (no Tailwind, no CSS modules)
+- CSS custom properties definidas en `src/index.css` (incluyendo `--page-padding` responsivo: 32px desktop, 20px mobile)
+- Build production con tsc + Vite, deploy via Docker (`Dockerfile` + `nginx.conf` en raíz) en EasyPanel
+
+## Sistema completo (contexto fuera del repo)
+
+Este repo NO vive solo. Es una pieza de un pipeline más grande:
+
+```
+Telegram (bot Flowbit)
+  ↓
+n8n workflows (instancia: https://n8n.flowbit.studio)
+  ├── Workflow principal: parseo de briefs, comandos administrativos, generación
+  └── Workflow CTA: webhook de aceptación de cliente desde el botón final
+  ↓
+Wrapper HTTP (Node + Claude Code CLI)
+  → Container EasyPanel "claude-wrapper" en project "flowbit"
+  → Tiene este repo (flowbit-studio) clonado en /app/workspace
+  → Corre Claude Code en modo headless (`claude -p`) con cwd al repo
+  → Después de un commit + push exitoso, dispara EasyPanel deploy hook
+  ↓
+GitHub (repos privados FlowbitStudio/flowbit-studio + FlowbitStudio/flowbit-wrapper)
+  ↓
+EasyPanel container "website-flowbit" rebuild → flowbit.studio
+  ↓
+Sistema de tracking en paralelo:
+  - Jira project "Propuestas" (PROP) con custom fields y 5 statuses
+  - Supabase tabla `propuestas` (mirror de Jira + metadata pipeline)
+  - Supabase tabla `leads` (CRM, linkeada via lead_id)
+```
+
+**Cuando este Claude Code corre desde el wrapper headless**, NO está editando el repo en local — está editando el clone que vive en el container del VPS. El git push va a GitHub, y de ahí EasyPanel auto-deploya. Todo el ciclo dura ~3 minutos por propuesta.
 
 ## Qué es este repo
 
