@@ -1,0 +1,278 @@
+.brief-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+/* ── Header negro ── */
+.brief-header {
+  background: var(--black);
+  padding: 80px var(--page-padding) 64px;
+}
+
+.brief-header-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.brief-header-logo {
+  height: 22px;
+  display: block;
+  margin-bottom: 48px;
+}
+
+.brief-header-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--blue);
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+
+.brief-header-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.brief-header-desc {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  line-height: 1.6;
+  max-width: 520px;
+}
+
+/* ── Form container ── */
+.brief-body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px var(--page-padding) 64px;
+}
+
+.brief-card {
+  background: #fff;
+  padding: 40px;
+}
+
+/* ── Section labels ── */
+.brief-section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  margin-bottom: 20px;
+  padding-top: 16px;
+}
+
+.brief-section-label:first-child {
+  padding-top: 0;
+}
+
+/* ── Grid ── */
+.brief-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 32px;
+}
+
+.brief-full {
+  grid-column: 1 / -1;
+}
+
+/* ── Input styles ── */
+.brief-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 6px;
+}
+
+.brief-input,
+.brief-select,
+.brief-textarea {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  padding: 12px 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--black);
+  text-transform: uppercase;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.brief-input::placeholder,
+.brief-textarea::placeholder {
+  color: rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+}
+
+.brief-input:focus,
+.brief-select:focus,
+.brief-textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(23, 134, 255, 0.12);
+}
+
+.brief-textarea {
+  resize: none;
+  line-height: 1.6;
+}
+
+.brief-hint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ── Select wrapper ── */
+.brief-select-wrap {
+  position: relative;
+}
+
+.brief-select {
+  appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.brief-select-arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 12px;
+  color: var(--gray);
+}
+
+/* ── Submit ── */
+.brief-submit-row {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brief-submit-note {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gray);
+  text-transform: uppercase;
+  line-height: 1.5;
+  max-width: 280px;
+}
+
+.brief-submit-note strong {
+  color: var(--black);
+}
+
+.brief-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  background: var(--black);
+  padding: 16px 36px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.brief-submit-btn:hover {
+  transform: translateY(-2px);
+}
+
+.brief-submit-btn--disabled {
+  background: #e0e0e0;
+  color: rgba(0, 0, 0, 0.3);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.brief-submit-btn--disabled:hover {
+  transform: none;
+}
+
+.brief-submit-success {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--blue);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+  width: 100%;
+  padding: 16px 0;
+}
+
+/* ── Footer ── */
+.brief-footer {
+  text-align: center;
+  padding: 32px 0 48px;
+}
+
+.brief-footer-logo {
+  height: 18px;
+  margin: 0 auto 12px;
+  display: block;
+  opacity: 0.25;
+}
+
+.brief-footer-email {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.brief-footer-copy {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.15);
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .brief-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brief-card {
+    padding: 24px;
+  }
+
+  .brief-submit-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .brief-submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
