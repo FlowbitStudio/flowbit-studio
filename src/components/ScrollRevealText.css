@@ -22,9 +22,9 @@
     padding: 0 var(--page-padding);
   }
 
-  /* Quote 20% más grande en mobile para que tenga más presencia
-     en pantallas chicas — el clamp default daba 40px, ahora 48px */
+  /* Quote en mobile con presencia fuerte — 57px para que el texto del
+     quote domine visualmente en pantallas chicas */
   .scroll-reveal-text {
-    font-size: 48px;
+    font-size: 57px;
   }
 }
