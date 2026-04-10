@@ -196,7 +196,7 @@ Cuando **iteres una propuesta existente (V02+)**, esta regla NO aplica:
 
 ### Reglas de layout fijas (NO cambiar)
 
-- **card-carousel**: Las cards SIEMPRE ocupan 3 columnas visibles (1/3 del viewport cada una). Si hay más de 3, se navega con las flechas. No se configura el número de columnas visibles.
+- **card-carousel**: En desktop las cards ocupan **3 columnas visibles** (1/3 del viewport cada una). En tablet y mobile (≤1024px) cambia a **1 columna full-width** para mejor legibilidad — la navegación entre cards se hace con las flechas o swipe nativo. Esto se controla con la CSS variable `--visible-cards` en `Arquitectura.css` (default 3, override a 1 en media queries).
 - **card-carousel quote**: El texto grande de descanso (quote) SIEMPRE ocupa 100vh del viewport, centrado verticalmente.
 - **sticky-cards**: Grid de 2 columnas. La primera card (proyecto completo / total) siempre ocupa 2 columnas para mayor jerarquía. El resto se acomoda en pares. Si queda una huérfana, se expande a 2 columnas.
 - **sticky-cards (1 sola card)**: Cuando hay una sola card (proyecto no modular), toda la sección mide 70vh. La columna izquierda NO es sticky (no hay scroll), se centra verticalmente. La card se estira al mismo alto. Sin desglose — un solo bloque, un solo precio.

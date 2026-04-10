@@ -2,6 +2,11 @@
   background: var(--black);
   color: var(--white);
   padding: 80px 0;
+
+  /* Cuántas cards visibles en el viewport del carousel.
+     Default desktop: 3. Tablet/mobile cambian este valor en media queries
+     y todos los anchos del carrusel se recalculan automáticamente. */
+  --visible-cards: 3;
 }
 
 /* Header — keeps inner padding */
@@ -65,6 +70,11 @@
   background: var(--black);
   transition: background 0.35s ease;
   cursor: pointer;
+
+  /* Ancho derivado de --visible-cards (definido en .arquitectura).
+     Desktop: 100vw / 3 = 33.33vw. Mobile: 100vw / 1 = 100vw. */
+  flex: 0 0 calc(100vw / var(--visible-cards));
+  width: calc(100vw / var(--visible-cards));
 }
 
 .arch-card:hover {
@@ -110,48 +120,44 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
+  .arquitectura {
+    /* Tablet: una sola card visible (no es un peek, es full-width)
+       para mejor legibilidad del contenido por card */
+    --visible-cards: 1;
+  }
+
   .arq-header {
     grid-template-columns: 1fr;
   }
 
   .arch-cards-scroll {
+    /* En mobile/tablet permitimos scroll touch nativo además de las arrows */
     overflow-x: auto;
   }
 
-  .arch-cards {
-    width: calc(80vw * 4);
-  }
-
   .arch-card {
-    flex: 0 0 80vw;
-    width: 80vw;
     min-height: 500px;
-    padding: 60px 24px;
+    padding: 60px var(--page-padding);
   }
 }
 
 @media (max-width: 600px) {
   .arquitectura {
     padding: 60px 0;
+    /* Mobile: igual 1 card visible, full-width */
+    --visible-cards: 1;
   }
 
   .arq-header {
-    padding: 0 20px;
+    padding: 0 var(--page-padding);
   }
 
   .arq-title {
     font-size: 36px;
   }
 
-  .arch-cards {
-    width: calc(85vw * 4);
-  }
-
   .arch-card {
-    flex: 0 0 85vw;
-    width: 85vw;
     min-height: 420px;
-    padding: 40px 20px;
+    padding: 40px var(--page-padding);
   }
-
 }

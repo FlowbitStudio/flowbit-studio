@@ -6,8 +6,6 @@ import useFadeIn from '../hooks/useFadeIn'
 import type { CardCarouselSection } from '../data/proposal'
 import './Arquitectura.css'
 
-const VISIBLE = 3
-
 const CardCarousel = forwardRef<HTMLElement, CardCarouselSection>((props, ref) => {
   const { tag, title, description, quote, cards } = props
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -16,10 +14,15 @@ const CardCarousel = forwardRef<HTMLElement, CardCarouselSection>((props, ref) =
   const descRef = useFadeIn<HTMLParagraphElement>(300)
 
 
+  // Mide el ancho real de la primera card para hacer scroll exactamente
+  // el equivalente a una card. Funciona en cualquier breakpoint sin
+  // depender de constantes hardcoded — la CSS variable --visible-cards
+  // del .arquitectura define cuántas cards entran en el viewport.
   const scroll = (dir: number) => {
     if (!scrollRef.current) return
-    const cardW = scrollRef.current.offsetWidth / VISIBLE
-    scrollRef.current.scrollBy({ left: dir * cardW, behavior: 'smooth' })
+    const firstCard = scrollRef.current.querySelector<HTMLElement>('.arch-card')
+    if (!firstCard) return
+    scrollRef.current.scrollBy({ left: dir * firstCard.offsetWidth, behavior: 'smooth' })
   }
 
   return (
@@ -34,16 +37,12 @@ const CardCarousel = forwardRef<HTMLElement, CardCarouselSection>((props, ref) =
       </div>
 
       <div className="arch-cards-scroll" ref={scrollRef}>
-        <div
-          className="arch-cards"
-          style={{ width: `calc(100vw / ${VISIBLE} * ${cards.length})` }}
-        >
+        <div className="arch-cards">
           {cards.map((card, i) => (
             <StrokeCard
               key={card.title}
               className="arch-card"
               delay={i * 150}
-              style={{ flex: `0 0 calc(100vw / ${VISIBLE})`, width: `calc(100vw / ${VISIBLE})` }}
             >
               <img src={card.image} alt="" className="arch-card-img" />
               <div className="arch-card-bottom">

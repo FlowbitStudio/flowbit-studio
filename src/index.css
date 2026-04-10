@@ -29,6 +29,15 @@ body {
   --page-padding: 32px;
 }
 
+/* Mobile: reduce el padding lateral para dar más espacio al contenido.
+   Cualquier componente que use var(--page-padding) hereda este cambio
+   sin necesidad de override manual. */
+@media (max-width: 768px) {
+  :root {
+    --page-padding: 20px;
+  }
+}
+
 /* Fade-in on scroll */
 .fade-in {
   opacity: 0;

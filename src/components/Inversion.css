@@ -170,7 +170,7 @@
 
 @media (max-width: 600px) {
   .inversion-text {
-    padding: 60px 20px 24px;
+    padding: 60px var(--page-padding) 24px;
   }
 
   .inversion-title {

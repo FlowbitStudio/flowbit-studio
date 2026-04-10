@@ -100,7 +100,7 @@
 
 @media (max-width: 600px) {
   .hero {
-    padding: 100px 20px 40px;
+    padding: 100px var(--page-padding) 40px;
   }
 
   .hero-card {

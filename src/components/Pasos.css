@@ -146,7 +146,7 @@
   }
 
   .pasos-header {
-    padding: 0 20px;
+    padding: 0 var(--page-padding);
   }
 
   .pasos-title {

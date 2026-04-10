@@ -173,7 +173,7 @@
 
 @media (max-width: 600px) {
   .fases {
-    padding: 0 20px 60px;
+    padding: 0 var(--page-padding) 60px;
   }
 
   .fases-title {

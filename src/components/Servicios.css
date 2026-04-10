@@ -122,7 +122,7 @@
   }
 
   .servicios-header {
-    padding: 0 20px;
+    padding: 0 var(--page-padding);
   }
 
   .servicios-title {

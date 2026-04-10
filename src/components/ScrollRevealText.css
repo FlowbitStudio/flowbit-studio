@@ -19,6 +19,12 @@
 
 @media (max-width: 600px) {
   .scroll-reveal {
-    padding: 0 20px;
+    padding: 0 var(--page-padding);
+  }
+
+  /* Quote 20% más grande en mobile para que tenga más presencia
+     en pantallas chicas — el clamp default daba 40px, ahora 48px */
+  .scroll-reveal-text {
+    font-size: 48px;
   }
 }
