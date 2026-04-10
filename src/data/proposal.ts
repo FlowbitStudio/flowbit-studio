@@ -19,10 +19,12 @@ export type {
 
 import cigarSociety from './cigar-society'
 import martiniano from './martiniano'
+import rosaditoEdicionCopaDelMundoMexico from './rosadito-edicion-copa-del-mundo-mexico'
 import type { ProposalData } from './types'
 
 // Registra aquí cada propuesta con su slug (usado en la URL)
 export const proposals: Record<string, ProposalData> = {
   'cigar-society': cigarSociety,
   'martiniano': martiniano,
+  'rosadito-edicion-copa-del-mundo-mexico': rosaditoEdicionCopaDelMundoMexico,
 }
