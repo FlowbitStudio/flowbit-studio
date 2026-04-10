@@ -19,18 +19,10 @@ export type {
 
 import cigarSociety from './cigar-society'
 import martiniano from './martiniano'
-import testWrapper from './test-wrapper'
-import tacosElPaisa from './tacos-el-paisa'
-import cafeCondesa from './cafe-condesa'
-import barElRefugio from './bar-el-refugio'
 import type { ProposalData } from './types'
 
 // Registra aquí cada propuesta con su slug (usado en la URL)
 export const proposals: Record<string, ProposalData> = {
   'cigar-society': cigarSociety,
   'martiniano': martiniano,
-  'test-wrapper': testWrapper,
-  'tacos-el-paisa': tacosElPaisa,
-  'cafe-condesa': cafeCondesa,
-  'bar-el-refugio': barElRefugio,
 }
