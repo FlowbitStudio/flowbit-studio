@@ -200,7 +200,7 @@ Cuando **iteres una propuesta existente (V02+)**, esta regla NO aplica:
 - **card-carousel quote**: El texto grande de descanso (quote) SIEMPRE ocupa 100vh del viewport, centrado verticalmente.
 - **sticky-cards**: Grid de 2 columnas. La primera card (proyecto completo / total) siempre ocupa 2 columnas para mayor jerarquía. El resto se acomoda en pares. Si queda una huérfana, se expande a 2 columnas.
 - **sticky-cards (1 sola card)**: Cuando hay una sola card (proyecto no modular), toda la sección mide 70vh. La columna izquierda NO es sticky (no hay scroll), se centra verticalmente. La card se estira al mismo alto. Sin desglose — un solo bloque, un solo precio.
-- **step-carousel**: Siempre 4 pasos visibles. Si hay más, se navega con flechas.
+- **step-carousel**: En desktop **4 pasos visibles**. En tablet y mobile (≤1024px) cambia a **1 paso full-width** para legibilidad. Mismo sistema que `card-carousel`: CSS variable `--visible-cards` en `Pasos.css` (default 4, override a 1 en media queries). Si hay más pasos que los visibles, se navegan con las flechas o swipe nativo.
 
 ### Ejemplo: propuesta simple (1 marca, sin arquitectura)
 

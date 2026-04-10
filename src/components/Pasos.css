@@ -1,6 +1,11 @@
 .pasos {
   background: var(--black);
   padding: 80px 0;
+
+  /* Cuántos pasos visibles en el viewport. Default desktop: 4.
+     Tablet/mobile cambian este valor en media queries y todos los
+     anchos del carrusel se recalculan automáticamente. */
+  --visible-cards: 4;
 }
 
 /* Header: título + desc + flechas */
@@ -55,6 +60,11 @@
   background: transparent;
   cursor: pointer;
   transition: background 0.35s ease;
+
+  /* Ancho derivado de --visible-cards (definido en .pasos).
+     Desktop: 100vw / 4 = 25vw. Mobile: 100vw / 1 = 100vw. */
+  flex: 0 0 calc(100vw / var(--visible-cards));
+  width: calc(100vw / var(--visible-cards));
 }
 
 .paso-card:hover {
@@ -110,32 +120,21 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
+  .pasos {
+    /* Tablet: una sola card visible, full-width — mejor legibilidad */
+    --visible-cards: 1;
+  }
+
   .pasos-header {
     grid-template-columns: 1fr;
   }
 
   .pasos-scroll {
+    /* En tablet/mobile permitimos scroll touch nativo además de las arrows */
     overflow-x: auto;
   }
 
-  .pasos-cards {
-    width: calc(70vw * 5);
-  }
-
   .paso-card {
-    flex: 0 0 70vw;
-    width: 70vw;
-  }
-}
-
-@media (max-width: 768px) {
-  .pasos-cards {
-    width: calc(80vw * 5);
-  }
-
-  .paso-card {
-    flex: 0 0 80vw;
-    width: 80vw;
     min-height: 400px;
   }
 }
@@ -143,6 +142,8 @@
 @media (max-width: 600px) {
   .pasos {
     padding: 60px 0;
+    /* Mobile: igual 1 card visible, full-width */
+    --visible-cards: 1;
   }
 
   .pasos-header {
@@ -153,13 +154,7 @@
     font-size: 36px;
   }
 
-  .pasos-cards {
-    width: calc(85vw * 5);
-  }
-
   .paso-card {
-    flex: 0 0 85vw;
-    width: 85vw;
     min-height: 350px;
   }
 
