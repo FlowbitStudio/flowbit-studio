@@ -45,7 +45,7 @@ export default function NoiseOverlay() {
         height: '100%',
         pointerEvents: 'none',
         zIndex: 9999,
-        opacity: 0.035,
+        opacity: 0.05,
         imageRendering: 'pixelated',
       }}
     />

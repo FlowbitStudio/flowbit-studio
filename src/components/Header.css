@@ -12,8 +12,11 @@
 }
 
 .header-inner {
-  max-width: 1728px;
-  margin: 0 auto;
+  /* Sin max-width: el header span 100% del viewport igual que todas
+     las demás secciones, para que el logo se alinee con los títulos
+     en cualquier breakpoint (incluyendo monitores ≥1728px donde antes
+     se centraba y rompía la alineación). */
+  width: 100%;
   padding: 0 var(--page-padding);
   height: 100%;
   display: flex;
