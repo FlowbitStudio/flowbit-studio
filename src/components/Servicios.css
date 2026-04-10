@@ -147,18 +147,20 @@
 
   .servicio-card {
     padding: 32px 24px;
-    min-height: 280px;
-    /* Cambiamos el layout para que el icono no se empalme con el título */
+    min-height: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    overflow: hidden;
   }
 
-  /* En mobile: el icono deja de ser absolute y se vuelve bloque
-     arriba del inner content, sin empalmar */
   .servicio-card-icon {
     position: static;
     display: block;
     margin-bottom: 16px;
+  }
+
+  .servicio-card-inner {
+    position: relative;
   }
 }
