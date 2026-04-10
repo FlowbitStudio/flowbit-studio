@@ -48,6 +48,22 @@
   background: transparent;
   cursor: pointer;
   transition: background 0.35s ease;
+  /* Para que el icono absolute lo tome de referencia */
+  position: relative;
+}
+
+/* Icono por categoría — posicionado al top-left del card sin afectar
+   el flex-end del .servicio-card-inner que ancla el contenido al fondo. */
+.servicio-card-icon {
+  position: absolute;
+  top: 40px;
+  left: 50px;
+  color: var(--gray);
+  transition: color 0.35s ease;
+}
+
+.servicio-card:hover .servicio-card-icon {
+  color: var(--white);
 }
 
 .servicio-card:hover {

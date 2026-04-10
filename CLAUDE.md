@@ -123,6 +123,60 @@ Flowbit es un estudio multidisciplinario, NO solo una agencia de desarrollo. El 
 
 Al generar la propuesta, identifica qué servicios complementarios tendrían sentido según la naturaleza del proyecto y sugiérelos en `servicios_adicionales` (ver regla 2 más abajo). Un proyecto de e-commerce probablemente necesite fotografía de producto + SEO + capacitación; un proyecto de branding podría necesitar animación + fotografía + estrategia de redes; un proyecto de SaaS probablemente necesite video explainer + onboarding + soporte mensual.
 
+## Sistema de iconos por categoría
+
+Las cards de los layouts `card-carousel` y `card-grid` usan un sistema de iconos basado en CATEGORÍAS de servicios. Cada card declara una `category` (string) y el componente `Icon.tsx` resuelve esa categoría a uno de los 6 SVGs en `src/assets/icons/categories/`.
+
+**Regla**: cuando generes una propuesta nueva, **siempre usa el campo `category` en las cards del card-carousel y del card-grid**. NUNCA generes el campo `image` con URLs de Figma — esas URLs expiran a los 7 días y rompen las propuestas.
+
+### Las 6 categorías madre
+
+| Categoría madre | Icono | Aliases válidos para `category` | Cuándo usar |
+|---|---|---|---|
+| Tech / Desarrollo | `tech.svg` | `tech`, `desarrollo`, `website`, `web`, `app`, `aplicacion`, `crm`, `software`, `ecommerce`, `e-commerce`, `saas`, `sistema`, `automatizacion`, `integracion`, `dashboard`, `api`, `webhook` | Cualquier proyecto de código: webs, apps, e-commerce, CRMs, automatizaciones, integraciones, dashboards, sistemas internos |
+| Diseño | `design.svg` | `design`, `diseño`, `branding`, `marca`, `ilustracion`, `identidad`, `grafico`, `manual-marca`, `papeleria` | Branding, identidad visual, ilustración, sistemas gráficos, manual de marca |
+| Visual / Audiovisual | `visual.svg` | `visual`, `audiovisual`, `fotografia`, `foto`, `video`, `animacion`, `motion`, `motion-graphics`, `produccion`, `reels`, `filmacion` | Fotografía, video, animación, motion graphics, producción audiovisual |
+| Crecimiento / Marketing | `growth.svg` | `growth`, `marketing`, `seo`, `analytics`, `contenido`, `redes`, `redes-sociales`, `ads`, `publicidad`, `social`, `email-marketing`, `conversion` | SEO, analytics, contenido, redes sociales, ads, growth, campañas |
+| Soporte / Operación | `support.svg` | `support`, `soporte`, `mantenimiento`, `capacitacion`, `training`, `hosting`, `monitoring`, `monitoreo`, `ops`, `operacion`, `onboarding` | Planes mensuales de soporte, capacitación, hosting, mantenimiento, training del equipo del cliente |
+| Diagnóstico / Estrategia | `diagnosis.svg` | `diagnosis`, `diagnostico`, `estrategia`, `consultoria`, `auditoria`, `analisis`, `research`, `discovery` | El servicio fijo de Diagnóstico ($10,000 MXN) + cualquier auditoría, consultoría estratégica o análisis previo |
+
+### Cómo elegir la categoría correcta
+
+- Lee el `nombre` y `features` (o `desc` para card-grid) de la card
+- Identifica el servicio principal que la card describe
+- Encuentra la categoría madre más cercana en la tabla de arriba
+- Usa cualquiera de los aliases (todos mapean al mismo SVG)
+
+Ejemplos:
+
+```ts
+// E-commerce de tacos → tech
+{ title: 'Sistema de e-commerce', category: 'ecommerce', items: [...] }
+
+// Sesión fotográfica de productos → visual
+{ title: 'Fotografía de producto', category: 'fotografia', desc: '...', price: '...' }
+
+// SEO para landing → growth
+{ title: 'Optimización SEO', category: 'seo', desc: '...', price: '...' }
+
+// El Diagnóstico fijo → diagnosis (SIEMPRE en servicios_adicionales)
+{ title: 'Diagnóstico', category: 'diagnostico', desc: '...', price: '$10,000 MXN', label: 'fijo' }
+
+// Soporte mensual → support
+{ title: 'Soporte y mantenimiento', category: 'soporte', desc: '...', price: '...' }
+```
+
+### Si no encuentras una categoría que aplique
+
+Usa `tech` como fallback. El componente `Icon.tsx` también cae al icono `tech.svg` si recibe una category desconocida — no rompe nada.
+
+### Para añadir una categoría madre nueva (futuro)
+
+Solo aplica si Flowbit incorpora un nuevo grupo de servicios que no encaja en ninguna de las 6 actuales. En ese caso:
+1. Diseñar el SVG nuevo y guardarlo en `src/assets/icons/categories/{nombre}.svg`
+2. Importarlo y mapear sus aliases en `src/components/Icon.tsx`
+3. Documentarlo en esta sección de CLAUDE.md
+
 ## Reglas de contenido obligatorias (toda propuesta)
 
 Estas 3 reglas aplican SIEMPRE, independientemente del tipo de propuesta.

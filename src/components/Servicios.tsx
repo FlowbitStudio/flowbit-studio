@@ -1,5 +1,6 @@
 import { forwardRef } from 'react'
 import StrokeCard from './StrokeCard'
+import Icon from './Icon'
 import useFadeIn from '../hooks/useFadeIn'
 import type { CardGridSection } from '../data/proposal'
 import './Servicios.css'
@@ -21,6 +22,9 @@ const CardGrid = forwardRef<HTMLElement, CardGridSection>((props, ref) => {
       <div className="servicios-cards">
         {cards.map((s, i) => (
           <StrokeCard key={s.title} className="servicio-card" delay={i * 150}>
+            {s.category && (
+              <Icon category={s.category} size={56} className="servicio-card-icon" />
+            )}
             <div className="servicio-card-inner">
               <h3 className="servicio-card-title">{s.title}</h3>
               <p className="servicio-card-desc">{s.desc}</p>

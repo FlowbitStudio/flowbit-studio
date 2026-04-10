@@ -2,6 +2,7 @@ import { forwardRef, useRef } from 'react'
 import NavArrows from './NavArrows'
 import StrokeCard from './StrokeCard'
 import ScrollRevealText from './ScrollRevealText'
+import Icon from './Icon'
 import useFadeIn from '../hooks/useFadeIn'
 import type { CardCarouselSection } from '../data/proposal'
 import './Arquitectura.css'
@@ -44,7 +45,14 @@ const CardCarousel = forwardRef<HTMLElement, CardCarouselSection>((props, ref) =
               className="arch-card"
               delay={i * 150}
             >
-              <img src={card.image} alt="" className="arch-card-img" />
+              {/* Renderea icono por categoría si existe; fallback a la
+                  imagen legacy de Figma para propuestas viejas que aún
+                  usan `image` en vez de `category` */}
+              {card.category ? (
+                <Icon category={card.category} size={80} className="arch-card-icon" />
+              ) : card.image ? (
+                <img src={card.image} alt="" className="arch-card-img" />
+              ) : null}
               <div className="arch-card-bottom">
                 <h3 className="arch-card-title">{card.title}</h3>
                 {card.description && <p className="arch-card-desc">{card.description}</p>}

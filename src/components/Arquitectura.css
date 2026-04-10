@@ -88,6 +88,14 @@
   object-fit: contain;
 }
 
+/* Icono por categoría — reemplaza la imagen Figma legacy en propuestas
+   nuevas. El tamaño viene del prop `size` del componente Icon (inline
+   style). Solo definimos color aquí, que el SVG hereda via
+   stroke="currentColor". */
+.arch-card-icon {
+  color: var(--white);
+}
+
 .arch-card-bottom {
   margin-top: auto;
 }

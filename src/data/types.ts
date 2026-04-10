@@ -22,7 +22,21 @@ export interface CarouselCard {
   title: string
   description?: string
   items?: string[]
-  image: string
+  /**
+   * Categoría del servicio. Mapea a un icono SVG en
+   * src/assets/icons/categories/ vía el componente Icon.tsx.
+   * Valores aceptados (entre otros): tech, desarrollo, website, ecommerce,
+   * design, branding, fotografia, video, growth, seo, support,
+   * mantenimiento, diagnostico, estrategia, ...
+   * Ver iconMap en Icon.tsx para la lista completa de aliases.
+   */
+  category?: string
+  /**
+   * @deprecated Usar `category` en propuestas nuevas. El campo `image`
+   * queda solo para backward compatibility con propuestas viejas que
+   * todavía usan URLs de Figma.
+   */
+  image?: string
 }
 
 export interface CardCarouselSection {
@@ -65,6 +79,12 @@ export interface GridCard {
   desc: string
   price: string
   label: string
+  /**
+   * Categoría del servicio (igual semántica que CarouselCard.category).
+   * Si no se especifica, la card del card-grid se renderea sin icono
+   * arriba (compatibilidad con propuestas viejas).
+   */
+  category?: string
 }
 
 export interface CardGridSection {
