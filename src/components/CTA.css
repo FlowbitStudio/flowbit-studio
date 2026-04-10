@@ -51,12 +51,63 @@
   padding: 20px 48px;
   border: none;
   cursor: pointer;
-  transition: background 0.35s ease, transform 0.35s ease;
+  transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease, opacity 0.35s ease;
+  /* Necesario para que el button no rompa la línea cuando crece */
+  text-align: center;
+  /* Permite que el texto largo de los estados de error quepa sin overflow */
+  max-width: 100%;
 }
 
-.cta-button:hover {
+.cta-button:hover:not(:disabled) {
   background: var(--white);
   transform: translateY(-2px);
+}
+
+.cta-button:disabled {
+  cursor: default;
+  transform: none;
+}
+
+/* ── Estados ──────────────────────────────────────────────────────── */
+
+/* Loading: opacidad reducida y cursor wait */
+.cta-button--loading {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+/* Success: fondo blanco con texto azul (reverso del idle), sin hover */
+.cta-button--success {
+  background: var(--white);
+  color: var(--blue);
+}
+
+/* Error 404 — propuesta no encontrada */
+.cta-button--error_404 {
+  background: var(--gray);
+  color: var(--white);
+  font-size: 12px;
+}
+
+/* Error 409 — propuesta no enviada todavía (retryable) */
+.cta-button--error_409_not_sent {
+  background: var(--gray);
+  color: var(--white);
+  font-size: 12px;
+}
+
+/* Error 409 — ya aceptada (terminal) */
+.cta-button--error_409_already_accepted {
+  background: var(--white);
+  color: var(--gray);
+  font-size: 12px;
+}
+
+/* Error genérico (network / 5xx) — clickeable para retry */
+.cta-button--error_generic {
+  background: var(--white);
+  color: var(--black);
+  font-size: 13px;
 }
 
 .cta-footer {
