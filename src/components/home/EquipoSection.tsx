@@ -23,8 +23,6 @@ export default function EquipoSection() {
 
     const buttons = gridRef.current.querySelectorAll<HTMLElement>('.eq__card-button')
 
-    const info = infoRef.current
-
     buttons.forEach((button, i) => {
       if (expandedIndex === i) {
         // Open: photo expands, info slides up
