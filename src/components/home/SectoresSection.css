@@ -1,0 +1,339 @@
+/* ===== Sectores — exact WQF structure ===== */
+/* WQF: entire focus section sits inside bg-neural-fog text-rich-carbon */
+
+/* WQF: #focus-industries — relative isolate -mt-[2px] overflow-hidden */
+.sectores-wrapper {
+  position: relative;
+  isolation: isolate;
+  margin-top: -2px;
+  /* NOTE: WQF has overflow:hidden here but that breaks position:sticky on the gradient.
+     Since we don't have the canvas yet, we omit it. If canvas is added later,
+     the canvas wrapper gets its own overflow:hidden. */
+}
+
+
+/* Gradient overlay — WQF: absolute inset-0 z-1 hidden h-screen w-full
+   bg-linear-to-b from-neural-fog via-transparent to-neural-fog md:block
+   PINNED by ScrollTrigger (not sticky) */
+/* WQF exact: absolute inset-0 z-1 h-screen w-full
+   bg-linear-to-b from-neural-fog via-transparent to-neural-fog
+   PINNED by ScrollTrigger from trigger top-top to trigger bottom-top */
+.sectores-gradient {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    #dadada 0%,
+    #dadada 10%,
+    transparent 35%,
+    transparent 65%,
+    #dadada 90%,
+    #dadada 100%
+  );
+  display: block;
+}
+
+/* ===== Intro — WQF: flex h-dvh items-center overflow-hidden ===== */
+.sectores-intro {
+  display: flex;
+  height: 100dvh;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sectores-intro__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 10px;
+  text-align: center;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .sectores-intro__container {
+    padding: 0 2.5rem;
+  }
+}
+
+/* WQF: mx-auto max-w-[895px] flex-col items-center gap-[30px] */
+.sectores-intro__inner {
+  margin: 0 auto;
+  max-width: 895px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.sectores-intro__headings {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* WQF: p1-mono */
+.sectores-intro__preheading {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .sectores-intro__preheading {
+    font-size: 0.875rem;
+  }
+}
+
+/* WQF: h2 uppercase */
+.sectores-intro__heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 500;
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* WQF: p3 md:p1 max-w-[305px] md:max-w-[550px] */
+.sectores-intro__description {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.15;
+  max-width: 305px;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .sectores-intro__description {
+    font-size: 1rem;
+    line-height: 1.2;
+    max-width: 550px;
+  }
+}
+
+/* ===== List section — WQF: -mt-px min-h-dvh py-[40px] md:py-[100px] ===== */
+.sectores-list-section {
+  margin-top: -1px;
+  min-height: 100dvh;
+  padding: 40px 0;
+}
+
+@media (min-width: 768px) {
+  .sectores-list-section {
+    padding: 100px 0;
+  }
+}
+
+.sectores-list__container {
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+@media (min-width: 1024px) {
+  .sectores-list__container {
+    padding: 0 2.5rem;
+  }
+}
+
+/* WQF: relative isolate flex-col items-center text-center */
+.sectores-list {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Each item — WQF: grid grid-rows-[auto_0fr] px-[40px] py-[10px]
+   transition-[grid-template-rows,padding] duration-500 ease-(--easing)
+   data-active:grid-rows-[auto_1fr] data-active:py-[60px] md:py-0 */
+.sectores-item {
+  display: grid;
+  grid-template-rows: auto 0fr;
+  padding: 10px 40px;
+  text-align: center;
+  width: 100%;
+  transition: grid-template-rows 500ms var(--easing),
+              padding 500ms var(--easing);
+}
+
+@media (min-width: 768px) {
+  .sectores-item {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.sectores-item[data-active] {
+  grid-template-rows: auto 1fr;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+/* Button — WQF: relative w-full overflow-hidden md:cursor-default */
+.sectores-item__button {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  overflow: hidden;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .sectores-item__button {
+    cursor: default;
+  }
+}
+
+/* Name — WQF: h4 min-[360px]:h-vw uppercase
+   transition-transform duration-500 ease-(--easing)
+   group-data-active:-translate-y-full */
+.sectores-item__name {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0;
+  transition: transform 500ms var(--easing);
+}
+
+@media (min-width: 360px) {
+  .sectores-item__name {
+    font-size: clamp(2.25rem, 5.5vw, 4.875rem);
+  }
+}
+
+.sectores-item[data-active] .sectores-item__name {
+  transform: translateY(-100%);
+}
+
+/* Duplicate — WQF: absolute inset-0 translate-y-full
+   group-data-active:translate-y-0 */
+.sectores-item__name-dup {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: transform 500ms var(--easing);
+}
+
+@media (min-width: 360px) {
+  .sectores-item__name-dup {
+    font-size: clamp(2.25rem, 5.5vw, 4.875rem);
+  }
+}
+
+.sectores-item[data-active] .sectores-item__name-dup {
+  transform: translateY(0);
+}
+
+/* Body — WQF: flex justify-center overflow-hidden */
+.sectores-item__body {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Description — WQF: p2 max-w-[430px] pt-[4px] */
+.sectores-item__description {
+  font-family: var(--font-mono);
+  font-size: 0.938rem;
+  line-height: 1.1;
+  max-width: 430px;
+  padding-top: 4px;
+  margin: 0;
+}
+
+/* ===== Floating indicator — WQF: absolute, 4 corner SVGs ===== */
+/* transition-[width,left,top,height,opacity,transform,scale] duration-500
+   inactive: opacity-0 scale-200 blur-[10px]
+   active: opacity-100 scale-100 blur-none */
+.sectores-indicator {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transform: scale(2);
+  filter: blur(10px);
+  transition: width 500ms var(--easing),
+              left 500ms var(--easing),
+              top 500ms var(--easing),
+              height 500ms var(--easing),
+              opacity 500ms var(--easing),
+              transform 500ms var(--easing),
+              filter 500ms var(--easing);
+}
+
+.sectores-indicator.-visible {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+/* Corner accent SVGs — positioned at each corner */
+.sectores-indicator__corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  color: #535353; /* pulse-ash */
+}
+
+@media (min-width: 768px) {
+  .sectores-indicator__corner {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.sectores-indicator__corner.-tl {
+  top: 0;
+  left: 0;
+}
+
+.sectores-indicator__corner.-tr {
+  top: 0;
+  right: 0;
+  transform: rotate(90deg);
+}
+
+.sectores-indicator__corner.-bl {
+  bottom: 0;
+  left: 0;
+  transform: rotate(-90deg);
+}
+
+.sectores-indicator__corner.-br {
+  bottom: 0;
+  right: 0;
+  transform: rotate(180deg);
+}

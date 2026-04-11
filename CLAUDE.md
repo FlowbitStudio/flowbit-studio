@@ -340,3 +340,75 @@ Todas las imágenes usan URLs de Figma API (`https://www.figma.com/api/mcp/asset
 
 ### Navigation
 Auto-generada desde `sections[].navLabel`. Las secciones sin `navLabel` (como `cta`) no aparecen en el nav.
+
+---
+
+## Website Homepage (ruta `/`)
+
+El repo ahora también tiene el homepage de Flowbit en la ruta `/`. Los componentes viven en `src/components/home/` y la página en `src/pages/Home.tsx`.
+
+### Referencia visual
+El diseño replica la estructura visual y animaciones de WorldQuant Foundry (worldquantfoundry.com). El HTML original descargado está en `/Users/andre/Desktop/wqf-capture/index.html` como referencia para traducir las clases de Tailwind a CSS plano.
+
+### Stack adicional para el homepage
+- **GSAP** (ScrollTrigger, ScrollSmoother) — animaciones de scroll, pin, parallax
+- **Three.js** — escenas 3D con partículas (canvas backgrounds)
+- **Swiper** — carrusel de portfolio con container-query units
+
+### Contenido
+Todo el contenido en español está en `src/data/homeContent.ts`. NUNCA usar textos del sitio original — siempre usar la arquitectura de datos de Flowbit.
+
+### Tokens adicionales (src/index.css)
+```css
+--dark-bg: #111111
+--deep-navy: #15374C
+--teal: #00C9A7
+--red: #FF4444
+--header-height: 80px (5rem desktop, 4rem mobile)
+--easing: cubic-bezier(0.25, 0.1, 0.25, 1)
+```
+
+### Secciones del homepage (orden en Home.tsx)
+
+| # | Sección | Componente | Estado |
+|---|---------|-----------|--------|
+| 1 | Hero | HeroSection + HeroCanvas | ✓ (canvas deshabilitado) |
+| 2 | Header | WebsiteHeader | ✓ pill flotante + dot-blur hover |
+| 3 | Ethos | EthosSection | ✓ cards horizontales + clip-path scroll reveal |
+| 4 | Sectores | SectoresSection | ✓ text-slide + gradient overlay pinned |
+| 5 | Portfolio | PortfolioSection | ✓ Swiper cqw + clip-path color reveal + DragCursor |
+| 6 | Equipo | EquipoSection | ⚠️ Parcial — franja 80px funciona, expand al click pendiente de pulir |
+| 7 | Clientes | ClientesSection | ✓ cards clip-path reveal + texto pinned |
+| 8 | Proceso | ProcesoSection | ✓ cards izq + texto der (mirror de Clientes) |
+| 9 | Diagnóstico | DiagnosticoSection | ✓ texto izq + espacio der |
+| 10 | Footer | FooterSection | ✓ panel azul grid 2x2 + nav hover grande |
+| 11 | Contact Modal | ContactModal | Pendiente |
+| 12 | Drag Cursor | DragCursor | ✓ pill "Drag" sobre portfolio |
+
+### Componente reutilizable: WqfButton
+`src/components/home/WqfButton.tsx` — botón con dot-blur + text-slide + corner accent SVGs. Props: `text`, `dark?`, `onClick?`, `href?`, `target?`. Usar en vez de markup inline.
+
+### Patrones técnicos clave
+
+**ScrollSmoother** (en Home.tsx): `smooth: 1.25, effects: true`. Requiere `#smooth-wrapper > #smooth-content`. Elementos con `data-lag="0.2"` se mueven con parallax.
+
+**Gradient overlay en Sectores**: `position: absolute` + ScrollTrigger pin (`trigger: #light-section, start: top top, end: bottom top, pinSpacing: false`). NO usar `position: sticky` — no funciona con ScrollSmoother.
+
+**Stacking cards (Clientes/Proceso)**: NO usar pin en las cards — fluyen normalmente con clip-path reveal. Solo la columna de texto se pinnea con ScrollTrigger.
+
+**Container query units**: El portfolio usa `cqw` para sizing responsivo de slides. El contenedor necesita `container-type: inline-size`.
+
+**Secciones envueltas**: Sectores + Portfolio están dentro de un `<div id="light-section" style="background: #dadada">` en Home.tsx porque ambas comparten el fondo claro (neural-fog).
+
+### Recursos descargados
+- `/public/ethos-icons/1-4.svg` — íconos de las cards del ethos
+- `/public/portfolio-logos/1-6.svg` — logos SVG de las empresas del portfolio
+- `/public/card-icons/1-6.svg` — íconos de las stacking cards
+- `/public/placeholder-andre.svg`, `/public/placeholder-cesar.svg` — placeholders fotos equipo
+
+### Approach de desarrollo
+- Leer el HTML original en `/Users/andre/Desktop/wqf-capture/index.html` para replicar estructura
+- Traducir clases Tailwind a CSS plano directamente, una por una
+- Validar cada sección con el usuario antes de pasar a la siguiente
+- NO delegar CSS a agentes — el resultado no es fiel. Hacer directo
+- NO cambiar textos de homeContent.ts — siempre usar la arquitectura de Flowbit

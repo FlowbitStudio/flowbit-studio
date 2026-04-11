@@ -1,0 +1,210 @@
+/* ===== Equipo — WQF Partners structure with expandable photo strip ===== */
+
+.eq__outer {
+  background: var(--dark-bg);
+  margin-top: -20px;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+  position: relative;
+  z-index: 2; /* above the gradient overlay from sectores */
+}
+
+.eq { position: relative; z-index: 1; padding-top: 40px; }
+
+.eq__container { max-width: 1440px; margin: 0 auto; padding: 0 10px; }
+@media (min-width: 1024px) { .eq__container { padding: 0 2.5rem; } }
+
+/* Title bar — WQF: p2-mono flex justify-between mb-80 md:mb-0 */
+.eq__title-bar {
+  font-family: var(--font-mono); font-size: 0.688rem; text-transform: uppercase;
+  letter-spacing: 0.05em; line-height: 0.938rem; color: #dadada;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 80px;
+}
+@media (min-width: 768px) { .eq__title-bar { margin-bottom: 0; } }
+.eq__title-bar h2 { font: inherit; margin: 0; }
+.eq__hide-mobile { display: none; }
+@media (min-width: 768px) { .eq__hide-mobile { display: block; } }
+.eq__hide-desktop { display: inline; }
+@media (min-width: 768px) { .eq__hide-desktop { display: none; } }
+
+/* Layout — WQF: flex-col md:h-dvh */
+.eq__layout {
+  position: relative;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+@media (min-width: 768px) { .eq__layout { min-height: 100dvh; gap: 0; } }
+
+/* Mobile tagline */
+.eq__tagline-mobile {
+  font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.125rem);
+  font-weight: 500; line-height: 1; text-transform: uppercase;
+  text-align: center; max-width: 666px; margin: 0 auto; color: #e7e7e7;
+}
+@media (min-width: 768px) { .eq__tagline-mobile { display: none; } }
+
+/* Center — WQF: mt-32 mb-20 flex-col items-center text-center md:mt-120 md:grow md:basis-0 md:pb-40 */
+.eq__center {
+  margin-top: 32px; margin-bottom: 20px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+@media (min-width: 768px) {
+  .eq__center { margin-top: 120px; margin-bottom: 0; flex-grow: 1; flex-basis: 0; padding-bottom: 40px; }
+}
+
+.eq__description {
+  font-family: var(--font-mono); font-size: 0.688rem; text-transform: uppercase;
+  letter-spacing: 0.05em; line-height: 0.938rem; color: rgba(231,231,231,0.6);
+  max-width: 438px; margin: 0 auto 32px; text-wrap: balance;
+}
+@media (min-width: 768px) { .eq__description { font-size: 0.75rem; } }
+
+/* Bottom section with taglines + grid */
+.eq__bottom { display: flex; flex-direction: column; gap: 40px; }
+
+/* Desktop tagline — WQF: h4 mx-auto max-w-666 text-center uppercase hidden md:block */
+.eq__tagline-desktop { display: none; }
+@media (min-width: 768px) {
+  .eq__tagline-desktop {
+    display: block; font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 500;
+    line-height: 1; text-transform: uppercase; text-align: center;
+    max-width: 666px; margin: 0 auto; color: #e7e7e7;
+  }
+}
+
+/* ===== Photo grid — WQF: md:grid md:grid-cols-3 adapted to 2 ===== */
+.eq__grid {
+  position: relative; isolation: isolate; z-index: 1;
+  display: flex; flex-direction: column; width: 100%;
+}
+@media (min-width: 768px) {
+  .eq__grid { display: grid; grid-template-columns: repeat(2, 1fr); align-items: center; }
+}
+
+/* Each card — WQF: relative md:h-[80px] */
+.eq__card {
+  position: relative; width: 100%;
+  height: auto; cursor: pointer;
+}
+@media (min-width: 768px) {
+  .eq__card { height: 80px; }
+}
+
+/* Expanded card goes above everything */
+.eq__card.-expanded {
+  z-index: 10;
+}
+
+/* Card button — fills the card, photo as bg */
+.eq__card-button {
+  position: relative; aspect-ratio: 3/4; width: 100%;
+  background: var(--dark-bg); isolation: isolate;
+  display: flex; align-items: flex-end; justify-content: flex-end;
+  overflow: hidden; border: none; padding: 0; cursor: pointer; color: #dadada;
+}
+@media (min-width: 768px) {
+  .eq__card-button {
+    aspect-ratio: auto; height: 100%; width: 100%;
+  }
+}
+
+/* Photo bg — WQF: absolute inset-0 -z-1 bg-cover transition-opacity */
+.eq__card-photo {
+  position: absolute; inset: 0; z-index: -1;
+  width: 100%; height: 100%;
+  background-size: cover; background-repeat: no-repeat;
+  transition: opacity 300ms var(--easing);
+}
+
+/* Hover: dim others */
+.eq__grid:hover .eq__card-photo { opacity: 0.5; }
+.eq__card:hover .eq__card-photo { opacity: 1 !important; }
+.eq__card.-expanded .eq__card-photo { opacity: 1 !important; }
+
+/* Job badge — WQF: flex items-center gap-10 pr-20 pb-15 */
+.eq__card-job {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 20px 15px 0; z-index: 2;
+}
+.eq__card-dot { width: 10px; height: 10px; background: #dadada; border-radius: 3px; }
+.eq__card-job-text {
+  font-family: var(--font-mono); font-size: 0.688rem;
+  text-transform: uppercase; letter-spacing: 0.05em; color: #dadada;
+}
+
+/* ===== Info section — absolute overlay with backdrop blur ===== */
+.eq__info {
+  padding: 0 0 0;
+  z-index: 15;
+  opacity: 0;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.6s var(--easing), opacity 0.4s var(--easing), padding 0.6s var(--easing);
+}
+
+.eq__info:has(> *) {
+  max-height: 300px;
+  opacity: 1;
+  padding: 20px 0 10px;
+}
+@media (min-width: 1024px) {
+  .eq__info { padding: 20px 2.5rem 30px; }
+}
+
+/* Info bar — WQF: border-b off-white/20 flex justify-between pb-6 */
+.eq__info-bar {
+  display: flex; width: 100%; justify-content: space-between;
+  gap: 24px; border-bottom: 0.063rem solid rgba(231,231,231,0.2);
+  padding-bottom: 6px; margin-bottom: 24px;
+}
+
+.eq__info-left { display: none; }
+@media (min-width: 768px) { .eq__info-left { display: block; width: 30%; } }
+@media (min-width: 1280px) { .eq__info-left { width: 50%; } }
+
+.eq__info-counter {
+  font-family: var(--font-mono); font-size: 0.688rem;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  color: rgba(231,231,231,0.6); margin: 0;
+}
+
+.eq__info-right {
+  display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 10px;
+}
+@media (min-width: 768px) { .eq__info-right { width: 70%; justify-content: flex-start; } }
+@media (min-width: 1280px) { .eq__info-right { width: 50%; } }
+
+.eq__info-name {
+  font-family: var(--font-mono); font-size: 0.875rem;
+  color: #dadada; margin: 0;
+}
+
+.eq__info-badge {
+  font-family: var(--font-mono); font-size: 0.688rem;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  background: #090909; color: #dadada;
+  border-radius: 4px; padding: 4px 8px;
+}
+
+/* Info content — WQF: flex-col-reverse md:flex-row gap-24 */
+.eq__info-content {
+  display: flex; flex-direction: column-reverse; gap: 24px;
+}
+@media (min-width: 768px) { .eq__info-content { flex-direction: row; } }
+
+.eq__info-links {
+  display: flex; align-items: center; gap: 0; flex-shrink: 0;
+}
+@media (min-width: 768px) { .eq__info-links { width: 30%; flex-direction: column; align-items: flex-start; } }
+@media (min-width: 1280px) { .eq__info-links { width: 50%; flex-direction: row; } }
+
+.eq__info-bio {
+  flex: 1;
+}
+@media (min-width: 768px) { .eq__info-bio { max-width: 490px; } }
+
+.eq__info-bio p {
+  font-family: var(--font-mono); font-size: 0.875rem;
+  line-height: 1.4; color: rgba(231,231,231,0.8); margin: 0;
+}

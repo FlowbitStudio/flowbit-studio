@@ -1,0 +1,344 @@
+/* ===== Header — exact WQF replica ===== */
+
+/* --easing is defined in index.css as cubic-bezier(0.25, 0.1, 0.25, 1) */
+/* WQF uses cubic-bezier(.62,.16,.13,1.01) for its --easing. Let's match: */
+
+.wh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  transition: transform 400ms var(--easing);
+}
+
+.wh.-hidden {
+  transform: translateY(-100%);
+}
+
+/* Container: full width, constrained on lg */
+.wh__container {
+  display: flex;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .wh__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+}
+
+/* Inner bar — becomes floating pill on scroll */
+.wh__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height); /* 4rem mobile, 5rem desktop via media query */
+  width: fit-content;
+  flex-grow: 1;
+  gap: 20px;
+  padding: 0 10px;
+  background: transparent;
+  transition: all 600ms var(--easing);
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .wh__inner {
+    height: auto;
+    padding: 0;
+  }
+}
+
+/* Scrolled: bg fill on mobile */
+.-scrolled .wh__inner {
+  background-color: var(--dark-bg);
+}
+
+/* Mobile menu open: bg fill */
+.-mobile-menu-open .wh__inner {
+  background-color: var(--dark-bg);
+}
+
+/* Scrolled on desktop: pill shape */
+@media (min-width: 1024px) {
+  .-scrolled .wh__inner {
+    background-color: #1b1b1b; /* urban-smoke */
+    width: fit-content;
+    flex-grow: 0;
+    border-radius: 8px;
+    padding: 4px 12px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
+/* Logo — transitions from full text to icon on scroll */
+.wh__logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 30px;
+  width: 120px;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-decoration: none;
+  color: currentColor;
+  transition: width 600ms var(--easing);
+}
+
+.-scrolled .wh__logo {
+  width: 30px;
+}
+
+.wh__logo-full {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+  white-space: nowrap;
+  transition: transform 600ms var(--easing);
+}
+
+.-scrolled .wh__logo-full {
+  transform: translateY(-100%);
+}
+
+.wh__logo-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+  transform: translateY(100%);
+  transition: transform 600ms var(--easing);
+}
+
+.-scrolled .wh__logo-icon {
+  transform: translateY(0);
+}
+
+/* Nav — hidden on mobile */
+.wh__nav {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .wh__nav {
+    display: block;
+  }
+}
+
+.wh__nav-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Nav link — dot blur + text slide hover */
+.wh__link {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+}
+
+.wh__link-inner {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 20px;
+}
+
+/* The blurred dot that appears on hover */
+.wh__link-dot {
+  width: 10px;
+  height: 10px;
+  background: #dadada; /* neural-fog */
+  border-radius: 3px;
+  transform: translateX(-24px);
+  opacity: 0;
+  filter: blur(20px);
+  transition: all 400ms var(--easing);
+  flex-shrink: 0;
+}
+
+.wh__link:hover .wh__link-dot {
+  transform: translateX(-5px);
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* Text wrapper with slide-up duplicate */
+.wh__link-text-wrap {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 0.688rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 0.938rem;
+  color: #dadada;
+  transform: translateX(-5px);
+  transition: transform 400ms var(--easing);
+}
+
+.wh__link:hover .wh__link-text-wrap {
+  transform: translateX(5px);
+}
+
+.wh__link-text {
+  transition: transform 400ms var(--easing);
+}
+
+.wh__link:hover .wh__link-text {
+  transform: translateY(-100%);
+}
+
+.wh__link-text-dup {
+  position: absolute;
+  inset: 0;
+  transform: translateY(100%);
+  transition: transform 400ms var(--easing);
+}
+
+.wh__link:hover .wh__link-text-dup {
+  transform: translateY(0);
+}
+
+/* CTA variant (same hover but could add border) */
+.wh__link--cta {
+  /* same as regular link for now — WQF uses same pattern */
+}
+
+/* ===== Hamburger — WQF uses a dot with corners ===== */
+.wh__hamburger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+@media (min-width: 1024px) {
+  .wh__hamburger {
+    display: none;
+  }
+}
+
+.wh__hamburger-dot {
+  width: 10px;
+  height: 10px;
+  background: #dadada;
+  border-radius: 3px;
+  transition: transform 400ms var(--easing);
+}
+
+.-open .wh__hamburger-dot {
+  transform: rotate(180deg);
+}
+
+/* ===== Mobile overlay ===== */
+.wh__overlay {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  width: 100%;
+  height: calc(100dvh - var(--header-height));
+  background: rgba(17, 17, 17, 1);
+  backdrop-filter: blur(10px);
+  z-index: 49;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 400ms var(--easing);
+}
+
+@media (min-width: 1024px) {
+  .wh__overlay {
+    display: none;
+  }
+}
+
+.wh__overlay.-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.wh__overlay-inner {
+  background: var(--dark-bg);
+  border-bottom: 1px solid rgba(231, 231, 231, 0.2);
+  padding: 12px 10px;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 400ms var(--easing) 100ms;
+}
+
+.wh__overlay.-open .wh__overlay-inner {
+  clip-path: inset(0 0 0 0);
+}
+
+.wh__overlay-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wh__overlay-link {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.688rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #dadada;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px 10px;
+  width: 100%;
+  text-align: left;
+}
+
+.wh__overlay-link:hover {
+  color: var(--white);
+}
+
+/* Mobile header height */
+@media (max-width: 1023px) {
+  :root {
+    --header-height: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-height: 5rem;
+  }
+}

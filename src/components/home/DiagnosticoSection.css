@@ -1,0 +1,124 @@
+/* ===== Diagnostico — WQF Partners CTA layout (text left, space right) ===== */
+
+.diag {
+  background: var(--dark-bg);
+  color: var(--white);
+}
+
+.diag__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+@media (min-width: 1024px) {
+  .diag__container { padding: 0 2.5rem; }
+}
+
+.diag__grid {
+  display: grid;
+  align-items: center;
+  padding: 120px 0 80px;
+}
+
+@media (min-width: 768px) {
+  .diag__grid {
+    grid-template-columns: repeat(12, 1fr);
+    padding: 300px 0 280px;
+  }
+}
+
+.diag__left {
+  grid-column: span 12;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 437px;
+  gap: 35px;
+}
+
+@media (min-width: 1024px) {
+  .diag__left { grid-column: span 4; }
+}
+
+.diag__right {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .diag__right { display: block; grid-column: span 8; }
+}
+
+.diag__header {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  padding-bottom: 15px;
+  border-bottom: 0.063rem solid rgba(231, 231, 231, 0.2);
+}
+
+.diag__preheading {
+  font-family: var(--font-mono);
+  font-size: 0.688rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 0.938rem;
+}
+
+@media (min-width: 768px) {
+  .diag__preheading { font-size: 0.875rem; }
+}
+
+.diag__heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.diag__body {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  color: rgba(231, 231, 231, 0.6);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .diag__body { font-size: 0.875rem; }
+}
+
+.diag__price-info {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  color: rgba(231, 231, 231, 0.6);
+  margin: 0;
+}
+
+.diag__price-info strong {
+  color: var(--blue);
+  font-weight: 500;
+}
+
+.diag__whatsapp {
+  font-family: var(--font-mono);
+  font-size: 0.688rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(231, 231, 231, 0.5);
+  text-decoration: none;
+  transition: color 0.3s var(--easing);
+}
+
+.diag__whatsapp:hover {
+  color: var(--white);
+  text-decoration: underline;
+}

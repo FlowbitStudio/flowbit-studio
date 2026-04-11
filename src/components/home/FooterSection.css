@@ -1,0 +1,244 @@
+/* ===== Footer — WQF structure with blue panel ===== */
+
+.footer {
+  background: var(--dark-bg);
+}
+
+/* Container — px-0 override */
+.footer__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 !important;
+}
+
+/* Inner — grid lg:grid-cols-2 */
+.footer__inner {
+  position: relative;
+  display: grid;
+  background: var(--dark-bg);
+}
+
+@media (min-width: 1024px) {
+  .footer__inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Left — canvas placeholder */
+.footer__left {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .footer__left {
+    display: block;
+  }
+}
+
+/* Right — the blue panel */
+.footer__panel {
+  background: var(--blue);
+  color: var(--dark-bg);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  row-gap: 60px;
+  border-radius: 20px 20px 0 0;
+  padding: 30px 10px 10px;
+}
+
+@media (min-width: 768px) {
+  .footer__panel {
+    min-height: 666px;
+    gap: 32px;
+    row-gap: 210px;
+    padding: 40px 10px 30px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer__panel {
+    border-radius: 20px 0 0 20px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .footer__panel {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+/* Cells */
+.footer__cell {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cell 1: CTA — h6 heading + p2-mono body + button */
+.footer__cell--cta {
+  gap: 16px;
+}
+
+.footer__panel-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  font-weight: 500;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--dark-bg);
+}
+
+.footer__panel-body {
+  font-family: var(--font-mono);
+  font-size: 0.688rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 0.938rem;
+  color: var(--dark-bg);
+  opacity: 0.7;
+  margin: 0 0 auto;
+}
+
+/* Cell 2: Logo */
+.footer__cell--logo {
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.footer__logo {
+  width: 48px;
+  height: auto;
+  opacity: 0.5;
+}
+
+/* Cell 3: Nav links — col-span-2 on mobile, col-span-1 on desktop */
+.footer__cell--nav {
+  grid-column: span 2;
+  gap: 8px;
+}
+
+@media (min-width: 1024px) {
+  .footer__cell--nav {
+    grid-column: span 1;
+  }
+}
+
+/* Nav link — h5 sized with big dot-blur + text-slide */
+.footer__nav-link {
+  text-decoration: none;
+  color: var(--dark-bg);
+  display: block;
+}
+
+.footer__nav-link-inner {
+  display: flex;
+  align-items: center;
+  height: 44px;
+}
+
+/* Dot — size-[25px], rounded-[8px], blur-[32px] */
+.footer__nav-dot {
+  width: 25px;
+  height: 25px;
+  background: var(--dark-bg);
+  border-radius: 8px;
+  transform: translateX(-33px);
+  opacity: 0;
+  filter: blur(32px);
+  transition: all 500ms var(--easing);
+  flex-shrink: 0;
+}
+
+.footer__nav-link:hover .footer__nav-dot {
+  transform: translateX(-8px);
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* Text wrap — h5 uppercase, text-slide offset -33px */
+.footer__nav-text-wrap {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--dark-bg);
+  transform: translateX(-33px);
+  transition: transform 500ms var(--easing);
+}
+
+.footer__nav-link:hover .footer__nav-text-wrap {
+  transform: translateX(5px);
+}
+
+.footer__nav-text {
+  transition: transform 500ms var(--easing);
+}
+
+.footer__nav-link:hover .footer__nav-text {
+  transform: translateY(-100%);
+}
+
+.footer__nav-text-dup {
+  position: absolute;
+  inset: 0;
+  transform: translateY(100%);
+  transition: transform 500ms var(--easing);
+}
+
+.footer__nav-link:hover .footer__nav-text-dup {
+  transform: translateY(0);
+}
+
+/* Cell 4: Legal + copyright */
+.footer__cell--legal {
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.footer__legal-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer__legal-link {
+  font-family: var(--font-mono);
+  font-size: 0.688rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--dark-bg);
+  opacity: 0.6;
+  text-decoration: none;
+  transition: opacity 0.3s var(--easing);
+}
+
+.footer__legal-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.footer__copyright {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--dark-bg);
+  opacity: 0.4;
+}
+
+/* Dark variant for wqf-button inside footer */
+.wqf-button--dark .wqf-button__dot--dark {
+  background: var(--dark-bg);
+}
+
+.wqf-button--dark .wqf-button__text-wrap--dark {
+  color: var(--dark-bg);
+}

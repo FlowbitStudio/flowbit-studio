@@ -27,6 +27,12 @@ body {
   --font-display: 'Mark Pro', 'Helvetica Neue', 'Arial', sans-serif;
   --font-mono: 'GT America Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
   --page-padding: 32px;
+  --dark-bg: #111111;
+  --deep-navy: #15374C;
+  --teal: #00C9A7;
+  --red: #FF4444;
+  --header-height: 80px;
+  --easing: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 /* Mobile: reduce el padding lateral para dar más espacio al contenido.
