@@ -22,6 +22,7 @@ import martiniano from './martiniano'
 import rosaditoEdicionCopaDelMundoMexico from './rosadito-edicion-copa-del-mundo-mexico'
 import cigarSocietyMxEcosistemaDigital from './cigar-society-mx-ecosistema-digital'
 import luzAnayaPodologia from './luz-anaya-podologia'
+import formaQ3 from './forma-q3'
 import type { ProposalData } from './types'
 
 // Registra aquí cada propuesta con su slug (usado en la URL)
@@ -31,4 +32,5 @@ export const proposals: Record<string, ProposalData> = {
   'rosadito-edicion-copa-del-mundo-mexico': rosaditoEdicionCopaDelMundoMexico,
   'cigar-society-mx-ecosistema-digital': cigarSocietyMxEcosistemaDigital,
   'luz-anaya-podologia': luzAnayaPodologia,
+  'forma-q3': formaQ3,
 }
