@@ -96,6 +96,13 @@
   color: var(--white);
 }
 
+/* Icono 3D Origami — canvas WebGL en lugar de SVG. El tamaño real
+   lo setea el prop `size` del componente OrigamiIcon vía inline style. */
+.arch-card-origami {
+  height: 180px;
+  width: 180px;
+}
+
 .arch-card-bottom {
   margin-top: auto;
 }

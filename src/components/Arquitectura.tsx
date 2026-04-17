@@ -3,6 +3,8 @@ import NavArrows from './NavArrows'
 import StrokeCard from './StrokeCard'
 import ScrollRevealText from './ScrollRevealText'
 import Icon from './Icon'
+import OrigamiIcon from './origami/OrigamiIcon'
+import { flowbitIconPreset } from './origami/presets'
 import useFadeIn from '../hooks/useFadeIn'
 import type { CardCarouselSection } from '../data/proposal'
 import './Arquitectura.css'
@@ -48,7 +50,16 @@ const CardCarousel = forwardRef<HTMLElement, CardCarouselSection>((props, ref) =
               {/* Renderea icono por categoría si existe; fallback a la
                   imagen legacy de Figma para propuestas viejas que aún
                   usan `image` en vez de `category` */}
-              {card.category ? (
+              {card.origamiItem ? (
+                <div className="arch-card-origami">
+                  <OrigamiIcon
+                    item={card.origamiItem}
+                    size={180}
+                    material={flowbitIconPreset.material}
+                    envPreset={flowbitIconPreset.envPreset}
+                  />
+                </div>
+              ) : card.category ? (
                 <Icon category={card.category} size={80} className="arch-card-icon" />
               ) : card.image ? (
                 <img src={card.image} alt="" className="arch-card-img" />

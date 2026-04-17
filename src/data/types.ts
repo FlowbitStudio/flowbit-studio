@@ -32,6 +32,11 @@ export interface CarouselCard {
    */
   category?: string
   /**
+   * Icono 3D Origami. Si se provee, tiene prioridad sobre `category`.
+   * Valores 1-12. Ver src/components/origami/README.md para el mapeo.
+   */
+  origamiItem?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  /**
    * @deprecated Usar `category` en propuestas nuevas. El campo `image`
    * queda solo para backward compatibility con propuestas viejas que
    * todavía usan URLs de Figma.
