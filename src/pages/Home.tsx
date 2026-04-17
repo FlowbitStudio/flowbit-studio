@@ -14,6 +14,8 @@ import ProcesoSection from '../components/home/ProcesoSection'
 import FooterSection from '../components/home/FooterSection'
 import ContactModal from '../components/home/ContactModal'
 import DragCursor from '../components/home/DragCursor'
+import NoiseOverlay from '../components/NoiseOverlay'
+import ParticleSwarm from '../components/home/ParticleSwarm'
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
@@ -44,6 +46,8 @@ export default function Home() {
 
   return (
     <>
+      {/* Interactive particle swarm BG — fixed viewport, follows cursor + reacts to scroll */}
+      <ParticleSwarm particleCount={5000} hue={210} rotateColor={false} />
       <WebsiteHeader onContactClick={openContact} />
       <div id="smooth-wrapper">
         <div id="smooth-content">
@@ -64,6 +68,7 @@ export default function Home() {
         </div>
       </div>
       <DragCursor />
+      <NoiseOverlay opacity={0.025} />
       <ContactModal isOpen={contactOpen} onClose={closeContact} />
     </>
   )

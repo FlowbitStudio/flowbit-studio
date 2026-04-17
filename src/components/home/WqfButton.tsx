@@ -3,6 +3,7 @@
 interface WqfButtonProps {
   text: string
   dark?: boolean
+  hideCorners?: boolean
   onClick?: () => void
   href?: string
   target?: string
@@ -14,7 +15,7 @@ const CornerSvg = () => (
   </svg>
 )
 
-export default function WqfButton({ text, dark, onClick, href, target }: WqfButtonProps) {
+export default function WqfButton({ text, dark, hideCorners, onClick, href, target }: WqfButtonProps) {
   const className = `wqf-button${dark ? ' wqf-button--dark' : ''}`
 
   const content = (
@@ -26,12 +27,14 @@ export default function WqfButton({ text, dark, onClick, href, target }: WqfButt
           <span className="wqf-button__text-dup" aria-hidden="true">{text}</span>
         </div>
       </div>
-      <div className="wqf-button__corners">
-        <span className="wqf-button__corner wqf-button__corner--tl"><CornerSvg /></span>
-        <span className="wqf-button__corner wqf-button__corner--tr"><CornerSvg /></span>
-        <span className="wqf-button__corner wqf-button__corner--bl"><CornerSvg /></span>
-        <span className="wqf-button__corner wqf-button__corner--br"><CornerSvg /></span>
-      </div>
+      {!hideCorners && (
+        <div className="wqf-button__corners">
+          <span className="wqf-button__corner wqf-button__corner--tl"><CornerSvg /></span>
+          <span className="wqf-button__corner wqf-button__corner--tr"><CornerSvg /></span>
+          <span className="wqf-button__corner wqf-button__corner--bl"><CornerSvg /></span>
+          <span className="wqf-button__corner wqf-button__corner--br"><CornerSvg /></span>
+        </div>
+      )}
     </>
   )
 

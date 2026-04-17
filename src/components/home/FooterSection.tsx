@@ -28,7 +28,7 @@ export default function FooterSection({ onCtaClick }: FooterSectionProps) {
             {/* Cell 2 (top-right): logo/emblem placeholder */}
             <div className="footer__cell footer__cell--logo">
               <img
-                src="/logo-flowbit.png"
+                src="/logo-flowbit-dark.svg"
                 alt="Flowbit"
                 className="footer__logo"
               />

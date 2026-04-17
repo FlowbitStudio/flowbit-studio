@@ -56,7 +56,6 @@
   font-size: clamp(1.5rem, 3vw, 1.875rem);
   font-weight: 500;
   line-height: 1;
-  text-transform: uppercase;
   text-wrap: balance;
   margin: 0 0 24px;
 }
@@ -124,6 +123,7 @@
   height: 34.80cqw;
   width: 50.40cqw;
 
+  will-change: width, height, opacity;
   transition: padding 300ms var(--easing),
               width 300ms var(--easing),
               height 300ms var(--easing),
@@ -178,6 +178,7 @@
   height: 100%;
   background: #e7e7e7;
   clip-path: inset(0 0 100% 0);
+  will-change: clip-path;
   transition: clip-path 300ms var(--easing) 100ms,
               background-color 300ms var(--easing);
 }
@@ -240,7 +241,6 @@
   font-size: clamp(1.125rem, 1.5vw, 1.375rem);
   font-weight: 500;
   line-height: 1.1;
-  text-transform: uppercase;
   margin: 0;
   pointer-events: none;
 }
@@ -267,6 +267,7 @@
   width: 100%;
   height: 100%;
   grid-template-rows: 0fr;
+  will-change: grid-template-rows;
   transition: grid-template-rows 300ms var(--easing);
 }
 

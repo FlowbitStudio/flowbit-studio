@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-export default function NoiseOverlay() {
+export default function NoiseOverlay({ opacity = 0.05 }: { opacity?: number } = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function NoiseOverlay() {
         height: '100%',
         pointerEvents: 'none',
         zIndex: 9999,
-        opacity: 0.05,
+        opacity,
         imageRendering: 'pixelated',
       }}
     />

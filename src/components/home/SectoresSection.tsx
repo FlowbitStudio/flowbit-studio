@@ -9,7 +9,6 @@ gsap.registerPlugin(ScrollTrigger)
 export default function SectoresSection() {
   const { sectores } = siteContent
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const gradientRef = useRef<HTMLDivElement>(null)
   const introRef = useRef<HTMLElement>(null)
   const listSectionRef = useRef<HTMLElement>(null)
   const listContentRef = useRef<HTMLDivElement>(null)
@@ -75,18 +74,6 @@ export default function SectoresSection() {
         scrollTrigger: { trigger: listSectionRef.current, start: 'top 60%' },
       })
 
-      // Gradient overlay pin — trigger is #light-section
-      const lightSection = document.getElementById('light-section')
-      if (lightSection && gradientRef.current) {
-        ScrollTrigger.create({
-          trigger: lightSection,
-          start: 'top top',
-          end: 'bottom top',
-          pin: gradientRef.current,
-          pinSpacing: false,
-          invalidateOnRefresh: true,
-        })
-      }
     }, wrapperRef)
 
     return () => ctx.revert()
@@ -107,8 +94,6 @@ export default function SectoresSection() {
   return (
     <>
       <div ref={wrapperRef} className="sectores-wrapper" id="soluciones">
-        {/* Gradient overlay — WQF: absolute inset-0 z-1 h-screen, pinned by ScrollTrigger */}
-        <div ref={gradientRef} className="sectores-gradient" />
 
         {/* Intro sub-section — WQF: flex h-dvh items-center */}
         <section ref={introRef} className="sectores-intro">

@@ -11,51 +11,8 @@ export default function EquipoSection() {
   const { equipo } = siteContent
   const sectionRef = useRef<HTMLElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
-  const infoRef = useRef<HTMLDivElement>(null)
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
-
-  // Animate expand/collapse — WQF: the clicked photo expands as an overlay
-  // covering the section, others dim. It's NOT an in-grid expand.
-  useEffect(() => {
-    if (!gridRef.current) return
-    const isMobile = window.innerWidth < 768
-    if (isMobile) return
-
-    const buttons = gridRef.current.querySelectorAll<HTMLElement>('.eq__card-button')
-
-    buttons.forEach((button, i) => {
-      if (expandedIndex === i) {
-        // Open: photo expands, info slides up
-        button.style.position = 'absolute'
-        button.style.zIndex = '20'
-        button.style.top = '50%'
-        button.style.left = '50%'
-        button.style.transform = 'translate(-50%, -50%)'
-        gsap.fromTo(button,
-          { width: '100%', height: '80px' },
-          { width: '100%', height: '70vh', duration: 0.6, ease: 'power3.inOut' }
-        )
-        // info animates via CSS transitions (max-height + opacity)
-      } else {
-        // Close: photo shrinks back, THEN reset position
-        gsap.to(button, {
-          height: '80px',
-          duration: 0.6,
-          ease: 'power3.inOut',
-          onComplete: () => {
-            button.style.position = 'relative'
-            button.style.zIndex = ''
-            button.style.top = ''
-            button.style.left = ''
-            button.style.transform = ''
-            gsap.set(button, { height: '100%' })
-          },
-        })
-      }
-    })
-
-    // info close is handled by CSS (content removed → :has(> *) no longer matches)
-  }, [expandedIndex])
+  const [activeInfo, setActiveInfo] = useState<number | null>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -68,11 +25,35 @@ export default function EquipoSection() {
   }, [])
 
   const handleCardClick = (i: number) => {
-    setExpandedIndex(prev => prev === i ? null : i)
+    if (expandedIndex === i) {
+      // Close: remove info first, then collapse card after transition
+      setActiveInfo(null)
+      setTimeout(() => {
+        setExpandedIndex(null)
+      }, 400)
+    } else {
+      if (expandedIndex !== null) {
+        // Switch: close current info, then open new
+        setActiveInfo(null)
+        setTimeout(() => {
+          setExpandedIndex(i)
+          setTimeout(() => setActiveInfo(i), 50)
+        }, 400)
+      } else {
+        // Open fresh: expand card, then show info
+        setExpandedIndex(i)
+        setTimeout(() => setActiveInfo(i), 50)
+      }
+    }
   }
 
   return (
     <div className="eq__outer">
+      {/* Blur overlay — fixed covers viewport, but inside eq__outer stacking context */}
+      <div
+        className={`eq__overlay${expandedIndex !== null ? ' -active' : ''}`}
+        onClick={() => expandedIndex !== null && handleCardClick(expandedIndex)}
+      />
       <section id="equipo" ref={sectionRef} className="eq">
         <div className="eq__container">
           {/* Title bar — WQF: p2-mono spread */}
@@ -103,59 +84,57 @@ export default function EquipoSection() {
                 <span className="eq__hide-desktop">{equipo.taglineBottom}</span>
               </div>
 
-              {/* Photo grid — WQF: md:grid-cols-3, each md:h-[80px], expand on click */}
-              <div ref={gridRef} className="eq__grid">
-                {equipo.members.map((member, i) => (
-                  <div
-                    key={i}
-                    className={`eq__card${expandedIndex === i ? ' -expanded' : ''}`}
-                    onClick={() => handleCardClick(i)}
-                  >
-                    <button className="eq__card-button">
-                      <span className="sr-only">Ver {member.name}, {member.title}</span>
-                      <div className="eq__card-job">
-                        <div className="eq__card-dot" />
-                        <span className="eq__card-job-text">{member.title}</span>
-                      </div>
-                      <div
-                        className="eq__card-photo"
-                        style={{
-                          backgroundImage: `url(${member.photo})`,
-                          backgroundPosition: '50% 30%',
-                        }}
-                      />
-                    </button>
-                  </div>
-                ))}
-              </div>
+              {/* Photo grid — each card expands as overlay with info below */}
+              <div className="eq__grid-wrapper">
+                <div ref={gridRef} className="eq__grid">
+                  {equipo.members.map((member, i) => (
+                    <div
+                      key={i}
+                      className={`eq__card${expandedIndex === i ? ' -expanded' : ''}`}
+                      onClick={() => handleCardClick(i)}
+                    >
+                      <button className="eq__card-button">
+                        <span className="sr-only">Ver {member.name}, {member.title}</span>
+                        <div className="eq__card-job">
+                          <div className="eq__card-dot" />
+                          <span className="eq__card-job-text">{member.title}</span>
+                        </div>
+                        <div
+                          className="eq__card-photo"
+                          style={{
+                            backgroundImage: `url(${member.photo})`,
+                            backgroundPosition: '50% 30%',
+                          }}
+                        />
+                      </button>
 
-              {/* Info section — sits right after photo grid */}
-              <div ref={infoRef} className="eq__info">
-              {expandedIndex !== null && (
-                <>
-                  <div className="eq__info-bar">
-                    <div className="eq__info-left">
-                      <p className="eq__info-counter">
-                        {String(expandedIndex + 1).padStart(2, '0')} / {String(equipo.members.length).padStart(2, '0')}
-                      </p>
+                      {/* Info — always in DOM, visibility controlled by class */}
+                      <div className={`eq__info${activeInfo === i ? ' -visible' : ''}`}>
+                        <div className="eq__info-bar">
+                          <div className="eq__info-left">
+                            <p className="eq__info-counter">
+                              {String(i + 1).padStart(2, '0')} / {String(equipo.members.length).padStart(2, '0')}
+                            </p>
+                          </div>
+                          <div className="eq__info-right">
+                            <p className="eq__info-name">{member.name}</p>
+                            <span className="eq__info-badge">{member.title}</span>
+                          </div>
+                        </div>
+                        <div className="eq__info-content">
+                          <div className="eq__info-links">
+                            <WqfButton text={`Connect with ${member.name.split(' ')[0]}`} href={member.linkedin} target="_blank" />
+                            <WqfButton text="Full Bio" />
+                          </div>
+                          <div className="eq__info-bio">
+                            <p>{member.bio}</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="eq__info-right">
-                      <p className="eq__info-name">{equipo.members[expandedIndex].name}</p>
-                      <span className="eq__info-badge">Founder</span>
-                    </div>
-                  </div>
-                  <div className="eq__info-content">
-                    <div className="eq__info-links">
-                      <WqfButton text={`Connect with ${equipo.members[expandedIndex].name.split(' ')[0]}`} href={equipo.members[expandedIndex].linkedin} target="_blank" />
-                      <WqfButton text="Full Bio" />
-                    </div>
-                    <div className="eq__info-bio">
-                      <p>{equipo.members[expandedIndex].bio}</p>
-                    </div>
-                  </div>
-                </>
-              )}
-              </div>
+                  ))}
+                </div>
+              </div>{/* close eq__grid-wrapper */}
 
               {/* Bottom tagline */}
               <div className="eq__tagline-desktop">

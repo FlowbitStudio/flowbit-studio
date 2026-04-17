@@ -63,7 +63,6 @@
   font-size: clamp(1.5rem, 3vw, 1.875rem);
   font-weight: 500;
   line-height: 1;
-  text-transform: uppercase;
 }
 
 .ethos__header-right {
@@ -122,6 +121,7 @@
 .ethos-card {
   width: 100%;
   flex-shrink: 0;
+  will-change: width;
   transition: width 500ms var(--easing) 100ms;
 }
 
@@ -146,7 +146,8 @@
   width: 100%;
   overflow: hidden;
   border-radius: 20px;
-  transition: all 500ms var(--easing) 100ms;
+  will-change: width;
+  transition: width 500ms var(--easing) 100ms, opacity 500ms var(--easing) 100ms;
 }
 
 @media (min-width: 768px) {
@@ -199,9 +200,9 @@
   font-size: clamp(1.5rem, 2.5vw, 1.875rem);
   font-weight: 500;
   line-height: 1;
-  text-transform: uppercase;
   max-width: 290px;
   margin: 0;
+  white-space: pre-line;
 }
 
 /* Icon — WQF: size-full max-h-[300px] object-contain */
@@ -212,6 +213,20 @@
   object-fit: contain;
   object-position: center;
   flex-grow: 1;
+}
+
+/* Origami variant: centra el canvas dentro del slot de ícono y evita
+   que la inline width/height del wrapper OrigamiIcon desborde la card. */
+.ethos-card__icon--origami {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ethos-card__icon--origami > .origami-icon {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /* Meta — WQF: p2-mono flex-col gap-15px */

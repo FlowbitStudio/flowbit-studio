@@ -3,13 +3,30 @@
 .eq__outer {
   background: var(--dark-bg);
   margin-top: -20px;
-  overflow: hidden;
   border-radius: 20px 20px 0 0;
   position: relative;
   z-index: 2; /* above the gradient overlay from sectores */
 }
 
-.eq { position: relative; z-index: 1; padding-top: 40px; }
+/* Blur overlay — fixed viewport, inside eq__outer stacking context */
+.eq__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+  transition: opacity 0.5s var(--easing);
+}
+.eq__overlay.-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.eq { position: relative; padding-top: 40px; }
 
 .eq__container { max-width: 1440px; margin: 0 auto; padding: 0 10px; }
 @media (min-width: 1024px) { .eq__container { padding: 0 2.5rem; } }
@@ -28,17 +45,18 @@
 .eq__hide-desktop { display: inline; }
 @media (min-width: 768px) { .eq__hide-desktop { display: none; } }
 
-/* Layout — WQF: flex-col md:h-dvh */
+/* Layout — flex-col, content clusters at bottom with controlled spacing */
 .eq__layout {
   position: relative;
-  display: flex; flex-direction: column; justify-content: space-between;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 40px;
 }
-@media (min-width: 768px) { .eq__layout { min-height: 100dvh; gap: 0; } }
+@media (min-width: 768px) { .eq__layout { height: 100dvh; gap: 60px; } }
 
 /* Mobile tagline */
 .eq__tagline-mobile {
   font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.125rem);
-  font-weight: 500; line-height: 1; text-transform: uppercase;
+  font-weight: 500; line-height: 1;
   text-align: center; max-width: 666px; margin: 0 auto; color: #e7e7e7;
 }
 @media (min-width: 768px) { .eq__tagline-mobile { display: none; } }
@@ -49,7 +67,7 @@
   display: flex; flex-direction: column; align-items: center; text-align: center;
 }
 @media (min-width: 768px) {
-  .eq__center { margin-top: 120px; margin-bottom: 0; flex-grow: 1; flex-basis: 0; padding-bottom: 40px; }
+  .eq__center { margin-top: 60px; margin-bottom: 0; padding-bottom: 40px; }
 }
 
 .eq__description {
@@ -60,7 +78,7 @@
 @media (min-width: 768px) { .eq__description { font-size: 0.75rem; } }
 
 /* Bottom section with taglines + grid */
-.eq__bottom { display: flex; flex-direction: column; gap: 40px; }
+.eq__bottom { display: flex; flex-direction: column; gap: 40px; position: relative; }
 
 /* Desktop tagline — WQF: h4 mx-auto max-w-666 text-center uppercase hidden md:block */
 .eq__tagline-desktop { display: none; }
@@ -68,18 +86,19 @@
   .eq__tagline-desktop {
     display: block; font-family: var(--font-display);
     font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 500;
-    line-height: 1; text-transform: uppercase; text-align: center;
+    line-height: 1; text-align: center;
     max-width: 666px; margin: 0 auto; color: #e7e7e7;
   }
 }
 
 /* ===== Photo grid — WQF: md:grid md:grid-cols-3 adapted to 2 ===== */
 .eq__grid {
-  position: relative; isolation: isolate; z-index: 1;
+  position: relative;
   display: flex; flex-direction: column; width: 100%;
+  overflow: visible;
 }
 @media (min-width: 768px) {
-  .eq__grid { display: grid; grid-template-columns: repeat(2, 1fr); align-items: center; }
+  .eq__grid { display: grid; grid-template-columns: repeat(2, 1fr); align-items: center; overflow: visible; }
 }
 
 /* Each card — WQF: relative md:h-[80px] */
@@ -91,21 +110,35 @@
   .eq__card { height: 80px; }
 }
 
-/* Expanded card goes above everything */
+/* Expanded card: above the blur overlay, others stay below */
 .eq__card.-expanded {
   z-index: 10;
+  overflow: visible;
+  position: relative;
 }
 
 /* Card button — fills the card, photo as bg */
 .eq__card-button {
   position: relative; aspect-ratio: 3/4; width: 100%;
-  background: var(--dark-bg); isolation: isolate;
+  background: var(--dark-bg);
   display: flex; align-items: flex-end; justify-content: flex-end;
   overflow: hidden; border: none; padding: 0; cursor: pointer; color: #dadada;
+  will-change: transform;
 }
 @media (min-width: 768px) {
   .eq__card-button {
-    aspect-ratio: auto; height: 100%; width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    aspect-ratio: auto;
+    width: 100%;
+    height: 80px;
+    will-change: height;
+    transition: height 0.5s var(--easing);
+  }
+  .eq__card.-expanded .eq__card-button {
+    height: 400px;
   }
 }
 
@@ -114,6 +147,7 @@
   position: absolute; inset: 0; z-index: -1;
   width: 100%; height: 100%;
   background-size: cover; background-repeat: no-repeat;
+  will-change: opacity;
   transition: opacity 300ms var(--easing);
 }
 
@@ -122,31 +156,50 @@
 .eq__card:hover .eq__card-photo { opacity: 1 !important; }
 .eq__card.-expanded .eq__card-photo { opacity: 1 !important; }
 
+/* Screen-reader only */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
 /* Job badge — WQF: flex items-center gap-10 pr-20 pb-15 */
 .eq__card-job {
   display: flex; align-items: center; gap: 10px;
   padding: 0 20px 15px 0; z-index: 2;
+  opacity: 0; transition: opacity 0.3s var(--easing);
 }
+.eq__card.-expanded .eq__card-job { opacity: 1; }
 .eq__card-dot { width: 10px; height: 10px; background: #dadada; border-radius: 3px; }
 .eq__card-job-text {
   font-family: var(--font-mono); font-size: 0.688rem;
   text-transform: uppercase; letter-spacing: 0.05em; color: #dadada;
 }
 
-/* ===== Info section — absolute overlay with backdrop blur ===== */
+/* ===== Grid wrapper ===== */
+.eq__grid-wrapper { position: relative; overflow: visible; }
+
+/* ===== Info — flows below photo inside expanded card ===== */
+/* Info: absolute, positioned below the expanded photo */
 .eq__info {
-  padding: 0 0 0;
-  z-index: 15;
+  position: absolute;
+  left: 0; right: 0;
+  top: calc(50% + 200px); /* center of card (50%) + half of expanded height (400/2) */
   opacity: 0;
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.6s var(--easing), opacity 0.4s var(--easing), padding 0.6s var(--easing);
+  pointer-events: none;
+  transform: translateY(15px);
+  will-change: transform, opacity;
+  transition: opacity 0.4s var(--easing), transform 0.4s var(--easing);
+  background: rgba(17, 17, 17, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 20px 10px;
 }
 
-.eq__info:has(> *) {
-  max-height: 300px;
+.eq__info.-visible {
   opacity: 1;
-  padding: 20px 0 10px;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 @media (min-width: 1024px) {
   .eq__info { padding: 20px 2.5rem 30px; }

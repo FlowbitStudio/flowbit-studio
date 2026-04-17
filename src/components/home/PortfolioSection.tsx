@@ -73,7 +73,7 @@ export default function PortfolioSection() {
                     <p className="pf__card-desc">{c.description}</p>
                   </div>
                   <div className="pf__card-link">
-                    <WqfButton text="Website" dark href={c.url} target="_blank" />
+                    <WqfButton text="Website" dark hideCorners href={c.url} target="_blank" />
                   </div>
                 </div>
 

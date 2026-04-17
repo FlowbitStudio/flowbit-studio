@@ -3,6 +3,17 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { siteContent } from '../../data/homeContent'
 import WqfButton from './WqfButton'
+import OrigamiIcon from '../origami/OrigamiIcon'
+import type { OrigamiItemId } from '../origami/OrigamiIcon'
+import { flowbitIconPreset } from '../origami/presets'
+
+// Mapeo card.id → Origami item
+const ETHOS_ICONS: Record<number, OrigamiItemId> = {
+  1: 9,   // Pulse
+  2: 10,  // Bloom
+  3: 3,   // Gears
+  4: 5,   // Stack
+}
 import './EthosSection.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -95,12 +106,23 @@ export default function EthosSection() {
                   <div className="ethos-card__content">
                     <div className="ethos-card__content-inner">
                       <h3 className="ethos-card__title">{card.title}</h3>
-                      <img
-                        className="ethos-card__icon"
-                        src={`/ethos-icons/${card.id}.svg`}
-                        alt=""
-                        loading="lazy"
-                      />
+                      {ETHOS_ICONS[card.id] ? (
+                        <div className="ethos-card__icon ethos-card__icon--origami">
+                          <OrigamiIcon
+                            item={ETHOS_ICONS[card.id]}
+                            size={flowbitIconPreset.size}
+                            material={flowbitIconPreset.material}
+                            envPreset={flowbitIconPreset.envPreset}
+                          />
+                        </div>
+                      ) : (
+                        <img
+                          className="ethos-card__icon"
+                          src={`/ethos-icons/${card.id}.svg`}
+                          alt=""
+                          loading="lazy"
+                        />
+                      )}
                       <div className="ethos-card__meta">
                         <p className="ethos-card__number">
                           {String(card.id).padStart(2, '0')} / {String(ethos.cards.length).padStart(2, '0')}

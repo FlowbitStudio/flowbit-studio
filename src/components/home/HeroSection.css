@@ -4,10 +4,25 @@
 .hero {
   position: relative;
   overflow: hidden;
-  background: var(--dark-bg);
+  background: transparent;
+}
+
+/* Dark blurred orb that follows cursor */
+.hero__orb {
+  position: fixed;
+  width: 1500px;
+  height: 1200px;
+  border-radius: 30%;
+  background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 60%);
+  filter: url(#orb-noise) blur(100px);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
 }
 
 .hero__container {
+  position: relative;
+  z-index: 2;
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 10px;
@@ -65,10 +80,22 @@
   font-size: clamp(2.25rem, 5.5vw, 3.75rem);
   font-weight: 500;
   line-height: 0.95;
-  text-transform: uppercase;
   text-align: center;
   max-width: 800px;
   color: var(--white);
+}
+
+/* Word-by-word stagger reveal */
+.hero__word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  margin-right: 0.25em;
+}
+
+.hero__word {
+  display: inline-block;
+  will-change: transform, opacity;
 }
 
 /* Bottom bar — WQF: p3-mono text-off-white/60, flex-col, pb-[24px] */
@@ -253,12 +280,6 @@
   width: 9px;
   height: 9px;
   color: #dadada;
-  opacity: 0;
-  transition: opacity 400ms var(--easing);
-}
-
-.wqf-button:hover .wqf-button__corner,
-.wqf-button:active .wqf-button__corner {
   opacity: 1;
 }
 

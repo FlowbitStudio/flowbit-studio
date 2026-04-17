@@ -5,7 +5,7 @@
 
 .wh {
   position: fixed;
-  top: 0;
+  top: 20px;
   left: 0;
   width: 100%;
   z-index: 50;
@@ -15,7 +15,7 @@
 }
 
 .wh.-hidden {
-  transform: translateY(-100%);
+  transform: translateY(calc(-100% - 20px));
 }
 
 /* Container: full width, constrained on lg */
@@ -84,53 +84,39 @@
   display: flex;
   align-items: center;
   height: 30px;
-  width: 120px;
+  width: 110px;
   flex-shrink: 0;
-  overflow: hidden;
   text-decoration: none;
   color: currentColor;
   transition: width 600ms var(--easing);
 }
 
 .-scrolled .wh__logo {
-  width: 30px;
+  width: 24px;
 }
 
-.wh__logo-full {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--white);
-  white-space: nowrap;
-  transition: transform 600ms var(--easing);
+/* SVG scales to fit — morphing container */
+.wh__logo-svg {
+  height: 22px;
+  width: auto;
+  display: block;
+  overflow: visible;
 }
 
-.-scrolled .wh__logo-full {
-  transform: translateY(-100%);
+/* Each letter path — base state */
+.wh__logo-letter {
+  transform-origin: center;
+  transition: transform 700ms var(--easing), opacity 500ms var(--easing);
 }
 
-.wh__logo-icon {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--white);
-  transform: translateY(100%);
-  transition: transform 600ms var(--easing);
+/* On scroll: all letters after F fade out + collapse toward F */
+.-scrolled .wh__logo-letter:not(.wh__logo-letter--f) {
+  opacity: 0;
+  transform: translateX(-60%) scaleX(0);
 }
 
-.-scrolled .wh__logo-icon {
-  transform: translateY(0);
-}
+/* Hide the old icon span (no longer used) */
+.wh__logo-icon { display: none; }
 
 /* Nav — hidden on mobile */
 .wh__nav {
@@ -273,6 +259,7 @@
   height: calc(100dvh - var(--header-height));
   background: rgba(17, 17, 17, 1);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 49;
   opacity: 0;
   pointer-events: none;

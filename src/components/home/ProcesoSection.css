@@ -94,7 +94,6 @@
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 500;
   line-height: 1;
-  text-transform: uppercase;
   margin: 0;
 }
 
@@ -148,7 +147,6 @@
   font-size: clamp(1.125rem, 2vw, 1.875rem);
   font-weight: 500;
   line-height: 0.95;
-  text-transform: uppercase;
   text-wrap: balance;
   max-width: 450px;
   margin: 0;

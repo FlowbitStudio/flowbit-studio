@@ -87,7 +87,6 @@
   font-size: clamp(1.125rem, 1.5vw, 1.375rem);
   font-weight: 500;
   line-height: 1.1;
-  text-transform: uppercase;
   margin: 0;
   color: var(--dark-bg);
 }
@@ -149,7 +148,10 @@
   transform: translateX(-33px);
   opacity: 0;
   filter: blur(32px);
-  transition: all 500ms var(--easing);
+  will-change: transform, opacity, filter;
+  transition: transform 500ms var(--easing),
+              opacity 500ms var(--easing),
+              filter 500ms var(--easing);
   flex-shrink: 0;
 }
 
@@ -167,7 +169,6 @@
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 2vw, 1.5rem);
   font-weight: 500;
-  text-transform: uppercase;
   line-height: 1;
   color: var(--dark-bg);
   transform: translateX(-33px);

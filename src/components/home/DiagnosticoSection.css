@@ -75,7 +75,6 @@
   font-size: clamp(1.5rem, 2.5vw, 1.875rem);
   font-weight: 500;
   line-height: 1;
-  text-transform: uppercase;
   margin: 0;
 }
 

@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { siteContent } from '../../data/homeContent'
-import HeroCanvas from './HeroCanvas'
 import WqfButton from './WqfButton'
 import './HeroSection.css'
 
@@ -11,24 +10,26 @@ interface HeroSectionProps {
 
 export default function HeroSection({ onCtaClick }: HeroSectionProps) {
   const { hero } = siteContent
-  const sectionRef = useRef<HTMLElement>(null)
   const headlineRef = useRef<HTMLHeadingElement>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero title: clip reveal + translateY
+      // Stagger each word in the headline
       if (headlineRef.current) {
-        gsap.from(headlineRef.current, {
-          clipPath: 'inset(100% 0 0 0)',
-          y: -48,
-          duration: 1.4,
-          ease: 'power3.inOut',
-          delay: 0.5,
+        const words = headlineRef.current.querySelectorAll('.hero__word')
+        gsap.from(words, {
+          y: '100%',
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          stagger: 0.08,
+          delay: 0.3,
         })
       }
 
-      // Bottom content fade in
+      // Bottom content fade in after headline
       if (bottomRef.current) {
         gsap.from(bottomRef.current, {
           opacity: 0,
@@ -38,23 +39,58 @@ export default function HeroSection({ onCtaClick }: HeroSectionProps) {
           delay: 1.2,
         })
       }
-    }, sectionRef)
+    })
+
+    // Orb follows cursor with lerp
+    const orb = document.getElementById('hero-orb')
+    const section = sectionRef.current
+    if (orb && section) {
+      const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
+      const target = { x: pos.x, y: pos.y }
+
+      const handleMouseMove = (e: MouseEvent) => {
+        target.x = e.clientX
+        target.y = e.clientY
+      }
+
+      const tick = () => {
+        pos.x += (target.x - pos.x) * 0.02
+        pos.y += (target.y - pos.y) * 0.02
+        orb.style.transform = `translate(${pos.x - 750}px, ${pos.y - 600}px)`
+        requestAnimationFrame(tick)
+      }
+
+      section.addEventListener('mousemove', handleMouseMove)
+      const animId = requestAnimationFrame(tick)
+
+      return () => {
+        ctx.revert()
+        section.removeEventListener('mousemove', handleMouseMove)
+        cancelAnimationFrame(animId)
+      }
+    }
 
     return () => ctx.revert()
   }, [])
 
+  // Split headline into individual words for stagger animation
+  const words = hero.headline.split(' ')
+
   return (
     <section className="hero" ref={sectionRef}>
-      <HeroCanvas />
       <div className="hero__container">
         <div className="hero__layout">
           {/* Top spacer — pushes headline down on desktop */}
           <div className="hero__spacer" />
 
-          {/* Headline zone — centered */}
+          {/* Headline zone — word-by-word stagger reveal */}
           <div className="hero__headline-zone">
             <h1 ref={headlineRef} className="hero__headline">
-              {hero.headline}
+              {words.map((word, i) => (
+                <span key={i} className="hero__word-wrap">
+                  <span className="hero__word">{word}</span>
+                </span>
+              ))}
             </h1>
           </div>
 
