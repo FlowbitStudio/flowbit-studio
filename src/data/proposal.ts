@@ -13,6 +13,13 @@ export type {
   Step,
   StepCarouselSection,
   CTASection,
+  RoiCard,
+  RoiCostCard,
+  RoiBenefitCard,
+  RoiBenefitItem,
+  RoiBreakevenCard,
+  RoiProjectionCard,
+  RoiSection,
   Section,
   ProposalData,
 } from './types'
@@ -22,6 +29,7 @@ import martiniano from './martiniano'
 import rosaditoEdicionCopaDelMundoMexico from './rosadito-edicion-copa-del-mundo-mexico'
 import cigarSocietyMxEcosistemaDigital from './cigar-society-mx-ecosistema-digital'
 import luzAnayaPodologia from './luz-anaya-podologia'
+import lizAnayaPodologia from './liz-anaya-podologia'
 import formaQ3 from './forma-q3'
 import asistIa from './asist-ia'
 import type { ProposalData } from './types'
@@ -33,6 +41,7 @@ export const proposals: Record<string, ProposalData> = {
   'rosadito-edicion-copa-del-mundo-mexico': rosaditoEdicionCopaDelMundoMexico,
   'cigar-society-mx-ecosistema-digital': cigarSocietyMxEcosistemaDigital,
   'luz-anaya-podologia': luzAnayaPodologia,
+  'liz-anaya-podologia': lizAnayaPodologia,
   'forma-q3': formaQ3,
   'asist-ia': asistIa,
 }

@@ -8,6 +8,7 @@ import StickyList from '../components/Fases'
 import CardGrid from '../components/Servicios'
 import StickyCards from '../components/Inversion'
 import StepCarousel from '../components/Pasos'
+import Roi from '../components/Roi'
 import CTA from '../components/CTA'
 import { proposals } from '../data/proposal'
 import type { Section } from '../data/types'
@@ -19,6 +20,7 @@ const LAYOUT_MAP: Record<Section['layout'], React.ComponentType<any>> = {
   'card-grid': CardGrid,
   'sticky-cards': StickyCards,
   'step-carousel': StepCarousel,
+  'roi': Roi,
   'cta': CTA,
 }
 

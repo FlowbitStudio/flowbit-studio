@@ -145,6 +145,65 @@ export interface CTASection {
   footerRight: string
 }
 
+/**
+ * Card individual del layout 'roi' (Retorno de Inversión).
+ *
+ * `kind` define la variante visual:
+ *  - `cost`       → lista de puntos (el costo de no hacer nada).
+ *  - `benefit`    → mezcla de bloques cuantitativos + cualitativos.
+ *  - `breakeven`  → tabla de 3 renglones (inversión, beneficio, punto de equilibrio).
+ *  - `projection` → proyección 12/24 meses + nota al final.
+ */
+export interface RoiCostCard {
+  kind: 'cost'
+  title: string
+  intro?: string
+  points: string[]
+}
+
+export interface RoiBenefitItem {
+  title: string
+  value?: string
+  desc: string
+  highlight?: boolean
+}
+
+export interface RoiBenefitCard {
+  kind: 'benefit'
+  title: string
+  items: RoiBenefitItem[]
+}
+
+export interface RoiBreakevenCard {
+  kind: 'breakeven'
+  title: string
+  rows: { label: string; value: string; emphasis?: boolean }[]
+}
+
+export interface RoiProjectionCard {
+  kind: 'projection'
+  title: string
+  intro?: string
+  rows: { label: string; value: string }[]
+  note?: string
+}
+
+export type RoiCard =
+  | RoiCostCard
+  | RoiBenefitCard
+  | RoiBreakevenCard
+  | RoiProjectionCard
+
+export interface RoiSection {
+  layout: 'roi'
+  navLabel: string
+  tag: string
+  title: string
+  description: string
+  cards: RoiCard[]
+  closingLine: string
+}
+
 export type Section =
   | HeroSection
   | CardCarouselSection
@@ -152,6 +211,7 @@ export type Section =
   | CardGridSection
   | StickyCardsSection
   | StepCarouselSection
+  | RoiSection
   | CTASection
 
 export interface ProposalData {
