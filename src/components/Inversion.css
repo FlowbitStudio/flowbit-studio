@@ -41,6 +41,7 @@
   line-height: 1.6;
   color: var(--black);
   max-width: 500px;
+  white-space: pre-line;
 }
 
 /* Imagen ocupa todo el espacio restante */

@@ -30,6 +30,7 @@ import rosaditoEdicionCopaDelMundoMexico from './rosadito-edicion-copa-del-mundo
 import cigarSocietyMxEcosistemaDigital from './cigar-society-mx-ecosistema-digital'
 import luzAnayaPodologia from './luz-anaya-podologia'
 import lizAnayaPodologia from './liz-anaya-podologia'
+import pauloTrejoArquitecto from './paulo-trejo-arquitecto'
 import formaQ3 from './forma-q3'
 import asistIa from './asist-ia'
 import type { ProposalData } from './types'
@@ -42,6 +43,7 @@ export const proposals: Record<string, ProposalData> = {
   'cigar-society-mx-ecosistema-digital': cigarSocietyMxEcosistemaDigital,
   'luz-anaya-podologia': luzAnayaPodologia,
   'liz-anaya-podologia': lizAnayaPodologia,
+  'paulo-trejo-arquitecto': pauloTrejoArquitecto,
   'forma-q3': formaQ3,
   'asist-ia': asistIa,
 }
