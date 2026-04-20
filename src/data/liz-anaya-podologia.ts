@@ -250,9 +250,9 @@ const lizAnayaPodologia: ProposalData = {
         {
           title: 'Soporte y mantenimiento mensual',
           category: 'soporte',
-          desc: 'Monitoreo de infraestructura, resolución de bugs, pequeños ajustes y capacitación continua al equipo. Opcional post-implementación.',
-          price: '$12,000 MXN/mes',
-          label: 'opcional',
+          desc: 'Monitoreo de infraestructura, resolución de bugs, pequeños ajustes y capacitación continua al equipo. Incluye los primeros 3 meses sin costo post go-live como parte del acompañamiento de transición — a partir del mes 4, $3,000 MXN/mes si decides continuar con el servicio.',
+          price: '$3,000 MXN/mes',
+          label: '3 meses incluidos',
         },
         {
           title: 'Chatbot conversacional con IA',
@@ -260,20 +260,6 @@ const lizAnayaPodologia: ProposalData = {
           desc: 'Agente de IA que responde conversaciones completas con pacientes: agenda citas, contesta dudas, da seguimiento y escala a la host cuando hace falta. Diferente al bot de triage/FAQ de la Fase 3 — este mantiene conversaciones enteras 24/7 y libera al equipo de responder mensajes repetitivos. Incluye operación, entrenamiento continuo y ajustes del guion.',
           price: '$6,000 MXN/mes',
           label: 'opcional',
-        },
-        {
-          title: 'Módulo de campañas automatizadas',
-          category: 'growth',
-          desc: 'Reactivación del histórico de +3,000 pacientes: recordatorios de revisión, campañas estacionales, cross-sell de productos. Plantilla + automatización + dashboard de conversión.',
-          price: '$45,000 MXN',
-          label: 'add-on',
-        },
-        {
-          title: 'Capacitación extendida del equipo',
-          category: 'capacitacion',
-          desc: 'Sesiones intensivas para host, operadoras y demás staff. Incluye material de referencia y soporte en los primeros 30 días post-entrega.',
-          price: '$15,000 MXN',
-          label: 'add-on',
         },
         {
           title: 'Hosting y dominio · año 2 en adelante',
