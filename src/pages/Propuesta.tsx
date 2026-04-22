@@ -10,6 +10,7 @@ import StickyCards from '../components/Inversion'
 import StepCarousel from '../components/Pasos'
 import Roi from '../components/Roi'
 import CTA from '../components/CTA'
+import Feedback from '../components/Feedback'
 import { proposals } from '../data/proposal'
 import type { Section } from '../data/types'
 
@@ -22,6 +23,7 @@ const LAYOUT_MAP: Record<Section['layout'], React.ComponentType<any>> = {
   'step-carousel': StepCarousel,
   'roi': Roi,
   'cta': CTA,
+  'feedback': Feedback,
 }
 
 export default function Propuesta() {

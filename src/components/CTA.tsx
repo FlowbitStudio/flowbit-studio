@@ -22,9 +22,14 @@ type CtaState =
   | { kind: 'error_generic' }
 
 const CTA = forwardRef<HTMLElement, CTASection>((props, ref) => {
-  const { tag, title, description, buttonText, footerLeft, footerRight } = props
+  const { tag, title, description, buttonText, buttonHref, footerLeft, footerRight } = props
   const { id: slug } = useParams<{ id: string }>()
   const [state, setState] = useState<CtaState>({ kind: 'idle' })
+
+  // Propuestas sin aceptación digital (documentos de revisión, guiones, etc.)
+  // declaran un buttonHref con protocolo mailto:/http(s):/tel: y se renderean
+  // como link directo en vez de disparar el webhook de aceptación.
+  const isDirectLink = /^(mailto:|https?:|tel:)/i.test(buttonHref)
 
   const tagRef = useFadeIn<HTMLSpanElement>(0)
   const titleRef = useFadeIn<HTMLHeadingElement>(150)
@@ -109,15 +114,24 @@ const CTA = forwardRef<HTMLElement, CTASection>((props, ref) => {
         <h2 className="cta-title fade-in" ref={titleRef}>{renderLines(title)}</h2>
         <p className="cta-desc fade-in" ref={descRef}>{description}</p>
         <div className="cta-action fade-in" ref={btnRef}>
-          <button
-            type="button"
-            onClick={handleAccept}
-            disabled={isDisabled}
-            className={`cta-button cta-button--${state.kind}`}
-            aria-busy={state.kind === 'loading'}
-          >
-            {buttonLabel}
-          </button>
+          {isDirectLink ? (
+            <a
+              href={buttonHref}
+              className="cta-button cta-button--idle"
+            >
+              {buttonText}
+            </a>
+          ) : (
+            <button
+              type="button"
+              onClick={handleAccept}
+              disabled={isDisabled}
+              className={`cta-button cta-button--${state.kind}`}
+              aria-busy={state.kind === 'loading'}
+            >
+              {buttonLabel}
+            </button>
+          )}
         </div>
       </div>
 

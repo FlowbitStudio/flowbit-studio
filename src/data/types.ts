@@ -76,6 +76,7 @@ export interface StickyListSection {
   navLabel: string
   tag: string
   title: string
+  description?: string
   blocks: ContentBlock[]
 }
 
@@ -143,6 +144,19 @@ export interface CTASection {
   buttonHref: string
   footerLeft: string
   footerRight: string
+}
+
+export interface FeedbackSection {
+  layout: 'feedback'
+  navLabel?: string
+  tag: string
+  title: string
+  description: string
+  videoLabel: string
+  emailTo: string
+  emailSubject: string
+  placeholder: string
+  buttonText: string
 }
 
 /**
@@ -213,6 +227,7 @@ export type Section =
   | StepCarouselSection
   | RoiSection
   | CTASection
+  | FeedbackSection
 
 export interface ProposalData {
   logo: string

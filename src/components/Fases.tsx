@@ -5,9 +5,10 @@ import type { StickyListSection, ContentBlock, ContentEntregable } from '../data
 import './Fases.css'
 
 const StickyList = forwardRef<HTMLElement, StickyListSection>((props, ref) => {
-  const { tag, title, blocks } = props
+  const { tag, title, description, blocks } = props
   const tagRef = useFadeIn<HTMLSpanElement>(0)
   const titleRef = useFadeIn<HTMLHeadingElement>(150)
+  const descRef = useFadeIn<HTMLParagraphElement>(300)
 
   return (
     <section className="fases" ref={ref}>
@@ -20,6 +21,9 @@ const StickyList = forwardRef<HTMLElement, StickyListSection>((props, ref) => {
         </div>
 
         <div className="fases-right">
+          {description && (
+            <p className="fases-intro fade-in" ref={descRef}>{description}</p>
+          )}
           {blocks.map((block, i) => (
             <BlockItem key={block.number} block={block} isLast={i === blocks.length - 1} />
           ))}

@@ -38,6 +38,18 @@
   flex-direction: column;
 }
 
+/* Intro descriptivo opcional antes de los bloques */
+.fases-intro {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--light-gray);
+  max-width: 679px;
+  margin-bottom: 56px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 /* Each phase block */
 .phase-block {
   margin-bottom: 0;
