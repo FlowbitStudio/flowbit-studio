@@ -2,12 +2,26 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Empieza aquí: el backlog
+
+**`docs/tareas.md` es la fuente de verdad de lo que hay que construir.** Cuando el usuario
+diga "sigue con lo que toca", "¿qué falta?", "trabaja la siguiente tarea" o algo similar
+sin especificar qué, **lee `docs/tareas.md` primero** y toma la primera tarea en estado
+`🔲 Pendiente`, de arriba hacia abajo.
+
+Cada tarea trae su contexto, alcance, criterio de terminado, archivos involucrados y qué NO
+hacer. Ese contenido es el contrato: no amplíes el alcance ni lo recortes. Al terminar,
+actualiza el `Estado` de la tarea en ese archivo y commitéalo junto con el código.
+
+Las instrucciones completas de cómo trabajar el backlog están al inicio de `docs/tareas.md`.
+
 ## Documentación complementaria — leer cuando aplique
 
 Este archivo cubre la arquitectura técnica. El contexto que NO se deduce del código vive en `docs/`:
 
 | Cuándo | Leer |
 |---|---|
+| Necesitas saber **qué construir** | `docs/tareas.md` ← el backlog |
 | Vas a escribir el **contenido** de una propuesta (no solo la estructura) | `docs/playbook-propuestas.md` |
 | Vas a tocar íconos, `Icon.tsx` o `src/components/origami/` | `docs/iconografia.md` |
 | El proyecto involucra archivos, PDFs, fotos o expedientes de clientes | `docs/storage.md` |

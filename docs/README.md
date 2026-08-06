@@ -8,6 +8,7 @@ cómo funciona el pipeline de n8n. Esto es el complemento.
 
 | Documento | De qué trata |
 |---|---|
+| **[tareas.md](tareas.md)** | **El backlog.** Lo que hay que construir, con contexto y criterio de terminado por tarea. Empieza aquí |
 | [playbook-propuestas.md](playbook-propuestas.md) | Cómo escribir el **contenido** de una propuesta: los 9 pasos de la cita al documento, el tono, y el checklist final. `CLAUDE.md` dice dónde va cada cosa; esto dice qué escribir adentro |
 | [iconografia.md](iconografia.md) | Origami será el sistema oficial de íconos también en propuestas. Estado: **decidido, no implementado**. Incluye el preset oficial `flowbitIconPreset` |
 | [storage.md](storage.md) | Supabase Storage es el default para archivos de los CRMs. Por qué se descartaron S3 y R2, y cómo cotizarlo al cliente |

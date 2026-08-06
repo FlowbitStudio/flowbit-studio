@@ -102,6 +102,8 @@ contenido de propuestas y cómo funciona el pipeline de n8n. **Léelo antes de t
 
 En [`docs/`](docs/) está el contexto que no se deduce del código:
 
+- **[`docs/tareas.md`](docs/tareas.md) — el backlog.** Lo que hay que construir. Cada tarea
+  trae contexto, alcance, criterio de terminado y qué no hacer. **Empieza por aquí**
 - [`docs/playbook-propuestas.md`](docs/playbook-propuestas.md) — cómo escribir el contenido
   de una propuesta, los 9 pasos de la cita al documento
 - [`docs/iconografia.md`](docs/iconografia.md) — Origami como sistema oficial de íconos
