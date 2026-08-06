@@ -37,8 +37,9 @@ npm run preview   # previsualizar el build de producción
 
 ## Cómo trabajamos en equipo
 
-**Pusheamos directo a `main`.** No usamos pull requests. Como somos dos personas
-*y además un bot* escribiendo al mismo repo, el orden importa:
+**Pusheamos directo a `main`.** No usamos pull requests. Aunque solo una persona esté
+desarrollando activamente, **hay un bot escribiendo al mismo repo**, así que el orden
+importa:
 
 ```bash
 # SIEMPRE antes de empezar a trabajar
@@ -91,7 +92,25 @@ src/
 └── assets/icons/categories/   # Los 6 SVGs de categoría
 public/                  # Assets estáticos (logo, íconos, placeholders)
 prompts/                 # System messages de los agentes de n8n
+docs/                    # Decisiones, playbooks y material de referencia
 ```
+
+## Documentación
+
+`CLAUDE.md` es el manual técnico: tipos, layouts, convenciones de diseño, reglas de
+contenido de propuestas y cómo funciona el pipeline de n8n. **Léelo antes de tocar nada.**
+
+En [`docs/`](docs/) está el contexto que no se deduce del código:
+
+- [`docs/playbook-propuestas.md`](docs/playbook-propuestas.md) — cómo escribir el contenido
+  de una propuesta, los 9 pasos de la cita al documento
+- [`docs/iconografia.md`](docs/iconografia.md) — Origami como sistema oficial de íconos
+  (decidido, aún no implementado) + el preset oficial
+- [`docs/storage.md`](docs/storage.md) — Supabase Storage como default para los CRMs
+- [`docs/animaciones-externas.md`](docs/animaciones-externas.md) — cómo portar animaciones
+  de referencias sin romper el branding
+- [`docs/reference/wqf-capture/`](docs/reference/wqf-capture/) — la referencia visual del
+  homepage
 
 ## Cómo agregar una propuesta nueva
 

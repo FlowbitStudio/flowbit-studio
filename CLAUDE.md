@@ -2,6 +2,18 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Documentación complementaria — leer cuando aplique
+
+Este archivo cubre la arquitectura técnica. El contexto que NO se deduce del código vive en `docs/`:
+
+| Cuándo | Leer |
+|---|---|
+| Vas a escribir el **contenido** de una propuesta (no solo la estructura) | `docs/playbook-propuestas.md` |
+| Vas a tocar íconos, `Icon.tsx` o `src/components/origami/` | `docs/iconografia.md` |
+| El proyecto involucra archivos, PDFs, fotos o expedientes de clientes | `docs/storage.md` |
+| Vas a portar una animación de una referencia externa (Codrops, CodePen) | `docs/animaciones-externas.md` |
+| Vas a trabajar en el homepage | `docs/reference/wqf-capture/index.html` (referencia visual) |
+
 ## Build & Dev Commands
 
 ```bash
@@ -348,7 +360,7 @@ Auto-generada desde `sections[].navLabel`. Las secciones sin `navLabel` (como `c
 El repo ahora también tiene el homepage de Flowbit en la ruta `/`. Los componentes viven en `src/components/home/` y la página en `src/pages/Home.tsx`.
 
 ### Referencia visual
-El diseño replica la estructura visual y animaciones de WorldQuant Foundry (worldquantfoundry.com). El HTML original descargado está en `/Users/andre/Desktop/wqf-capture/index.html` como referencia para traducir las clases de Tailwind a CSS plano.
+El diseño replica la estructura visual y animaciones de WorldQuant Foundry (worldquantfoundry.com). El HTML original descargado está versionado en el repo en `docs/reference/wqf-capture/index.html` como referencia para traducir las clases de Tailwind a CSS plano. Los estilos originales están en `docs/reference/wqf-capture/main.min.css`.
 
 ### Stack adicional para el homepage
 - **GSAP** (ScrollTrigger, ScrollSmoother) — animaciones de scroll, pin, parallax
@@ -407,7 +419,7 @@ Todo el contenido en español está en `src/data/homeContent.ts`. NUNCA usar tex
 - `/public/placeholder-andre.svg`, `/public/placeholder-cesar.svg` — placeholders fotos equipo
 
 ### Approach de desarrollo
-- Leer el HTML original en `/Users/andre/Desktop/wqf-capture/index.html` para replicar estructura
+- Leer el HTML original en `docs/reference/wqf-capture/index.html` para replicar estructura
 - Traducir clases Tailwind a CSS plano directamente, una por una
 - Validar cada sección con el usuario antes de pasar a la siguiente
 - NO delegar CSS a agentes — el resultado no es fiel. Hacer directo

@@ -27,7 +27,10 @@ import OrigamiIcon from '@/components/origami/OrigamiIcon'
 | Wave | 11 | 5 esferas en onda |
 | Arrows | 12 | Cubo con 4 flechas direccionales |
 
-## Catálogo visual
+## Look oficial
 
-`/origami` (route en `App.tsx`, page en `src/pages/Origami.tsx`).
-**Es temporal** — eliminar cuando ya no haga falta picking visual.
+Usa siempre el preset `flowbitIconPreset` de `presets.ts` salvo que se pida variación
+explícita. Ver [`docs/iconografia.md`](../../../docs/iconografia.md) para el preset completo
+y para la decisión pendiente de mapear las 6 categorías de propuestas a estos íconos.
+
+> El catálogo visual temporal (`/origami`, `src/pages/Origami.tsx`) ya fue eliminado.
