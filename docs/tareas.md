@@ -75,6 +75,20 @@ depende de nada, escribe "Nada".
 
 ---
 
+## Pendientes de Andre
+
+Lo que hace falta de su lado para desbloquear las tareas. Está repetido dentro de cada
+`Depende de`; esta tabla existe para verlo todo junto.
+
+| Para | Falta | ¿Bloquea? |
+|---|---|---|
+| **T-01** | App Password de `noreply@flowbit.studio` en Google Workspace (con 2FA, la contraseña normal no sirve) | Solo la prueba de envío real. El desarrollo arranca ya |
+| **T-01** | Acceso al proyecto Supabase `lxbvlawujewnxvipxjua` para desplegar la Edge Function | Sí, para desplegar |
+| **T-02** | Confirmar si el Diagnóstico cuesta **$5,000 o $10,000 MXN** | Sí, es una contradicción publicada |
+| **T-03** | Foto de César, su bio real, y las URLs de LinkedIn de ambos | Solo el contenido. La interacción se construye ya |
+| **T-04** | Lista de proyectos reales: cliente, qué se construyó, stack, resultado, logo y visuales | Sí, la tarea no avanza sin esto |
+| **T-04** | Decidir si la ficha de proyecto es página `/proyectos/:slug` o modal | Sí |
+
 ## Tareas
 
 <!--
