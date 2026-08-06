@@ -72,6 +72,15 @@ Sistema de tracking en paralelo:
   - Supabase tabla `leads` (CRM, linkeada via lead_id)
 ```
 
+### Supabase — cuál es cuál
+
+| Proyecto | Ref | Para qué |
+|---|---|---|
+| **Flowbit** | `lxbvlawujewnxvipxjua` | La DB propia de Flowbit: leads, propuestas y las Edge Functions del sitio (`flowbit.studio`) |
+| Cigar Society | `mwufcgudxkbotkkwqzoo` | Base de un **cliente** (puros, POS, eventos, convenios). En algunas máquinas el MCP `supabase-flowbit` apunta aquí, pese al nombre |
+
+⚠️ Nunca despliegues funciones ni escribas datos del sitio de Flowbit en el proyecto de un cliente. Verifica el `ref` antes de cualquier deploy.
+
 **Cuando este Claude Code corre desde el wrapper headless**, NO está editando el repo en local — está editando el clone que vive en el container del VPS. El git push va a GitHub, y de ahí EasyPanel auto-deploya. Todo el ciclo dura ~3 minutos por propuesta.
 
 ## Qué es este repo

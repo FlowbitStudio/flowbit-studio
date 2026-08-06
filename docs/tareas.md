@@ -84,8 +84,10 @@ depende de nada, escribe "Nada".
 
 ### T-01 — Conectar el formulario de contacto para que envíe correos
 
-- **Estado:** ⛔ Bloqueada
+- **Estado:** 🔲 Pendiente
 - **Prioridad:** Alta
+- **Nota:** solo el paso final (probar el envío real) espera el App Password. Todo lo demás
+  se puede construir ya.
 
 **Contexto.** El formulario de `ContactModal.tsx` está completo en UI — 8 campos, selector
 de rol, industria, consentimiento — pero **no envía nada**. Su `handleSubmit` solo hace
@@ -95,45 +97,85 @@ contactó a Flowbit y nadie se entera. Son leads perdiéndose hoy.
 ⚠️ **Lee esto antes de proponer una solución.** El sitio es **estático**: React + Vite
 compilado y servido por nginx en un container. **No hay backend.** No puedes hacer SMTP
 desde el navegador — las credenciales quedarían en el bundle de JavaScript, visibles para
-cualquiera que abra las DevTools. Hace falta un endpoint que reciba el POST y desde ahí
-mande el correo.
+cualquiera que abra las DevTools.
+
+**La arquitectura ya está decidida, no la re-discutas:** una **Supabase Edge Function** en
+el proyecto Supabase propio de Flowbit. n8n **no** se usa aquí — queda reservado únicamente
+para el bot de propuestas.
+
+---
+
+#### 🛑 Advertencia que te va a ahorrar días: NO uses denomailer
+
+`denomailer` es la librería que todo mundo recomienda para SMTP en Deno / Supabase Edge
+Functions, y es la que vas a encontrar en la mayoría de los ejemplos. **Está descartada en
+Flowbit desde el 20 de julio de 2026.**
+
+Motivo, documentado en la Edge Function `correo-avisos` de otro proyecto de Flowbit: *su
+plegado de asuntos UTF-8 rompe los headers MIME y Gmail muestra el mensaje crudo.* Los
+acentos del español lo disparan constantemente.
+
+**Usa `nodemailer` (npm).** Arma el MIME correcto: asunto en RFC2047, alternativa de texto
+plano y quoted-printable bien separado. Supabase Edge Functions soportan imports de npm.
+
+Si tienes acceso a la Edge Function `correo-avisos`, léela antes de escribir nada: ya
+resuelve el transporte, el armado del MIME y el manejo de errores. Cópiale el patrón.
+
+---
 
 **Qué construir.**
-1. Un endpoint que reciba el submit del formulario (la opción está en `Depende de`).
-2. Correo de **notificación a Flowbit** (`hola@flowbit.studio`) con todos los campos del
-   formulario formateados y legibles.
-3. Correo de **autorespuesta a quien llenó el formulario**, confirmando que se recibió.
-   Debe respetar la identidad de Flowbit — hay un generador de emails HTML de referencia en
-   `src/utils/proposalEmail.ts` con los colores y la estructura ya resueltos, reutiliza ese
-   criterio visual.
-4. Conectar `handleSubmit` al endpoint con estados de UI: **loading** mientras envía,
-   **éxito** y **error**. Los textos ya existen en `homeContent.ts` →
+1. Una **Supabase Edge Function** que reciba el POST del formulario. Debe desplegarse con
+   `verify_jwt: false` — el formulario es público y anónimo, no hay sesión que validar.
+2. **Credenciales por secrets de Edge Function**: se cargan con `supabase secrets set` y se
+   leen con `Deno.env.get()`. Van host, puerto, usuario, contraseña y remitente.
+   *(Nota: otros proyectos de Flowbit guardan esto en Supabase Vault. Aquí se decidió usar
+   secrets por simplicidad; el costo es que rotar la contraseña exige redeploy.)*
+3. **Correo de notificación a `hola@flowbit.studio`** con todos los campos del formulario
+   formateados y legibles.
+4. **Correo de autorespuesta a quien llenó el formulario**, confirmando que se recibió. Debe
+   respetar la identidad de Flowbit — `src/utils/proposalEmail.ts` ya tiene resuelto el HTML
+   de correo con los colores y la estructura de la marca; reutiliza ese criterio visual.
+5. **Headers CORS** que permitan el POST desde `flowbit.studio`.
+6. **Degradado elegante**: si faltan las credenciales, la función responde 200 con un aviso
+   en vez de tronar (es como se comporta `correo-avisos`).
+7. Conectar `handleSubmit` en `ContactModal.tsx` a la función, con estados de UI: **loading**
+   mientras envía, **éxito** y **error**. Los textos ya existen en `homeContent.ts` →
    `contactForm.successMessage` y `contactForm.errorMessage`, pero el componente hoy no los
    usa. Úsalos.
-5. Validación antes de enviar y protección anti-spam (honeypot o equivalente).
+8. Validación antes de enviar y protección anti-spam (honeypot o rate limiting).
 
 **Criterio de terminado.** Llenar el formulario en producción hace llegar el correo a
-`hola@flowbit.studio` con todos los campos; quien lo llenó recibe la autorespuesta; el
-botón muestra estado de carga y luego el mensaje de éxito o de error real según lo que pase;
-las credenciales SMTP **no aparecen en ningún archivo del repo ni en el bundle**; y
-`npm run build` pasa limpio.
+`hola@flowbit.studio` con todos los campos; quien lo llenó recibe la autorespuesta desde
+`noreply@flowbit.studio`; **los acentos y la ñ se ven correctos en Gmail**, tanto en el
+asunto como en el cuerpo; el botón muestra carga y luego éxito o error real; las credenciales
+SMTP **no aparecen en ningún archivo del repo ni en el bundle**; y `npm run build` pasa
+limpio.
 
-**Archivos involucrados.** `src/components/home/ContactModal.tsx` (el `handleSubmit`),
-`src/data/homeContent.ts` (textos de estado, ya existen), y lo que se cree para el endpoint.
+**Archivos involucrados.** `src/components/home/ContactModal.tsx` (el `handleSubmit`, línea
+~23), `src/data/homeContent.ts` (textos de estado, ya existen), y la función nueva en
+`supabase/functions/contacto/index.ts` dentro de este repo.
 
-**No hacer.** No metas credenciales SMTP en el repo, ni siquiera en un `.env` versionado.
-No rediseñes el formulario ni cambies sus campos — solo se conecta. No cambies el copy
-existente de `contactForm`.
+**No hacer.** No uses denomailer (ver arriba). No metas credenciales SMTP en el repo, ni
+siquiera en un `.env` versionado. No uses n8n. No rediseñes el formulario ni cambies sus
+campos — solo se conecta. No cambies el copy existente de `contactForm`.
 
-**Depende de.** ⛔ **Decisión de Andre: dónde vive el endpoint.** Tres opciones viables:
-- **n8n webhook** (recomendado) — `n8n.flowbit.studio` ya existe y ya opera un webhook para
-  el CTA de propuestas. Cero infraestructura nueva, las credenciales viven en n8n, y de paso
-  el lead puede caer directo en la tabla `leads` de Supabase.
-- **Supabase Edge Function** — si se prefiere mantenerlo en el stack de datos.
-- **Resend / servicio transaccional** — el más simple, pero mete un vendor más.
+**Dónde se despliega.** Proyecto Supabase de Flowbit:
 
-También hace falta que Andre entregue **las credenciales SMTP** (el dominio corre en Google
-Workspace) o dé de alta el remitente en el servicio que se elija.
+```
+ref:  lxbvlawujewnxvipxjua
+url:  https://lxbvlawujewnxvipxjua.supabase.co
+```
+
+⚠️ **No confundir con el proyecto al que apunta el MCP `supabase-flowbit`** de la máquina de
+Andre: ese es el de **Cigar Society**, un cliente. La Edge Function del sitio **no** va ahí.
+
+**Depende de.** ⛔ Andre debe entregar el **App Password de `noreply@flowbit.studio`** en
+Google Workspace. Con 2FA activo hay que generar un App Password específico — la contraseña
+normal de la cuenta no sirve para SMTP. Config esperada: `smtp.gmail.com`, puerto `465`, SSL.
+
+Todo lo demás de esta tarea (la función, el HTML de los correos, los estados de UI, el CORS,
+el anti-spam) **se puede construir y probar sin el App Password**, gracias al degradado
+elegante del punto 6. No esperes a que llegue para arrancar.
 
 ---
 
