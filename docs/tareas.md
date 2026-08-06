@@ -180,8 +180,9 @@ ref:  lxbvlawujewnxvipxjua
 url:  https://lxbvlawujewnxvipxjua.supabase.co
 ```
 
-⚠️ **No confundir con el proyecto al que apunta el MCP `supabase-flowbit`** de la máquina de
-Andre: ese es el de **Cigar Society**, un cliente. La Edge Function del sitio **no** va ahí.
+⚠️ **No confundir con `mwufcgudxkbotkkwqzoo`**, que es el proyecto de **Cigar Society** — un
+cliente, cuyo MCP se llama `supabase-cigar-society`. La Edge Function del sitio **no** va ahí.
+Verifica el `ref` antes de cualquier deploy.
 
 **Depende de.** ⛔ Andre debe entregar el **App Password de `noreply@flowbit.studio`** en
 Google Workspace. Con 2FA activo hay que generar un App Password específico — la contraseña

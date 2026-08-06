@@ -77,7 +77,7 @@ Sistema de tracking en paralelo:
 | Proyecto | Ref | Para qué |
 |---|---|---|
 | **Flowbit** | `lxbvlawujewnxvipxjua` | La DB propia de Flowbit: leads, propuestas y las Edge Functions del sitio (`flowbit.studio`) |
-| Cigar Society | `mwufcgudxkbotkkwqzoo` | Base de un **cliente** (puros, POS, eventos, convenios). En algunas máquinas el MCP `supabase-flowbit` apunta aquí, pese al nombre |
+| Cigar Society | `mwufcgudxkbotkkwqzoo` | Base de un **cliente** (puros, POS, eventos, convenios). Su MCP se llama `supabase-cigar-society` |
 
 ⚠️ Nunca despliegues funciones ni escribas datos del sitio de Flowbit en el proyecto de un cliente. Verifica el `ref` antes de cualquier deploy.
 
