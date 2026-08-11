@@ -1,14 +1,18 @@
 .servicios {
   background: var(--light-gray);
   padding: 80px 0 0;
+
+  /* Cuántas cards entran en el viewport. Manda el ancho de .servicio-card. */
+  --visible-cards: 4;
 }
 
 /* Header — keeps inner padding */
 .servicios-header {
   padding: 0 var(--page-padding);
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 2fr auto;
   gap: 12px 32px;
+  align-items: start;
   margin-bottom: 60px;
 }
 
@@ -32,32 +36,47 @@
   line-height: 1.6;
 }
 
-/* Cards — full bleed, edge to edge */
-.servicios-cards {
-  display: flex;
+/* Cards — full bleed, edge to edge, navegables lateralmente */
+.servicios-cards-scroll {
+  overflow-x: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   width: 100%;
 }
 
+.servicios-cards-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.servicios-cards {
+  display: flex;
+}
+
 .servicio-card {
-  flex: 1 1 0;
+  scroll-snap-align: start;
+
+  /* Ancho derivado de --visible-cards en .servicios, para que agregar
+     una card más no apriete a las demás — se navegan con las flechas. */
+  flex: 0 0 calc(100vw / var(--visible-cards));
+  width: calc(100vw / var(--visible-cards));
   min-height: 441px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   padding: 40px 50px;
   background: transparent;
   cursor: pointer;
   transition: background 0.35s ease;
-  /* Para que el icono absolute lo tome de referencia */
   position: relative;
 }
 
-/* Icono por categoría — posicionado al top-left del card sin afectar
-   el flex-end del .servicio-card-inner que ancla el contenido al fondo. */
+/* Icono por categoría — vive en el flujo flex, arriba del todo. El
+   contenido se ancla al fondo con margin-top:auto en .servicio-card-inner,
+   así que el icono nunca se empalma con el título por más largo que sea
+   el texto de la card. */
 .servicio-card-icon {
-  position: absolute;
-  top: 40px;
-  left: 50px;
+  flex: none;
+  margin-bottom: 24px;
   color: var(--gray);
   transition: color 0.35s ease;
 }
@@ -72,6 +91,10 @@
 
 /* Text colors: default gray, white on hover */
 .servicio-card-inner {
+  /* Empuja el contenido al fondo del card. Cuando el texto es tan largo
+     que llena el card, el auto colapsa a 0 y solo queda el margin del
+     icono como separación — nunca hay traslape. */
+  margin-top: auto;
   color: var(--gray);
   transition: color 0.35s ease;
 }
@@ -114,12 +137,17 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
+  .servicios {
+    --visible-cards: 1;
+  }
+
   .servicios-header {
     grid-template-columns: 1fr;
   }
 
-  .servicios-cards {
-    flex-direction: column;
+  .servicios-cards-scroll {
+    /* En mobile/tablet permitimos swipe nativo además de las flechas */
+    overflow-x: auto;
   }
 
   .servicio-card {
@@ -148,19 +176,11 @@
   .servicio-card {
     padding: 32px 24px;
     min-height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
     overflow: hidden;
   }
 
   .servicio-card-icon {
-    position: static;
     display: block;
     margin-bottom: 16px;
-  }
-
-  .servicio-card-inner {
-    position: relative;
   }
 }
