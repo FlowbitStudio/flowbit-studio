@@ -35,6 +35,7 @@ import formaQ3 from './forma-q3'
 import asistIa from './asist-ia'
 import asistiaGuiones from './asistia-guiones'
 import camionesAConciertos from './camiones-a-conciertos'
+import escandalo from './escandalo'
 import type { ProposalData } from './types'
 
 // Registra aquí cada propuesta con su slug (usado en la URL)
@@ -49,4 +50,5 @@ export const proposals: Record<string, ProposalData> = {
   'asist-ia': asistIa,
   'asistia-guiones': asistiaGuiones,
   'camiones-a-conciertos': camionesAConciertos,
+  'escandalo': escandalo,
 }
