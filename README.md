@@ -144,11 +144,34 @@ Este repo está preparado para Claude Code. Léelo así:
 
 ## Deploy
 
-`main` → EasyPanel (container `website-flowbit`) → `flowbit.studio`.
+`main` → EasyPanel (project `flowbit`, service `website-flowbit`) → `flowbit.studio`.
+Build vía Docker con el `Dockerfile` y `nginx.conf` de la raíz.
 
-El deploy es automático al pushear a `main`. Build vía Docker con el `Dockerfile` y
-`nginx.conf` de la raíz. **Todo lo que pushees a `main` sale a producción** — por eso
-corre `npm run build` antes de pushear.
+> ⚠️ **Pushear a `main` NO despliega.** El servicio tiene `autoDeploy: false`: su
+> fuente es este repo en la rama `main`, pero el rebuild solo arranca cuando alguien
+> llama a la API de EasyPanel. En el pipeline automatizado esa llamada la hace el
+> wrapper después del push; **trabajando en local la tienes que hacer tú**.
+
+El ciclo completo, en este orden:
+
+```bash
+npm run build                  # si truena aquí, no sigas
+git add -A && git commit -m "Nueva propuesta: Cliente V01"
+git push origin main           # el deploy tiene que poder encontrarse en el repo
+scripts/desplegar.sh           # esto es lo que realmente despliega
+```
+
+**Verifica siempre el resultado.** nginx sirve `index.html` en cualquier ruta, así
+que `/propuestas/<slug>` responde 200 aunque el bundle sea el viejo. Lo que hay que
+comprobar es el JS en vivo:
+
+```bash
+js=$(curl -s https://flowbit.studio/ | grep -o 'assets/index-[A-Za-z0-9_-]*\.js' | head -1)
+curl -s "https://flowbit.studio/$js" | grep -c "<slug>"    # debe dar > 0
+```
+
+El token de la API vive en `~/.ssh/.ep_api_token`, fuera del repo (mismo token que
+usa Cigar Society; solo cambia `projectName`/`serviceName`).
 
 ## Qué NO va en el repo
 

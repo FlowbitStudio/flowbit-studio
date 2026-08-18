@@ -37,6 +37,49 @@ npm run lint      # ESLint (flat config)
 npm run preview   # Preview production build
 ```
 
+## Deploy — regla fija
+
+**Cuando André pida "despliega", "sube la propuesta" o "mándasela al cliente",
+esto es lo que hay que hacer. Siempre en este orden, sin saltarse pasos.**
+
+```bash
+npm run build                            # si truena aquí, no sigas
+git add -A && git commit -m "..."        # mensaje descriptivo
+git push origin main                     # el deploy termina en GitHub, no en el panel
+scripts/desplegar.sh                     # ESTO es lo que despliega
+```
+
+> ⚠️ **Pushear a `main` NO despliega nada.** El servicio `website-flowbit` tiene
+> `autoDeploy: false` en EasyPanel. Su fuente es este repo en `main`, pero el
+> rebuild solo arranca con una llamada a la API. En el pipeline de Telegram esa
+> llamada la hace el wrapper (`EASYPANEL_DEPLOY_HOOK_URL`); **en local la hace
+> `scripts/desplegar.sh`**. Si solo pusheas, producción se queda con el bundle
+> viejo y el cliente abre un link que no existe.
+
+Bajo el capó (mismo patrón que Cigar Society, solo cambian los nombres):
+
+```
+POST https://5xgoxf.easypanel.host/api/trpc/services.app.deployService
+  Authorization: Bearer $(cat ~/.ssh/.ep_api_token)
+  {"json":{"projectName":"flowbit","serviceName":"website-flowbit"}}
+```
+
+**Un HTTP 200 no es una verificación.** Significa que EasyPanel aceptó la orden,
+nada más. Y `curl` a `/propuestas/<slug>` tampoco sirve: nginx sirve `index.html`
+en cualquier ruta y contesta 200 aunque el JS sea el de hace tres semanas. Lo
+único que prueba que el deploy salió es el bundle en vivo:
+
+```bash
+js=$(curl -s https://flowbit.studio/ | grep -o 'assets/index-[A-Za-z0-9_-]*\.js' | head -1)
+curl -s "https://flowbit.studio/$js" | grep -c "<slug>"    # debe dar > 0
+```
+
+El build tarda ~2-4 minutos. **No le pases el link al cliente antes de que ese
+grep dé > 0.**
+
+El token vive en `~/.ssh/.ep_api_token`, fuera del repo. Nunca lo pegues en un
+archivo, un commit ni un mensaje.
+
 ## Tech Stack
 
 - **React 19** + **TypeScript 6** + **Vite 8**
@@ -44,6 +87,7 @@ npm run preview   # Preview production build
 - Plain CSS con archivos component-scoped (no Tailwind, no CSS modules)
 - CSS custom properties definidas en `src/index.css` (incluyendo `--page-padding` responsivo: 32px desktop, 20px mobile)
 - Build production con tsc + Vite, deploy via Docker (`Dockerfile` + `nginx.conf` en raíz) en EasyPanel
+- **El deploy NO es automático**: `autoDeploy: false`. Se dispara con `scripts/desplegar.sh` (API de EasyPanel). Ver sección "Deploy" abajo.
 
 ## Sistema completo (contexto fuera del repo)
 
@@ -109,7 +153,7 @@ Cuando este repo lo usa Claude Code en modo headless (`claude -p`) como parte de
 
 - NO preguntes nada. El user prompt viene con todos los datos ya estructurados en JSON.
 - Detecta si es una propuesta NUEVA (no existe `src/data/{slug}.ts`) o una ITERACIÓN (el archivo ya existe) y sigue el flujo correspondiente de las secciones "Cómo crear una propuesta NUEVA" o "Cómo ITERAR una propuesta existente".
-- Al terminar el archivo, ejecuta `git add`, `git commit` con mensaje descriptivo (ej: `"Nueva propuesta: Tacos El Paisa V01"` o `"Cigar Society V02 — ajustes de precio"`), y `git push origin main`. Vercel auto-deploya.
+- Al terminar el archivo, ejecuta `git add`, `git commit` con mensaje descriptivo (ej: `"Nueva propuesta: Tacos El Paisa V01"` o `"Cigar Society V02 — ajustes de precio"`), y `git push origin main`. Después **dispara el deploy** con `scripts/desplegar.sh` — el push por sí solo no publica nada.
 - Responde ÚNICAMENTE en formato JSON estricto con los metadatos del commit para que el wrapper los pueda parsear:
   ```json
   {
