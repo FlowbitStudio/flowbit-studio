@@ -10,18 +10,21 @@
   align-items: start;
 }
 
-/* Izquierda: sticky con espacio para el header */
+/* Izquierda: sticky con espacio para el header.
+   min-height en vez de height: si las condiciones son largas, la columna
+   crece en lugar de desbordarse encima de la siguiente sección. Con texto
+   corto el resultado es idéntico al de antes (100vh exactos). */
 .inversion-left {
   position: sticky;
   top: 0;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 /* Texto arriba — mismo padding que las demás secciones */
 .inversion-text {
-  padding: 100px var(--page-padding) 32px;
+  padding: 100px var(--page-padding) 64px;
   flex-shrink: 0;
 }
 

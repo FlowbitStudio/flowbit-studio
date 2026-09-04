@@ -212,7 +212,7 @@ const calzadoBlade: ProposalData = {
       tag: 'inversión',
       title: 'Inversión\nmensual.',
       description:
-        'Antes de arrancar cualquier plan va el Diagnóstico + Desarrollo estilográfico: $10,000 MXN de pago único. No es opcional y no se vende por separado — es lo que define cómo se ve Blade y sin eso los tres planes producen a ciegas.\n\nCompromiso mínimo de 3 meses en cualquiera de los tres planes. Después, renovación mes a mes. Pago mensual por adelantado dentro de los primeros 5 días de cada mes.\n\nQué incluye el precio: producción completa (set y locación cuando aplica), edición, estrategia, publicación y gestión de comunidad. Crecimiento y Total incluyen también el modelo.\n\nEn el plan Esencial, el modelo, la locación y el set corren por cuenta de Blade: tú decides dónde grabamos y quién modela, y Flowbit llega con dirección, equipo y edición. Si prefieres que nosotros lo resolvamos, se cotiza aparte (modelo $3,500 MXN y set o estudio $2,500 MXN por sesión).\n\nQué no incluye: el presupuesto de pauta en Meta y TikTok, que corre por cuenta de Blade y se paga directo a la plataforma. La logística de envío y devolución de los pares a producción también corre por cuenta del cliente.\n\nPropuesta inicial (V01). Los precios son estimaciones (excepto el Diagnóstico, que es fijo) y pueden ajustarse en iteraciones siguientes según el alcance final. Precios más IVA.',
+        'Antes de cualquier plan va el Diagnóstico + Desarrollo estilográfico: $10,000 MXN de pago único, obligatorio y no se vende por separado.\n\nCompromiso mínimo de 3 meses, luego renovación mes a mes. Pago por adelantado en los primeros 5 días.\n\nIncluye producción, edición, estrategia, publicación y comunidad. Crecimiento y Total incluyen además modelo, set y locación; en Esencial los pone Blade, o los cotizamos aparte.\n\nNo incluye el presupuesto de pauta, que se paga directo a la plataforma, ni la logística de envío de los pares.\n\nPropuesta inicial (V01): precios estimados, excepto el Diagnóstico, que es fijo. Más IVA.',
       cards: [
         {
           title: 'Plan Crecimiento',
@@ -246,7 +246,7 @@ const calzadoBlade: ProposalData = {
         {
           title: 'Diagnóstico + Desarrollo estilográfico',
           category: 'diagnostico',
-          desc: 'El punto de partida obligatorio de cualquiera de los tres planes, y no se venden por separado: el diagnóstico sin el estilográfico es un documento que nadie usa, y el estilográfico sin diagnóstico es decoración. Incluye auditoría de marca (tienda, catálogo, público que ya compra, competencia en sneakers de piel y posicionamiento actual) y el desarrollo estilográfico que sale de ahí: dirección de arte fotográfica —luz, superficies, encuadres, tratamiento de color—, paleta y tipografías de contenido, y tablero de referencia. Es lo que rige toda la producción de los tres planes. Precio fijo, pago único.',
+          desc: 'Punto de partida obligatorio de cualquier plan, y no se venden por separado. Incluye auditoría de marca —tienda, catálogo, público que ya compra y competencia en sneakers de piel— y el desarrollo estilográfico que sale de ahí: dirección de arte fotográfica, paleta, tipografías de contenido y tablero de referencia. Es lo que rige la producción de los tres planes.',
           price: '$10,000 MXN',
           label: 'obligatorio · pago único previo al arranque',
         },
