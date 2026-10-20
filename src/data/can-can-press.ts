@@ -10,7 +10,7 @@ const canCanPress: ProposalData = {
       subtitle: 'Sistema de operación',
       title: 'Can Can\nPress',
       cardTitle: 'Panel de operación Can Can Press',
-      cardText: 'Can Can Press vende por la galería, por las ferias, en línea y a más de treinta librerías en consignación. Cada canal lleva hoy sus propias cuentas. Flowbit construirá un panel único para el catálogo, el inventario por canal, los pedidos, el punto de venta de galería y ferias, los eventos con boletos digitales, los cobros en línea, la facturación y la administración, conectado a su sitio actual en WordPress y WooCommerce. Parte de un sistema que ya está en operación diaria en otro negocio con varios puntos de venta, adaptado a cómo trabaja un estudio que publica libros y produce todo tipo de mercancía.',
+      cardText: 'Can Can Press vende en la galería, en ferias, en línea y en más de treinta librerías, y cada canal lleva hoy sus propias cuentas. Flowbit construirá un solo panel para operar todo: productos, inventario, ventas, eventos, cobros, equipo y administración, conectado a su tienda en WordPress.',
       meta: [
         { label: 'Dirigido a', value: 'Gabino Azuela' },
         { label: 'Fecha', value: 'Octubre 2026' },
@@ -91,7 +91,11 @@ const canCanPress: ProposalData = {
             },
             {
               title: 'Administración',
-              desc: 'Los gastos del día a día (papel, tinta, encuadernación, envíos, renta de stands) se capturan en el panel junto con sus proveedores, así siempre saben qué se debe y a quién. También se lleva lo que les deben las librerías y los clientes de mayoreo. Cada persona del equipo entra con su propio usuario y ve solo lo que le toca, y queda registro de quién cambió qué.',
+              desc: 'Los gastos del día a día (papel, tinta, encuadernación, envíos, renta de stands) se capturan en el panel junto con sus proveedores, así siempre saben qué se debe y a quién. También se lleva lo que les deben las librerías y los clientes de mayoreo.',
+            },
+            {
+              title: 'Equipo: tareas y roles',
+              desc: 'Cada persona del equipo entra con su propio usuario y un rol que define qué puede ver y hacer: quien atiende la galería vende y consulta existencias, quien lleva las cuentas ve la administración, y la dirección lo ve todo. Las tareas del día a día, como preparar una feria, mandar una consignación o sacar una producción, se asignan a alguien con fecha de entrega y se sigue su avance en un tablero. Queda registro de quién hizo qué y cuándo.',
             },
             {
               title: 'Reportes y tablero de dirección',
@@ -196,7 +200,7 @@ const canCanPress: ProposalData = {
       cards: [
         {
           title: 'Implementación completa',
-          desc: 'Fases 1 a 3: panel de operación (catálogo, inventario por canal, pedidos y consignación, eventos con boletos en Apple y Google Wallet, WordPress y WooCommerce, pasarela de pago, administración y reportes para dirección e inversionistas), punto de venta para galería y ferias, y facturación y envíos.',
+          desc: 'Fases 1 a 3: panel de operación (catálogo, inventario por canal, pedidos y consignación, eventos con boletos en Apple y Google Wallet, WordPress y WooCommerce, pasarela de pago, tareas y roles del equipo, administración y reportes para dirección e inversionistas), punto de venta para galería y ferias, y facturación y envíos.',
           price: '$45,000 MXN',
           label: '+ IVA',
         },
