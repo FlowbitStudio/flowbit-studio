@@ -56,7 +56,9 @@ export interface CardCarouselSection {
 
 export interface ContentEntregable {
   title: string
-  items: string[]
+  /** Párrafo explicativo en lenguaje llano. Va antes de los bullets, si hay. */
+  desc?: string
+  items?: string[]
 }
 
 export interface ContentBlock {

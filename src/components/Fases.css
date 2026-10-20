@@ -148,6 +148,19 @@
   margin-bottom: 8px;
 }
 
+.phase-item-desc {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--gray);
+  text-transform: uppercase;
+  line-height: 1.7;
+  max-width: 559px;
+}
+
+.phase-item-desc + .phase-item-list {
+  margin-top: 12px;
+}
+
 .phase-item-list {
   font-family: var(--font-mono);
   font-size: 13px;

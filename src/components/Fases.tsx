@@ -77,19 +77,25 @@ function PhaseBullet({ text, delay }: { text: string; delay: number }) {
   )
 }
 
-// Entregable = título del subbloque + lista de items.
-// El título fade in primero (0ms) y los items siguen escalonados (60ms entre cada uno).
+// Entregable = título del subbloque + párrafo opcional + lista opcional de items.
+// El título fade in primero (0ms), luego el párrafo y los items escalonados (60ms entre cada uno).
 function PhaseEntregable({ entregable }: { entregable: ContentEntregable }) {
   const titleRef = useFadeIn<HTMLParagraphElement>(0)
+  const descRef = useFadeIn<HTMLParagraphElement>(120)
   return (
     <div className="phase-item">
       <div className="phase-item-dot" />
       <p className="phase-item-title fade-in" ref={titleRef}>{entregable.title}</p>
-      <ol className="phase-item-list">
-        {entregable.items.map((li, j) => (
-          <PhaseBullet key={j} text={li} delay={120 + j * 60} />
-        ))}
-      </ol>
+      {entregable.desc && (
+        <p className="phase-item-desc fade-in" ref={descRef}>{entregable.desc}</p>
+      )}
+      {entregable.items && entregable.items.length > 0 && (
+        <ol className="phase-item-list">
+          {entregable.items.map((li, j) => (
+            <PhaseBullet key={j} text={li} delay={180 + j * 60} />
+          ))}
+        </ol>
+      )}
     </div>
   )
 }

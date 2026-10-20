@@ -61,11 +61,15 @@
   object-fit: cover;
 }
 
-/* Derecha: cards scrolleables, grid de 2 cols que llena todo */
+/* Derecha: cards scrolleables, grid de 2 cols que llena todo.
+   Con pocas cards la columna izquierda (min 100vh) es más alta: las filas
+   se estiran para que no quede hueco debajo de la última card. */
 .inversion-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-auto-flow: dense;
+  grid-auto-rows: minmax(441px, 1fr);
+  align-self: stretch;
 }
 
 .inversion-card {
@@ -164,6 +168,7 @@
 
   .inversion-cards {
     grid-template-columns: 1fr;
+    grid-auto-rows: auto;
   }
 
   .inversion-card {
