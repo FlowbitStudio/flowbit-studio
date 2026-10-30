@@ -1,0 +1,43 @@
+.s-porque {
+  position: relative; z-index: 1; height: 900vh; background: var(--negro);
+
+  .escena { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  .marco { position: absolute; left: 50%; top: 50%; transform-origin: center; }
+  canvas { position: absolute; inset: 0; display: block; }
+  .texto { position: absolute; inset: 0; color: #ffffff; pointer-events: none; }
+
+  .etapa { position: absolute; left: 80px; top: 0; bottom: 0; width: 460px; display: flex; flex-direction: column; justify-content: center; gap: 22px; }
+  .etapa > * { animation: s-bits-entra .9s cubic-bezier(.215, .61, .355, 1) backwards; }
+  .eti { font-size: 12px; color: var(--azul); }
+  h3 { font-size: 56px; line-height: .95; }
+  p { font-size: 12px; line-height: 1.6; color: rgba(231, 231, 231, .65); }
+
+  /* La portada, centrada: un respiro antes de las formas */
+  .portada { left: 0; right: 0; width: auto; bottom: auto; top: 250px; align-items: center; text-align: center; }
+  .portada h2 { max-width: 900px; font-size: 88px; line-height: .92; letter-spacing: -.02em; }
+  /* Texto sobre una forma enorme */
+  .sombra h3, .sombra p { text-shadow: 0 0 24px #111111, 0 0 6px #111111; }
+  /* Texto dentro del hueco del toro */
+  .centro { left: 0; right: 0; width: auto; align-items: center; text-align: center; }
+  .centro h3 { max-width: 440px; }
+  .centro p { max-width: 360px; }
+  /* El respiro: casi nada en pantalla */
+  .pausa { left: 0; right: 0; width: auto; top: 500px; bottom: auto; align-items: center; text-align: center; gap: 10px; }
+  .num { font-size: 20px; color: #ffffff; }
+  .pal { font-size: 11px; color: rgba(231, 231, 231, .55); }
+
+  .indice { position: absolute; left: 80px; bottom: 56px; display: flex; gap: 8px; }
+  .indice i { display: block; width: 28px; height: 2px; background: rgba(231, 231, 231, .18); transition: background-color .5s ease; }
+  .indice i.on { background: var(--azul); }
+
+  /* Teléfono: el texto arriba y la forma abajo */
+  .telefono {
+    .etapa { left: 20px; right: 20px; width: auto; top: 92px; bottom: auto; gap: 14px; justify-content: flex-start; align-items: flex-start; text-align: left; }
+    h3 { font-size: 38px; max-width: none; }
+    p { font-size: 11px; max-width: none; text-shadow: 0 0 14px #111111, 0 0 4px #111111; }
+    .portada { top: 170px; }
+    .portada h2 { font-size: 48px; }
+    .pausa { top: 450px; left: 0; right: 0; align-items: center; text-align: center; }
+    .indice { left: 20px; bottom: 28px; }
+  }
+}

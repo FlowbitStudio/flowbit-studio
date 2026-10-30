@@ -39,9 +39,9 @@ Convención: `texto` = una línea · `párrafo` = texto largo · `\n` en un tít
 | **08 Por qué Flowbit** (desliza) | `etiqueta`, `titulo`, `pista` | `razones[4]` { palabra (la del respiro), titulo, descripcion } |
 | **09 Transición de bits** | — (diseño) | — |
 | **10 Equipo** | `titulo`, `descripcion`, `boton`, `frases[2]` | `miembros[]` { nombre, puesto, bio, foto imagen, enlace acción } |
-| **11 Clientes** (desliza) | `etiqueta`, `titulo`, `descripcion`, `boton` | `ventajas[3]` { titulo, descripcion } |
+| **11 Clientes** (desliza) | `etiqueta`, `titulo`, `descripcion`, `boton` | `ventajas[3]` { titulo, descripcion, color, icono imagen } |
 | **12 Listón de clientes** | `etiqueta`, `pista` | `clientes[]` { nombre, giro, **logo imagen**, href } |
-| **13 Proceso** (desliza) | `etiqueta`, `titulo`, `subtitulo`, `pista` | `etapas[4]` { nombre, descripcion } |
+| **13 Proceso** (desliza) | `etiqueta`, `titulo`, `subtitulo`, `pista` | `etapas[4]` { nombre, corto (para el riel), descripcion, color } |
 | **14 Diagnóstico** | `etiqueta`, `titulo`, `descripcion`, `notaPrecio`, `boton`, `whatsapp` acción | el **precio** viene de la base (§2) |
 | **15 Preguntas frecuentes** | `etiqueta`, `titulo`, `descripcion`, `boton` | `preguntas[]` { pregunta, respuesta } |
 | **16 Footer** | `correo`, `ciudad`, `titulo`, `descripcion`, `boton`, `derechos` | `enlaces[]`, `legales[]` { texto, href } |

@@ -1,0 +1,63 @@
+.s-equipo {
+  position: relative; z-index: 1; background: var(--gris); overflow: hidden;
+
+  /* La lámina oscura sube sobre la sección clara, con su borde redondo */
+  .lamina { position: relative; min-height: 1240px; background: var(--negro); color: var(--gris); border-radius: 20px 20px 0 0; padding: 40px var(--margen) 0; animation: s-eq-sube 1.3s cubic-bezier(.77, 0, .175, 1) backwards; }
+  .cinta-sup { display: flex; justify-content: space-between; font-size: 11px; line-height: 15px; }
+  .cinta-sup h2 { font: inherit; }
+  .centro { min-height: 900px; display: flex; flex-direction: column; justify-content: center; gap: 60px; padding-bottom: 180px; }
+  .intro { margin-top: 60px; padding-bottom: 40px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .intro p { margin: 0 auto 32px; max-width: 438px; font-size: 12px; line-height: 15px; color: rgba(231, 231, 231, .6); text-wrap: balance; }
+  .enlace { color: var(--gris); }
+  .pila { display: flex; flex-direction: column; gap: 40px; }
+  .frase { margin: 0 auto; max-width: 666px; text-align: center; font-size: 40px; line-height: 1; font-weight: 500; color: var(--gris-claro); }
+
+  /* Franja de 80px que se abre a 400px al tocarla */
+  .franjas { display: grid; align-items: center; height: 80px; position: relative; }
+  .miembro { position: relative; height: 80px; }
+  .miembro.abierta { z-index: 6; }
+  .franja { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); height: 80px; display: flex; align-items: flex-end; justify-content: flex-end; overflow: hidden; border: 0; padding: 0; background: var(--negro); color: var(--gris); cursor: pointer; transition: height .6s cubic-bezier(.77, 0, .175, 1); }
+  .franja:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
+  .abierta .franja { height: 400px; z-index: 10; }
+  .foto { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: 50% 30%; transform: scale(1.15); transition: opacity .3s var(--curva), transform 1.2s cubic-bezier(.215, .61, .355, 1); }
+  .franjas:hover .foto { opacity: .5; }
+  .miembro:hover .foto { opacity: 1; transform: scale(1.05); }
+  .abierta .foto { opacity: 1 !important; transform: scale(1) !important; }
+  .pendiente { background: repeating-linear-gradient(135deg, #1b1b1b 0 10px, #151515 10px 20px); }
+  .falta { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; color: rgba(231, 231, 231, .5); }
+  .puesto { position: relative; z-index: 1; display: flex; align-items: center; gap: 10px; padding: 0 20px 15px 0; font-size: 11px; opacity: 0; transform: translateY(8px); transition: opacity .3s ease, transform .5s var(--curva); }
+  .pt { width: 10px; height: 10px; background: var(--gris); border-radius: 3px; }
+  .abierta .puesto { opacity: 1; transform: none; transition-delay: .4s; }
+
+  /* La ficha llega después de que se abre la franja */
+  .ficha { position: absolute; left: 0; right: 0; top: calc(50% + 200px); z-index: 10; padding: 20px 40px 30px; background: rgba(17, 17, 17, .95); opacity: 0; transform: translateY(15px); pointer-events: none; transition: opacity .4s var(--curva), transform .4s var(--curva); }
+  .abierta .ficha { opacity: 1; transform: none; pointer-events: auto; transition-delay: .45s; }
+  .fila-a { display: flex; justify-content: space-between; gap: 24px; border-bottom: 1px solid rgba(231, 231, 231, .2); padding-bottom: 6px; margin-bottom: 24px; }
+  .num { width: 50%; font-size: 11px; color: rgba(231, 231, 231, .6); }
+  .quien { width: 50%; display: flex; align-items: center; gap: 10px; font-family: 'GT America Mono', Menlo, monospace; font-size: 14px; }
+  .chip { font-size: 11px; background: #090909; border-radius: 4px; padding: 4px 8px; }
+  .fila-b { display: flex; gap: 24px; }
+  .ir { width: 50%; display: flex; align-items: flex-start; }
+  .bio { width: 50%; max-width: 490px; font-family: 'GT America Mono', Menlo, monospace; font-size: 14px; line-height: 1.4; color: rgba(231, 231, 231, .8); }
+  .velo { position: absolute; inset: 0; z-index: 5; border: 0; padding: 0; background: rgba(255, 255, 255, .06); backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: opacity .5s var(--curva); cursor: default; }
+  .velo-on { opacity: 1; pointer-events: auto; }
+
+  /* Teléfono: las franjas se apilan y la ficha fluye debajo */
+  @media (max-width: 760px) {
+    .lamina { min-height: 0; }
+    .cinta-sup span { display: none; }
+    .centro { min-height: 0; padding-bottom: 80px; }
+    .frase { font-size: 30px; }
+    .franjas { display: flex; flex-direction: column; height: auto; }
+    .miembro { height: auto; }
+    .franja { position: relative; top: auto; transform: none; width: 100%; }
+    .abierta .franja { height: 320px; }
+    .ficha { position: static; display: none; padding: 16px 0 24px; }
+    .abierta .ficha { display: block; }
+    .fila-b { flex-direction: column-reverse; }
+    .num, .quien, .ir, .bio { width: auto; }
+    .bio { font-size: 12px; }
+    .velo { display: none; }
+  }
+}
+@keyframes s-eq-sube { from { transform: translateY(120px); } }

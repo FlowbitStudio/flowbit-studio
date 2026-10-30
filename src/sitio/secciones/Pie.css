@@ -1,0 +1,47 @@
+.s-pie {
+  position: relative; z-index: 1; min-height: 860px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; overflow: hidden; pointer-events: none;
+  a, button { pointer-events: auto; }
+
+  .izq { position: relative; height: 100%; min-height: 860px; }
+  .fade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(17, 17, 17, 0) 60%, rgba(17, 17, 17, .9) 100%); }
+  .contacto { position: absolute; left: var(--margen); bottom: 34px; display: flex; flex-direction: column; gap: 6px; font-size: 11px; line-height: 15px; color: rgba(231, 231, 231, .6); }
+  .contacto a { color: var(--gris); }
+
+  /* El panel azul entra deslizándose desde la derecha */
+  .panel { min-height: 666px; background: var(--azul); color: var(--negro); border-radius: 20px 0 0 20px; padding: 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; row-gap: 210px; margin-bottom: 30px; pointer-events: auto; animation: s-pi-panel 1.3s cubic-bezier(.77, 0, .175, 1) .1s backwards; }
+  .pregunta-c { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
+  h2 { font-size: 22px; line-height: 1.1; font-weight: 500; }
+  .pregunta-c p { font-size: 11px; line-height: 15px; opacity: .7; }
+  .enlace { color: var(--negro); }
+  .marca { display: flex; flex-direction: column; align-items: flex-end; }
+  .marca img { width: 48px; height: auto; opacity: .5; }
+
+  /* Menú grande del pie: punto de 25px + texto que se desliza */
+  .menu { display: flex; flex-direction: column; gap: 8px; }
+  .grande { display: flex; align-items: center; height: 44px; color: var(--negro); }
+  .p { width: 25px; height: 25px; flex-shrink: 0; background: var(--negro); border-radius: 8px; transform: translateX(-33px); opacity: 0; filter: blur(32px); transition: transform .5s var(--curva), opacity .5s var(--curva), filter .5s var(--curva); }
+  .t { position: relative; display: flex; overflow: hidden; font-size: 24px; line-height: 1; font-weight: 500; transform: translateX(-33px); transition: transform .5s var(--curva); }
+  .t > span { transition: transform .5s var(--curva); }
+  .t > span + span { position: absolute; inset: 0; transform: translateY(100%); }
+  .grande:hover .p { transform: translateX(-8px); opacity: 1; filter: blur(0); }
+  .grande:hover .t { transform: translateX(5px); }
+  .grande:hover .t > span:first-child { transform: translateY(-100%); }
+  .grande:hover .t > span + span { transform: translateY(0); }
+
+  .legales { display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; }
+  .lista-l { display: flex; flex-direction: column; gap: 8px; font-size: 11px; }
+  .legal { opacity: .6; transition: opacity .3s ease; }
+  .legal:hover { opacity: 1; text-decoration: underline; }
+  .der { font-size: 10px; opacity: .4; }
+
+  @media (max-width: 900px) {
+    display: flex; flex-direction: column; min-height: 0; align-items: stretch;
+    .izq { height: 44vh; min-height: 280px; }
+    .fade { background: linear-gradient(180deg, rgba(17, 17, 17, 0) 60%, rgba(17, 17, 17, .9) 100%); }
+    .panel { border-radius: 20px 20px 0 0; margin-bottom: 0; padding: 32px 20px; row-gap: 56px; min-height: 0; }
+    .pregunta-c { grid-column: 1 / -1; }
+    .marca { display: none; }
+    h2 { font-size: 26px; }
+  }
+}
+@keyframes s-pi-panel { from { transform: translateX(60%); opacity: .4; } }

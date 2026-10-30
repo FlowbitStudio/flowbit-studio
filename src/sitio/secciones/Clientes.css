@@ -1,0 +1,35 @@
+.s-clientes {
+  position: relative; z-index: 1; background: var(--negro); color: #ffffff; padding: 200px var(--margen);
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start;
+
+  .fija { grid-column: span 4; position: sticky; top: 100px; display: flex; flex-direction: column; align-items: flex-start; gap: 35px; }
+  .cab { position: relative; width: 100%; display: flex; flex-direction: column; gap: 15px; padding-bottom: 15px; }
+  .eti { font-size: 12px; letter-spacing: .1em; line-height: 1.5; color: var(--azul); }
+  h2 { font-size: 36px; line-height: .95; font-weight: 500; }
+  .linea { position: absolute; left: 0; right: 0; bottom: 0; border-bottom: 1px solid rgba(255, 255, 255, .2); }
+  .bajada { max-width: 438px; font-size: 12px; letter-spacing: .06em; line-height: 1.5; color: rgba(255, 255, 255, .6); text-wrap: balance; }
+  .enlace { color: var(--gris); }
+
+  .tarjetas-col { grid-column: 7 / -1; display: flex; flex-direction: column; gap: 20px; }
+  /* Tarjetas: se descubren de arriba abajo al entrar en pantalla (ligado al scroll) */
+  .tarjeta-c { display: flex; flex-direction: column; justify-content: space-between; gap: 32px; min-height: 514px; border-radius: 20px; padding: 60px 40px; color: var(--negro); animation: s-cl-revela linear both; animation-timeline: view(); animation-range: entry 5% cover 40%; }
+  .arr { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+  h3 { max-width: 360px; font-size: 30px; line-height: .95; font-weight: 500; text-wrap: balance; }
+  .icono-c { width: 60px; height: 60px; animation: s-cl-gira linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+  .baj { display: flex; flex-direction: column; gap: 30px; }
+  .n { border-bottom: 1px solid rgba(17, 17, 17, .2); padding-bottom: 9px; font-size: 14px; }
+  .baj p { font-size: 16px; line-height: 1.2; }
+  h3, .baj p { animation: s-cl-texto linear both; animation-timeline: view(); animation-range: entry 30% cover 45%; }
+
+  @media (max-width: 900px) {
+    padding: 96px var(--margen);
+    display: flex; flex-direction: column; gap: 56px;
+    .fija { position: static; }
+    .tarjeta-c { min-height: 380px; padding: 36px 24px; border-radius: 16px; }
+    h2 { font-size: 34px; }
+    h3 { font-size: 26px; }
+  }
+}
+@keyframes s-cl-revela { from { clip-path: inset(0 0 100% 0 round 20px); transform: translateY(40px) scale(.97); } to { clip-path: inset(0 0 0 0 round 20px); transform: none; } }
+@keyframes s-cl-gira { from { transform: rotate(-90deg); } to { transform: rotate(90deg); } }
+@keyframes s-cl-texto { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }

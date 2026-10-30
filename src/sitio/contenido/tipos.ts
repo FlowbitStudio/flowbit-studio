@@ -76,14 +76,14 @@ export type ClientesContenido = {
   titulo: string
   descripcion: string
   boton: Accion
-  ventajas: { titulo: string; descripcion: string }[]
+  ventajas: { titulo: string; descripcion: string; color: string; icono: Imagen }[]
 }
 
 /** Listón: los clientes que ya operan con Flowbit. El logo se sube desde la consola. */
 export type ClienteListon = { nombre: string; giro: string; logo?: Imagen; href?: string }
 export type ListonContenido = { etiqueta: string; pista: string; clientes: ClienteListon[] }
 
-export type ProcesoEtapa = { nombre: string; descripcion: string }
+export type ProcesoEtapa = { nombre: string; corto?: string; descripcion: string; color: string }
 export type ProcesoContenido = { etiqueta: string; titulo: string; subtitulo: string; pista: string; etapas: ProcesoEtapa[] }
 
 /** El precio del diagnóstico sale de la base (`servicios`, clave `diagnostico`); aquí sólo el texto. */

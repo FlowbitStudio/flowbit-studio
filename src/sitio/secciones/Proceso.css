@@ -1,0 +1,37 @@
+.s-proceso {
+  position: relative; z-index: 1; background: var(--negro);
+
+  .fijo { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  .pista { display: flex; height: 100%; will-change: transform; }
+  .tramo { position: relative; flex: 0 0 100vw; height: 100%; padding: 0 clamp(20px, 5.5vw, 80px); display: flex; align-items: center; }
+  .intro { max-width: 900px; display: flex; flex-direction: column; gap: 28px; color: #ffffff; }
+  .eti { font-size: 14px; color: var(--azul); }
+  h2 { font-size: clamp(44px, 6.1vw, 88px); line-height: .95; }
+  .tenue > span { color: rgba(231, 231, 231, .45); }
+  .pista-txt { font-size: 12px; color: rgba(231, 231, 231, .6); }
+  .flecha { display: inline-block; animation: s-pr-empuja 1.6s cubic-bezier(.45, 0, .55, 1) infinite; }
+
+  /* El número gigante en contorno se llena de su color al llegar */
+  .numero { position: absolute; right: 4vw; top: 10vh; font-size: clamp(160px, 30.5vw, 440px); line-height: 1; letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1px rgba(231, 231, 231, .18); pointer-events: none; user-select: none; }
+  .relleno { position: absolute; inset: 0; -webkit-text-stroke: 0; clip-path: inset(100% 0 0 0); }
+  .texto { position: relative; max-width: 560px; display: flex; flex-direction: column; gap: 28px; color: #ffffff; }
+  .eta { font-size: 12px; }
+  h3 { font-size: clamp(48px, 6.6vw, 96px); line-height: .92; }
+  .texto p { font-size: 14px; line-height: 1.45; color: rgba(231, 231, 231, .75); }
+
+  /* Riel inferior: avance continuo y las paradas */
+  .riel { position: absolute; left: clamp(20px, 5.5vw, 80px); right: clamp(20px, 5.5vw, 80px); bottom: 48px; height: 1px; background: rgba(231, 231, 231, .15); font-size: 10px; }
+  .avance { position: absolute; inset: 0; background: var(--azul); transform-origin: left; transform: scaleX(0); }
+  .parada { position: absolute; top: -18px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; color: rgba(231, 231, 231, .55); }
+  .parada:last-child { transform: translateX(-100%); align-items: flex-end; }
+  .parada i { display: block; width: 9px; height: 9px; border-radius: 3px; background: #2a2a2a; border: 1px solid rgba(231, 231, 231, .3); }
+
+  @media (max-width: 760px) {
+    .numero { top: 12vh; right: 12px; }
+    .texto { gap: 16px; margin-top: 18vh; }
+    .texto p { font-size: 12px; }
+    .parada span { display: none; }
+    .riel { bottom: 32px; }
+  }
+}
+@keyframes s-pr-empuja { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(10px); } }

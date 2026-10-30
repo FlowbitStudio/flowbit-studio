@@ -1,0 +1,38 @@
+.s-faq {
+  position: relative; z-index: 1; background: var(--gris); color: var(--negro); padding: 160px var(--margen) 140px;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: start;
+
+  .izq { grid-column: span 4; display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+  .eti { font-size: 12px; }
+  h2 { font-size: 60px; line-height: .95; }
+  .bajada { max-width: 340px; font-size: 12px; line-height: 1.6; color: rgba(17, 17, 17, .7); }
+  .enlace { color: var(--negro); }
+  .der { grid-column: 6 / -1; }
+  .entra { animation: s-sol-entra .9s cubic-bezier(.215, .61, .355, 1) backwards; }
+
+  .pregunta { border-top: 1px solid rgba(17, 17, 17, .2); }
+  .pregunta:last-child { border-bottom: 1px solid rgba(17, 17, 17, .2); }
+  .boton { display: grid; grid-template-columns: 56px minmax(0, 1fr) 40px; align-items: center; width: 100%; padding: 30px 0; border: 0; background: none; color: var(--negro); text-align: left; cursor: pointer; }
+  .num { font-family: 'GT America Mono', Menlo, monospace; font-size: 11px; opacity: .55; }
+  .q { font-size: 34px; font-weight: 500; line-height: 1.05; transition: transform .6s cubic-bezier(.77, 0, .175, 1); }
+  .boton:hover .q { transform: translateX(10px); }
+  .mas { position: relative; width: 22px; height: 22px; justify-self: end; transition: transform .6s cubic-bezier(.77, 0, .175, 1); }
+  .mas::before, .mas::after { content: ""; position: absolute; left: 0; top: 10px; width: 22px; height: 2px; background: var(--negro); }
+  .mas::after { transform: rotate(90deg); }
+  .abierta .mas { transform: rotate(135deg); }
+  .boton:focus-visible { outline: 2px solid var(--negro); outline-offset: 4px; }
+  .respuesta { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .6s cubic-bezier(.77, 0, .175, 1); }
+  .abierta .respuesta { grid-template-rows: 1fr; }
+  .respuesta > div { overflow: hidden; }
+  .respuesta p { margin: 0 0 34px 56px; max-width: 640px; font-family: 'GT America Mono', Menlo, monospace; font-size: 13px; line-height: 1.6; opacity: 0; transform: translateY(-10px); filter: blur(4px); transition: opacity .5s ease, transform .6s cubic-bezier(.215, .61, .355, 1), filter .5s ease; }
+  .abierta .respuesta p { opacity: 1; transform: none; filter: none; transition-delay: .15s; }
+
+  @media (max-width: 900px) {
+    display: flex; flex-direction: column; gap: 48px; padding: 96px var(--margen) 80px;
+    h2 { font-size: 44px; }
+    .der { width: 100%; }
+    .boton { grid-template-columns: 32px minmax(0, 1fr) 28px; padding: 22px 0; }
+    .q { font-size: 22px; }
+    .respuesta p { margin: 0 0 24px 32px; font-size: 12px; }
+  }
+}

@@ -137,9 +137,9 @@ export const contenidoPredeterminado: SitioContenido = {
     descripcion: 'No necesitas más empleados, más herramientas ni más presupuesto. Necesitas que lo que ya tienes funcione junto, sin fricciones, sin errores manuales y sin depender de que alguien recuerde hacer algo. Eso es lo que construimos.',
     boton: { texto: 'Empieza con un diagnóstico', href: '#diagnostico' },
     ventajas: [
-      { titulo: 'Empieza en días, no en meses', descripcion: 'Diagnóstico claro, propuesta sin rodeos, implementación que arranca rápido. Sin procesos de onboarding eternos ni documentación que nadie lee.' },
-      { titulo: 'Modular y a tu medida', descripcion: 'No vendemos paquetes genéricos. Construimos la solución exacta para tu problema específico — y solo pagas por lo que necesitas.' },
-      { titulo: 'Siempre sabes qué está pasando', descripcion: 'Visibilidad total desde el primer día. Reportes, accesos y comunicación directa con el equipo que está construyendo tu sistema.' },
+      { titulo: 'Empieza en días, no en meses', descripcion: 'Diagnóstico claro, propuesta sin rodeos, implementación que arranca rápido. Sin procesos de onboarding eternos ni documentación que nadie lee.', color: '#00C9A7', icono: { url: '/card-icons/1.svg', alt: '' } },
+      { titulo: 'Modular y a tu medida', descripcion: 'No vendemos paquetes genéricos. Construimos la solución exacta para tu problema específico — y solo pagas por lo que necesitas.', color: '#FF4444', icono: { url: '/card-icons/2.svg', alt: '' } },
+      { titulo: 'Siempre sabes qué está pasando', descripcion: 'Visibilidad total desde el primer día. Reportes, accesos y comunicación directa con el equipo que está construyendo tu sistema.', color: '#e7e7e7', icono: { url: '/card-icons/3.svg', alt: '' } },
     ],
   },
 
@@ -160,10 +160,10 @@ export const contenidoPredeterminado: SitioContenido = {
     subtitulo: 'Un proceso claro\ndesde el día uno.',
     pista: 'Desliza para recorrerlo',
     etapas: [
-      { nombre: 'Diagnóstico', descripcion: `Nos metemos en tu operación. Mapeamos procesos, identificamos fricciones y detectamos exactamente dónde se está perdiendo rentabilidad o capacidad. Tiene un costo de ${DIAGNOSTICO} — y se descuenta del proyecto si decides avanzar.` },
-      { nombre: 'Propuesta', descripcion: 'Te presentamos la solución con alcance claro, impacto estimado y precio cerrado. Sin letra chica, sin rangos ambiguos. Sabes exactamente qué vas a recibir antes de firmar.' },
-      { nombre: 'Construcción', descripcion: 'Implementamos el sistema. Diseño, automatización, desarrollo o lo que corresponda — todo en un timeline definido con entregas visibles. Setup en semanas, no meses.' },
-      { nombre: 'Crecemos juntos', descripcion: 'No desaparecemos al entregar. Nos quedamos con mantenimiento, ajustes y mejoras continuas. El sistema evoluciona conforme tu negocio crece.' },
+      { nombre: 'Diagnóstico', descripcion: `Nos metemos en tu operación. Mapeamos procesos, identificamos fricciones y detectamos exactamente dónde se está perdiendo rentabilidad o capacidad. Tiene un costo de ${DIAGNOSTICO} — y se descuenta del proyecto si decides avanzar.`, color: '#00C9A7' },
+      { nombre: 'Propuesta', descripcion: 'Te presentamos la solución con alcance claro, impacto estimado y precio cerrado. Sin letra chica, sin rangos ambiguos. Sabes exactamente qué vas a recibir antes de firmar.', color: '#FF4444' },
+      { nombre: 'Construcción', descripcion: 'Implementamos el sistema. Diseño, automatización, desarrollo o lo que corresponda — todo en un timeline definido con entregas visibles. Setup en semanas, no meses.', color: '#e7e7e7' },
+      { nombre: 'Crecemos juntos', descripcion: 'No desaparecemos al entregar. Nos quedamos con mantenimiento, ajustes y mejoras continuas. El sistema evoluciona conforme tu negocio crece.', color: '#1786FF', corto: 'Crecemos' },
     ],
   },
 
