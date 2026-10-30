@@ -1,0 +1,28 @@
+.s-liston {
+  position: relative; z-index: 1; background: var(--negro); color: #ffffff; padding: 72px 0;
+  display: flex; flex-direction: column; justify-content: center; gap: 36px;
+  border-top: 1px solid rgba(231, 231, 231, .1); border-bottom: 1px solid rgba(231, 231, 231, .1);
+
+  .arriba { padding: 0 var(--margen); display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: rgba(231, 231, 231, .6); }
+  .pista { color: rgba(231, 231, 231, .4); }
+  .marco { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+  .cinta { list-style: none; display: flex; width: max-content; animation: s-corre 38s linear infinite; }
+  .marco:hover .cinta { animation-play-state: paused; }
+  .cliente { display: flex; align-items: center; gap: 28px; padding: 0 28px; font-size: 56px; font-weight: 500; letter-spacing: -.01em; color: rgba(231, 231, 231, .55); white-space: nowrap; transition: color .4s ease, filter .4s ease; }
+  .cliente img { height: 48px; width: auto; display: block; filter: brightness(0) invert(1); opacity: .7; }
+  .giro { font-family: 'GT America Mono', Menlo, monospace; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: rgba(231, 231, 231, .4); transition: color .4s ease; }
+  .sep { width: 10px; height: 10px; border-radius: 3px; background: var(--azul); opacity: .7; }
+  .marco:hover .cliente { color: rgba(231, 231, 231, .18); filter: blur(1.5px); }
+  .marco .cliente:hover { color: #ffffff; filter: none; }
+  .marco .cliente:hover .giro { color: var(--azul); }
+  .entra { animation: s-lis-entra 1s cubic-bezier(.215, .61, .355, 1) backwards; }
+
+  @media (max-width: 760px) {
+    padding: 48px 0; gap: 24px;
+    .pista { display: none; }
+    .cliente { font-size: 36px; gap: 18px; padding: 0 18px; }
+    .cliente img { height: 32px; }
+  }
+}
+@keyframes s-corre { to { transform: translateX(-50%); } }
+@keyframes s-lis-entra { from { opacity: 0; transform: translateY(16px); } }

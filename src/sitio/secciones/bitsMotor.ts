@@ -25,7 +25,7 @@ export const CAM_TELEFONO: Camara[] = [
 const N = 1200, CX = 990, CY = 450, FOCO = 1500
 
 function formaciones(): Punto[][] {
-  const X0 = 600, X1 = 1380, Y0 = 130, Y1 = 770, W = X1 - X0, H = Y1 - Y0
+  const X0 = 600, Y0 = 130, Y1 = 770, H = Y1 - Y0
   let s = 7
   const rnd = () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646 }
   const f: Punto[][] = []
