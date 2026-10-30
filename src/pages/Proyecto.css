@@ -1,0 +1,64 @@
+.s-ficha {
+  min-height: 100vh;
+
+  .portada { position: relative; height: 100vh; min-height: 620px; overflow: hidden; background: var(--marino); }
+  .fondo { position: absolute; inset: 0; background-size: cover; background-position: center; }
+  .velo { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(17, 17, 17, .55) 0%, rgba(17, 17, 17, 0) 30%, rgba(17, 17, 17, 0) 55%, rgba(17, 17, 17, .9) 100%); }
+  .barra { position: absolute; top: 28px; left: var(--margen); right: var(--margen); display: flex; justify-content: space-between; align-items: center; }
+  .volver { display: inline-flex; align-items: center; height: 40px; padding: 0 18px; border: 1px solid rgba(231, 231, 231, .25); border-radius: 20px; font-size: 11px; transition: border-color .3s ease, background-color .3s ease; }
+  .volver:hover { border-color: #ffffff; background: rgba(255, 255, 255, .06); }
+  .numero { font-size: 11px; color: rgba(231, 231, 231, .7); }
+  .pie { position: absolute; left: var(--margen); right: var(--margen); bottom: 56px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; align-items: end; }
+  .izq { grid-column: span 8; display: flex; flex-direction: column; gap: 18px; }
+  .etiqueta { font-size: 12px; color: var(--azul-claro); }
+  h1 { font-size: 128px; line-height: .88; letter-spacing: -.03em; }
+  .resumen { grid-column: 9 / -1; font-size: 13px; line-height: 1.55; color: rgba(231, 231, 231, .8); }
+  .entra { animation: s-sol-entra .9s cubic-bezier(.215, .61, .355, 1) backwards; }
+
+  .cuerpo { padding: 120px var(--margen) 100px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 120px; }
+  .datos { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; }
+  .dato { display: flex; flex-direction: column; gap: 10px; padding-top: 16px; border-top: 1px solid rgba(231, 231, 231, .15); }
+  .dato b { font-family: 'GT America Mono', Menlo, monospace; font-weight: 400; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(231, 231, 231, .5); }
+  .dato span { font-size: 18px; }
+  .lado { grid-column: 1 / span 3; }
+  .rotulo-azul { font-size: 12px; color: var(--azul); }
+  .reto { grid-column: 4 / -1; font-size: 52px; line-height: 1.05; letter-spacing: -.01em; }
+  .hueco { position: relative; border-radius: 16px; overflow: hidden; background: repeating-linear-gradient(135deg, #1b1b1b 0 12px, #161616 12px 24px); display: flex; align-items: center; justify-content: center; color: rgba(231, 231, 231, .45); font-size: 11px; }
+  .hueco img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .principal { grid-column: 1 / span 7; }
+  .detalles { grid-column: 8 / -1; display: grid; grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .piezas { grid-column: 4 / -1; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px; }
+  .piezas .dato { padding-bottom: 28px; }
+  .resultados { grid-column: 4 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .resultados > div { display: flex; flex-direction: column; gap: 12px; }
+  .cifra { font-size: 96px; line-height: .9; letter-spacing: -.03em; }
+  .nota { font-size: 11px; color: rgba(231, 231, 231, .6); }
+
+  /* Revelado al deslizar */
+  .revela { animation: s-revela linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; }
+
+  .siguiente { display: flex; align-items: center; justify-content: space-between; height: 340px; padding: 0 56px; background: var(--azul); color: var(--negro); }
+  .siguiente .col { display: flex; flex-direction: column; gap: 16px; }
+  .siguiente .eti { font-size: 12px; }
+  .siguiente .nom, .siguiente .fl { font-size: 120px; font-weight: 500; letter-spacing: -.03em; line-height: .9; transition: transform .7s cubic-bezier(.77, 0, .175, 1); }
+  .siguiente:hover .nom { transform: translateX(24px); }
+  .siguiente:hover .fl { transform: translateX(24px) rotate(-45deg); }
+  .volver:focus-visible, .siguiente:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; }
+
+  @media (max-width: 900px) {
+    h1 { font-size: 56px; line-height: .95; }
+    .pie { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; bottom: 32px; }
+    .resumen { font-size: 11px; }
+    .cuerpo { display: flex; flex-direction: column; padding-top: 64px; padding-bottom: 64px; gap: 40px; }
+    .datos { grid-template-columns: 1fr 1fr; }
+    .reto { font-size: 28px; line-height: 1.1; }
+    .hueco { min-height: 220px; height: auto !important; }
+    .detalles { grid-template-rows: none; }
+    .piezas { grid-template-columns: 1fr; }
+    .resultados { grid-template-columns: 1fr; }
+    .cifra { font-size: 64px; }
+    .siguiente { height: 200px; padding: 0 var(--margen); }
+    .siguiente .nom, .siguiente .fl { font-size: 44px; }
+  }
+}
+@keyframes s-revela { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: none; } }

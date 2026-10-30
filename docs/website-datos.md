@@ -57,7 +57,8 @@ Convención: `texto` = una línea · `párrafo` = texto largo · `\n` en un tít
 | `logo` | imagen (SVG o PNG con fondo transparente) | tarjeta del carrusel |
 | `portada` | imagen 16:10, mínimo 2400 px de ancho | portada de la ficha y textura de la transición WebGL |
 | `servicios[]`, `stack[]`, `tiempo` | texto | franja de datos de la ficha |
-| `reto`, `solucion` | párrafo | ficha |
+| `reto` | párrafo | ficha, «El reto» |
+| `piezas[]` | texto | ficha, «Lo que construimos» |
 | `resultados[]` | { cifra, texto } | ficha (3 recomendados) |
 | `galeria[]` | imagen | ficha (capturas reales) |
 | `publicado`, `orden` | sí/no, número | si aparece y en qué lugar del carrusel |

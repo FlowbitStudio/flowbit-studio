@@ -56,7 +56,8 @@ export type Caso = {
   stack: string[]
   tiempo: string
   reto: string
-  solucion: string
+  /** «Lo que construimos»: los módulos o piezas entregadas. */
+  piezas: string[]
   resultados: { cifra: string; texto: string }[]
   galeria: Imagen[]
   publicado: boolean

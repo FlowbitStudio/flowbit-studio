@@ -1,0 +1,49 @@
+.s-portfolio {
+  position: relative; z-index: 1; padding: 170px 0 200px; background: var(--gris); color: var(--negro); overflow: hidden;
+
+  .cabeza { max-width: 668px; margin: 0 auto 100px; padding: 0 var(--margen); display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center; }
+  h2 { font-size: 14px; }
+  .titulo { margin-bottom: 32px; font-size: 30px; line-height: 1; font-weight: 500; }
+  .enlace { color: var(--negro); }
+  .zona { position: relative; touch-action: pan-y; user-select: none; }
+
+  /* Carrusel: la pista se centra en la tarjeta activa */
+  .pista { display: flex; align-items: center; height: 440px; transition: transform .5s var(--curva); cursor: none; }
+  .caso { position: relative; isolation: isolate; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; overflow: hidden; text-align: center; color: var(--negro); width: 283px; height: 326px; opacity: .4; border-radius: 0; padding: 0; border: 0; background: none; cursor: none; transition: all .3s var(--curva); }
+  .caso::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--gris-claro); clip-path: inset(0 0 100% 0); transition: clip-path .3s var(--curva) .1s, background-color .3s var(--curva); }
+  .caso:hover { opacity: .7; }
+  .activo { width: 331px; height: 440px; opacity: 1; border-radius: 20px; padding: 24px; gap: 40px; }
+  .activo:hover { opacity: 1; color: #ffffff; }
+  .activo::before { clip-path: inset(0 0 0 0); }
+  .activo:hover::before { background: var(--azul); }
+  .nombre { max-width: 270px; padding-top: 36px; }
+  h3 { font-size: 22px; line-height: 1.1; font-weight: 500; }
+  .extra { display: grid; grid-template-rows: 0fr; width: 100%; transition: grid-template-rows .3s var(--curva); }
+  .activo .extra { grid-template-rows: 1fr; }
+  .extra > div { overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+  .desc { max-width: 222px; padding: 15px 20px 0; font-size: 11px; line-height: 15px; opacity: 0; transition: opacity .3s ease .15s; }
+  .activo .desc { opacity: .6; }
+  .ver { font-size: 11px; height: 40px; display: flex; align-items: center; }
+  .marcas { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; padding: 24px; opacity: 0; transition: opacity .3s ease; }
+  .activo .marcas { opacity: 1; }
+  .m-i, .m-d { width: 9px; height: 9px; border-top: 1px solid currentColor; }
+  .m-i { border-left: 1px solid currentColor; } .m-d { border-right: 1px solid currentColor; }
+  .logo { width: 80px; height: 80px; flex-shrink: 0; border: 1px dashed currentColor; border-radius: 10px; display: flex; align-items: center; justify-content: center; opacity: .55; font-family: 'GT America Mono', Menlo, monospace; font-size: 10px; letter-spacing: .05em; text-transform: uppercase; }
+  .logo:has(img) { border: 0; opacity: 1; }
+  .logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+  /* Cursor «Drag»: la pastilla oscura que sigue al ratón sobre el carrusel */
+  .arrastra { position: absolute; top: 0; left: 0; height: 32px; padding: 0 16px; display: flex; align-items: center; border-radius: 9999px; background: var(--negro); color: var(--gris-claro); font-family: 'GT America Mono', Menlo, monospace; font-size: 11px; letter-spacing: .05em; text-transform: uppercase; pointer-events: none; z-index: 5; transition: opacity .3s ease, scale .3s var(--curva); }
+
+  /* Al abrir un caso, lo demás se aparta con desenfoque */
+  &.viajando .cabeza { opacity: 0; filter: blur(12px); transition: opacity .5s ease, filter .6s ease; }
+  &.viajando .caso { opacity: 0; filter: blur(14px); }
+  &.viajando .arrastra { opacity: 0 !important; }
+
+  @media (hover: none), (max-width: 760px) {
+    padding: 96px 0 110px;
+    .cabeza { margin-bottom: 56px; }
+    .pista, .caso { cursor: auto; }
+    .arrastra { display: none; }
+  }
+}
