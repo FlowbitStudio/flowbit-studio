@@ -17,6 +17,10 @@ RUN npm ci
 
 # Copy source y build de producción
 COPY . .
+
+# Vite hornea estas dos al compilar: EasyPanel las pasa como build args.
+ARG VITE_SITIO_SUPABASE_URL
+ARG VITE_SITIO_SUPABASE_ANON
 RUN npm run build
 
 # ── Stage 2: serve ──────────────────────────────────────────────────────
