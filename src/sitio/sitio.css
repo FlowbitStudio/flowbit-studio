@@ -1,0 +1,65 @@
+/* ===== Sitio flowbit.studio — base compartida =====
+   Cada sección vive en su propio CSS anidado bajo su clase raíz (.s-hero, .s-ethos…).
+   Aquí sólo va lo que comparten: fuentes, tipografías, el botón con punto y esquinas,
+   y la regla que pausa las entradas hasta que la sección aparece en pantalla. */
+
+@font-face { font-family: 'Mark Pro'; src: url('/fonts/MarkPro.woff2') format('woff2'); font-weight: 300 600; font-display: swap; }
+@font-face { font-family: 'Mark Pro'; src: url('/fonts/MarkPro-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'GT America Mono'; src: url('/fonts/GT-America-Mono-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+
+.sitio {
+  --azul: #1786FF;
+  --azul-claro: #7fbcff;
+  --negro: #111111;
+  --gris: #dadada;
+  --gris-claro: #e7e7e7;
+  --marino: #15374C;
+  --curva: cubic-bezier(.25, .1, .25, 1);
+  --margen: 40px;
+  background: var(--negro);
+  color: #ffffff;
+  font-family: 'Mark Pro', 'Helvetica Neue', Arial, sans-serif;
+  overflow-x: clip;
+}
+@media (max-width: 768px) { .sitio { --margen: 20px; } }
+
+.sitio .mono { font-family: 'GT America Mono', 'SF Mono', Menlo, monospace; text-transform: uppercase; letter-spacing: .05em; font-weight: 400; }
+.sitio .display { font-family: 'Mark Pro', 'Helvetica Neue', Arial, sans-serif; font-weight: 500; }
+.sitio a { color: inherit; text-decoration: none; }
+.sitio button { font: inherit; }
+
+/* Entradas: cada animación de entrada queda congelada en su primer cuadro (con «backwards»)
+   hasta que su sección entra en pantalla. useEntrada quita data-espera. */
+.sitio [data-espera] *,
+.sitio [data-espera]::before,
+.sitio [data-espera]::after { animation-play-state: paused !important; }
+
+/* Renglón que sube y se enfoca */
+.sitio .renglon { display: block; overflow: hidden; padding-bottom: .06em; }
+.sitio .renglon > span { display: block; animation: s-enfoca 1s cubic-bezier(.215, .61, .355, 1) backwards; }
+@keyframes s-enfoca { from { transform: translateY(105%); filter: blur(6px); opacity: 0; } }
+.sitio .suave { animation: s-suave 1.2s cubic-bezier(.77, 0, .175, 1) backwards; }
+@keyframes s-suave { from { opacity: 0; transform: translateY(40px); } }
+.sitio .raya { transform-origin: left; animation: s-raya 1.2s cubic-bezier(.65, 0, .35, 1) .6s backwards; }
+@keyframes s-raya { from { transform: scaleX(0); } }
+
+/* Botón: punto que se enfoca, texto que se desliza y cuatro esquinas que se abren */
+.sitio .enlace { position: relative; display: inline-flex; align-items: center; height: 40px; padding: 0 20px; margin-left: 4px; font-family: 'GT America Mono', 'SF Mono', Menlo, monospace; font-size: 11px; line-height: 15px; letter-spacing: .05em; text-transform: uppercase; color: currentColor; background: none; border: 0; cursor: pointer; }
+.sitio .enlace .punto { width: 10px; height: 10px; flex-shrink: 0; background: currentColor; border-radius: 3px; transform: translateX(-24px); opacity: 0; filter: blur(20px); transition: all .4s var(--curva); }
+.sitio .rotulo { position: relative; display: flex; overflow: hidden; transform: translateX(-5px); transition: transform .4s var(--curva); }
+.sitio .rotulo > span { transition: transform .4s var(--curva); }
+.sitio .rotulo > span + span { position: absolute; inset: 0; transform: translateY(100%); }
+.sitio .enlace:hover .punto, .sitio .enlace:focus-visible .punto { transform: translateX(-5px); opacity: 1; filter: blur(0); }
+.sitio .enlace:hover .rotulo, .sitio .enlace:focus-visible .rotulo { transform: translateX(5px); }
+.sitio .enlace:hover .rotulo > span:first-child, .sitio .enlace:focus-visible .rotulo > span:first-child { transform: translateY(-100%); }
+.sitio .enlace:hover .rotulo > span + span, .sitio .enlace:focus-visible .rotulo > span + span { transform: translateY(0); }
+.sitio .enlace:focus-visible { outline: 2px solid var(--azul); outline-offset: 4px; }
+.sitio .esquina { position: absolute; width: 10px; height: 10px; transition: transform .5s var(--curva); }
+.sitio .e1 { top: -4px; left: -4px; } .sitio .e2 { top: -4px; right: -4px; transform: rotate(90deg); }
+.sitio .e3 { bottom: -4px; left: -4px; transform: rotate(-90deg); } .sitio .e4 { bottom: -4px; right: -4px; transform: rotate(180deg); }
+.sitio .enlace:hover .e1 { transform: translate(-3px, -3px); } .sitio .enlace:hover .e2 { transform: translate(3px, -3px) rotate(90deg); }
+.sitio .enlace:hover .e3 { transform: translate(-3px, 3px) rotate(-90deg); } .sitio .enlace:hover .e4 { transform: translate(3px, 3px) rotate(180deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sitio *, .sitio *::before, .sitio *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

@@ -1,0 +1,52 @@
+.s-ethos {
+  position: relative; z-index: 1; background: var(--negro);
+
+  /* La sección entra barriendo desde la izquierda */
+  .lamina {
+    background: var(--gris); color: var(--negro); border-radius: 20px 20px 0 0; padding: 220px var(--margen); overflow: hidden;
+    animation: s-barre 1.4s cubic-bezier(.77, 0, .175, 1) .1s backwards;
+  }
+  .cabeza { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-bottom: 60px; }
+  .col { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  h2 { font-size: 11px; line-height: 15px; }
+  .titulo { font-size: 30px; line-height: 1; font-weight: 500; max-width: 520px; }
+  .raya { width: 100%; border-top: 1px solid rgba(17, 17, 17, .2); }
+  .desc-larga { margin: 0 0 20px; padding-top: 8px; font-family: 'GT America Mono', Menlo, monospace; font-size: 14px; line-height: 1.2; }
+  .enlace { color: var(--negro); }
+
+  /* Acordeón: 25% cada una; la activa crece a 40% y las demás bajan a 20% */
+  .tarjetas { display: flex; list-style: none; }
+  .tarjeta { width: 25%; flex-shrink: 0; transition: width .5s var(--curva) .1s; animation: s-llega 1.1s cubic-bezier(.215, .61, .355, 1) backwards; }
+  .tarjetas:hover .tarjeta { width: 20%; }
+  .tarjetas .tarjeta:hover { width: 40%; }
+  .cuerpo { position: relative; height: 640px; width: 125%; overflow: hidden; border-radius: 20px; transition: width .5s var(--curva) .1s; display: flex; justify-content: center; padding: 40px 0; }
+  .tarjeta:hover .cuerpo { width: 100%; }
+  .oscura { background: var(--negro); color: var(--gris); }
+  .clara { background: var(--gris-claro); color: var(--negro); }
+  .contenido { width: 100%; max-width: 300px; flex-shrink: 0; padding: 0 20px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 44px; text-align: center; }
+  h3 { font-size: 30px; line-height: 1; font-weight: 500; white-space: pre-line; }
+  .pie { display: flex; flex-direction: column; gap: 15px; font-size: 12px; line-height: 15px; }
+
+  /* El ícono flota y respira */
+  .icono { width: 260px; height: 260px; object-fit: contain; animation: s-flota 7s cubic-bezier(.45, 0, .55, 1) infinite alternate; transition: transform .8s var(--curva); }
+  .tarjeta:hover .icono { animation-play-state: paused; transform: scale(1.08) rotate(-8deg); }
+  .desc { opacity: .75; transition: opacity .5s ease; }
+  .tarjeta:hover .desc { opacity: 1; }
+
+  /* Teléfono: las cuatro tarjetas se apilan */
+  @media (max-width: 900px) {
+    .lamina { padding: 96px var(--margen) 40px; }
+    .cabeza { grid-template-columns: 1fr; gap: 20px; margin-bottom: 48px; }
+    .titulo { font-size: 28px; }
+    .desc-larga { font-size: 12px; line-height: 1.35; }
+    .tarjetas { flex-direction: column; gap: 12px; }
+    .tarjeta, .tarjetas:hover .tarjeta, .tarjetas .tarjeta:hover { width: 100%; }
+    .cuerpo, .tarjeta:hover .cuerpo { width: 100%; height: auto; border-radius: 16px; padding: 32px 24px; }
+    .contenido { max-width: none; padding: 0; gap: 20px; }
+    h3 { font-size: 26px; }
+    .icono { width: 170px; height: 170px; }
+  }
+}
+@keyframes s-barre { from { clip-path: inset(0 100% 0 0 round 20px 20px 0 0); } to { clip-path: inset(0 0 0 0 round 20px 20px 0 0); } }
+@keyframes s-llega { from { opacity: 0; transform: translateY(60px); } }
+@keyframes s-flota { 0% { transform: translateY(-8px) rotate(-4deg); } 100% { transform: translateY(8px) rotate(4deg); } }

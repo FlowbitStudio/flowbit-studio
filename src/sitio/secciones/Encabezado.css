@@ -1,0 +1,66 @@
+.s-encabezado {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  height: 80px; padding: 0 var(--margen);
+  display: flex; align-items: center; justify-content: space-between;
+  color: #dadada;
+  transition: background-color .5s var(--curva), backdrop-filter .5s var(--curva);
+
+  &.bajo { background: rgba(17, 17, 17, .72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+
+  .logo { display: flex; align-items: center; height: 80px; }
+  .logo svg { height: 22px; width: auto; }
+
+  .escritorio ul { list-style: none; display: flex; align-items: center; font-size: 11px; line-height: 15px; }
+
+  /* Encabezado: baja suave, el logo primero */
+  .cae { animation: s-baja .8s var(--curva) backwards; }
+
+  /* Pastilla azul con un punto que late y un brillo que la recorre */
+  .s-demo {
+    position: relative; display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 18px;
+    border-radius: 20px; background: var(--azul); color: #ffffff; overflow: hidden; font-size: 11px;
+    transition: box-shadow .4s ease, transform .3s var(--curva);
+  }
+  .s-demo:hover { box-shadow: 0 0 32px rgba(23, 134, 255, .55); transform: translateY(-1px); }
+  .s-demo::after {
+    content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .35), rgba(255, 255, 255, 0));
+    animation: s-brillo 4s cubic-bezier(.45, 0, .55, 1) 2.5s infinite;
+  }
+  .s-demo .vivo { width: 7px; height: 7px; border-radius: 2px; background: #ffffff; animation: s-late 1.6s ease-in-out infinite; }
+  .s-demo:hover .rotulo > span:first-child { transform: translateY(-100%); }
+  .s-demo:hover .rotulo > span + span { transform: translateY(0); }
+  .s-demo:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; }
+  .s-demo.chica { height: 34px; padding: 0 14px; font-size: 10px; }
+  .s-demo.grande { justify-content: center; height: 52px; border-radius: 26px; }
+
+  .telefono { display: none; align-items: center; gap: 6px; }
+
+  /* Menú de teléfono: dos rayas que se cruzan; la hoja baja desde arriba */
+  .hamburguesa { position: relative; width: 40px; height: 40px; border: 0; background: none; cursor: pointer; }
+  .hamburguesa i { position: absolute; left: 10px; width: 20px; height: 1.5px; background: #dadada; transition: transform .4s var(--curva); }
+  .hamburguesa i:first-child { top: 16px; } .hamburguesa i + i { top: 23px; }
+  .hamburguesa.abierta i:first-child { transform: translateY(3.5px) rotate(45deg); }
+  .hamburguesa.abierta i + i { transform: translateY(-3.5px) rotate(-45deg); }
+  .hamburguesa:focus-visible { outline: 2px solid var(--azul); outline-offset: 2px; }
+  .hoja {
+    position: fixed; inset: 0; z-index: -1; background: var(--negro); padding: 96px 20px 32px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    animation: s-hoja .6s cubic-bezier(.77, 0, .175, 1) backwards;
+  }
+  .hoja ul { list-style: none; }
+  .hoja li { border-top: 1px solid rgba(231, 231, 231, .15); animation: s-baja .6s cubic-bezier(.215, .61, .355, 1) backwards; }
+  .hoja li:last-child { border-bottom: 1px solid rgba(231, 231, 231, .15); }
+  .hoja li a { display: block; padding: 18px 0; font-size: 32px; line-height: 1; font-weight: 500; color: #ffffff; }
+
+  @media (max-width: 900px) {
+    height: 64px; padding: 0 12px 0 20px;
+    .logo { height: 64px; } .logo svg { height: 18px; }
+    .escritorio { display: none; }
+    .telefono { display: flex; }
+  }
+}
+@keyframes s-baja { from { opacity: 0; transform: translateY(-12px); } }
+@keyframes s-brillo { 0% { left: -60%; } 35%, 100% { left: 130%; } }
+@keyframes s-late { 50% { opacity: .35; } }
+@keyframes s-hoja { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }

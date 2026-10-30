@@ -1,0 +1,38 @@
+.s-hero {
+  position: relative; z-index: 1;
+  height: 100vh; min-height: 640px; overflow: hidden;
+  color: #ffffff; pointer-events: none;
+
+  .velo { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(17, 17, 17, .55) 0%, rgba(17, 17, 17, 0) 70%); }
+  .cuerpo { position: relative; height: 100%; padding: 0 var(--margen); display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
+  .hueco { flex: 1 1 0; }
+
+  /* Entrada: palabra por palabra */
+  h1 { align-self: center; max-width: 800px; font-size: 60px; line-height: .95; font-weight: 500; text-align: center; }
+  .palabra { display: inline-block; overflow: hidden; vertical-align: top; margin-right: .25em; padding-bottom: .08em; }
+  .palabra > span { display: inline-block; animation: s-sube .9s cubic-bezier(.215, .61, .355, 1) backwards; }
+
+  .abajo-zona { flex: 1 1 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; padding-bottom: 30px; font-size: 12px; line-height: 1.3; color: rgba(231, 231, 231, .6); }
+  .abajo { animation: s-aparece 1s cubic-bezier(.77, 0, .175, 1) 1.2s backwards; }
+  .linea { border-top: 1px solid rgba(231, 231, 231, .2); transform-origin: left; animation: s-raya 1.4s cubic-bezier(.65, 0, .35, 1) 1.1s backwards; }
+  .senal { display: flex; justify-content: center; padding-bottom: 28px; }
+  .fila { display: flex; gap: 24px; padding-top: 20px; }
+  .mitad { width: 50%; display: flex; align-items: center; }
+  .mitad p { max-width: 490px; }
+  .enlace { color: #dadada; pointer-events: auto; }
+
+  /* Señal de scroll: una línea que cae en bucle */
+  .scroll { position: relative; width: 1px; height: 48px; overflow: hidden; background: rgba(231, 231, 231, .15); }
+  .scroll::after { content: ""; position: absolute; left: 0; top: 0; width: 1px; height: 48px; background: #dadada; transform: translateY(-100%); animation: s-cae 2.2s cubic-bezier(.65, 0, .35, 1) 2.4s infinite; }
+
+  @media (max-width: 900px) {
+    h1 { align-self: stretch; font-size: 44px; text-align: left; }
+    .abajo-zona { font-size: 11px; line-height: 1.35; padding-bottom: 28px; }
+    .senal { display: none; }
+    .fila { flex-direction: column-reverse; gap: 22px; padding-top: 16px; }
+    .mitad { width: 100%; }
+  }
+}
+@keyframes s-sube { from { transform: translateY(105%); opacity: 0; } }
+@keyframes s-aparece { from { opacity: 0; transform: translateY(20px); } }
+@keyframes s-cae { 0% { transform: translateY(-100%); } 60%, 100% { transform: translateY(100%); } }
