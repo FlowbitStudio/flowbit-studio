@@ -14,6 +14,8 @@ en `predeterminado.ts`. Hay **tres orígenes**:
 | **La base que ya existe** | Módulos de Flowbit Base, sus precios, los giros y qué módulos enciende cada uno, el precio del diagnóstico | Ya se edita en la consola (Servicios, Armar paquete) |
 | **Diseño** (código) | Las formas de partículas, la cámara, las transiciones, los colores de marca | Nadie desde la consola: es diseño |
 
+Las funciones reales las construyó C22 en flowbit-base: todas piden el encabezado `x-empresa: flowbit`; hay además `sitio_vista_previa({p_token})` (el sitio la usa con `?vista_previa=<token>`), y el formulario manda `{p:{nombre,correo,telefono,negocio,giro,interes,mensaje,trampa}}`. El SQL de abajo fue la propuesta inicial; manda el de la migración.
+
 Mientras la consola no publique nada, el sitio usa lo predeterminado. Cuando exista, basta con definir
 `VITE_SITIO_SUPABASE_URL` y `VITE_SITIO_SUPABASE_ANON` en el build: el sitio pide tres funciones públicas (abajo) y
 **mezcla** lo publicado sobre lo predeterminado, así una sección vacía en la consola nunca rompe la página.

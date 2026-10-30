@@ -42,11 +42,9 @@ export default function Contacto({ c, abierto, alCerrar, interesInicial }: { c: 
   const contador = typeof p === 'number' ? `0${p} / 05` : p === 'listo' ? 'Enviado' : '05 / 05'
 
   const enviar = async () => {
-    // Campo trampa: si un robot lo llenó, se finge éxito y no se guarda nada
-    if (trampa.current?.value) { setP('listo'); return }
     setP('enviando')
     try {
-      await registrarLead({ nombre: [nombre, apellido].filter(Boolean).join(' '), correo: email, telefono: whatsapp, negocio: empresa, giro, interes, mensaje })
+      await registrarLead({ nombre: [nombre, apellido].filter(Boolean).join(' '), correo: email, telefono: whatsapp, negocio: empresa, giro, interes, mensaje, trampa: trampa.current?.value ?? '' })
       setP('listo')
     } catch { setP('error') }
   }
@@ -85,7 +83,7 @@ export default function Contacto({ c, abierto, alCerrar, interesInicial }: { c: 
 
       <div className="rejilla">
         <main className="principal">
-          <input ref={trampa} className="trampa" type="text" name="sitio_web" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+          <input ref={trampa} className="trampa" type="text" name="trampa" tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
           {p === 1 && (
             <div className="paso" key="1" style={{ gap: 36 }}>

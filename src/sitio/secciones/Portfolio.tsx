@@ -10,7 +10,9 @@ import './Portfolio.css'
 export default function Portfolio({ c }: { c: PortfolioContenido }) {
   const ref = useEntrada<HTMLElement>(0.2)
   const casos = c.casos.filter((k) => k.publicado).sort((a, b) => a.orden - b.orden)
-  const [activo, setActivo] = useState(Math.min(2, casos.length - 1))
+  const [elegido, setActivo] = useState(2)
+  // lo publicado puede traer menos casos que lo predeterminado
+  const activo = Math.max(0, Math.min(elegido, casos.length - 1))
   const [cursor, setCursor] = useState({ x: 0, y: 0, dentro: false })
   const [ancho, setAncho] = useState(1440)
   const [viajando, setViajando] = useState(false)
@@ -37,6 +39,9 @@ export default function Portfolio({ c }: { c: PortfolioContenido }) {
       alLlegar: () => ir(`/proyectos/${k.slug}`),
     })
   }
+
+  // Sin casos publicados la sección no se muestra
+  if (!casos.length) return null
 
   return (
     <section className={`s-portfolio${viajando ? ' viajando' : ''}`} id="casos" ref={ref}>

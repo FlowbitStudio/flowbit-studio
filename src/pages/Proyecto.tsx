@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { useContenido } from '../sitio/contenido/fuente'
+import { useContenidoEstado } from '../sitio/contenido/fuente'
 import { pintarPortada } from '../sitio/secciones/transicionCaso'
 import type { Imagen } from '../sitio/contenido/tipos'
 import '../sitio/sitio.css'
@@ -16,13 +16,14 @@ const Hueco = ({ img, texto, className = '', alto }: { img?: Imagen; texto: stri
 // así que aquí sólo entran los textos.
 export default function Proyecto() {
   const { slug } = useParams()
-  const c = useContenido()
+  const { c, listo } = useContenidoEstado()
   const casos = c.portfolio.casos.filter((k) => k.publicado).sort((a, b) => a.orden - b.orden)
   const i = casos.findIndex((k) => k.slug === slug)
   const k = casos[i]
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior }) }, [slug])
 
+  if (!k && !listo) return <div className="sitio s-ficha" />
   if (!k) return <Navigate to="/#casos" replace />
   const sig = casos[(i + 1) % casos.length]
   const rayas = !k.portada ? pintarPortada(1440, 900).toDataURL('image/jpeg', 0.85) : undefined
