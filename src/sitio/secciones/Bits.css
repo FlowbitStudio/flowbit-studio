@@ -1,0 +1,25 @@
+.s-bits {
+  position: relative; z-index: 1; background: var(--negro);
+
+  /* La escena queda fija mientras la sección pasa: el scroll ordena los puntos, el cursor los perturba */
+  .escena { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  .marco { position: absolute; left: 50%; top: 50%; transform-origin: center; }
+  canvas { position: absolute; inset: 0; display: block; }
+
+  /* Cada etapa tiene su propia composición: el texto cambia de lugar, de tamaño y de alineación */
+  .etapa { position: absolute; display: flex; flex-direction: column; gap: 22px; color: #ffffff; pointer-events: none; }
+  .etapa > * { animation: s-bits-entra 1.1s cubic-bezier(.215, .61, .355, 1) backwards; }
+  .etapa h2 { font-size: 60px; line-height: .95; }
+  .etapa p { font-size: 12px; line-height: 1.6; color: rgba(231, 231, 231, .7); text-shadow: 0 0 14px #111111, 0 0 4px #111111; }
+
+  .indice { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; }
+  .indice i { display: block; width: 2px; height: 28px; background: rgba(231, 231, 231, .18); transition: background-color .5s ease; }
+  .indice i.on { background: var(--azul); }
+
+  /* Teléfono: el texto arriba, a lo ancho; la forma vive abajo */
+  .telefono .etapa { left: 20px; right: 20px; top: 92px; gap: 14px; }
+  .telefono .etapa h2 { font-size: 44px; }
+  .telefono .etapa p { font-size: 11px; }
+  .telefono .indice { right: 14px; }
+}
+@keyframes s-bits-entra { from { opacity: 0; transform: translateY(28px); filter: blur(10px); } }

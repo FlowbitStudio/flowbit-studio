@@ -4,6 +4,7 @@ import { useContenido } from '../sitio/contenido/fuente'
 import Encabezado from '../sitio/secciones/Encabezado'
 import Hero from '../sitio/secciones/Hero'
 import Ethos from '../sitio/secciones/Ethos'
+import Bits from '../sitio/secciones/Bits'
 import '../sitio/sitio.css'
 
 // El sitio flowbit.studio. Cada sección recibe su parte del contenido administrable (docs/website-datos.md).
@@ -18,6 +19,7 @@ export default function Sitio() {
       <main>
         <Hero c={c.hero} onContacto={abrir} />
         <Ethos c={c.ethos} />
+        <Bits c={c.bits} />
       </main>
     </div>
   )
