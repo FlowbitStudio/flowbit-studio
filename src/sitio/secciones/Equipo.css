@@ -48,7 +48,7 @@
     .cinta-sup span { display: none; }
     .centro { min-height: 0; padding-bottom: 80px; }
     .frase { font-size: 30px; }
-    .franjas { display: flex; flex-direction: column; height: auto; }
+    .franjas { display: flex; flex-direction: column; align-items: stretch; height: auto; }
     .miembro { height: auto; }
     .franja { position: relative; top: auto; transform: none; width: 100%; }
     .abierta .franja { height: 320px; }

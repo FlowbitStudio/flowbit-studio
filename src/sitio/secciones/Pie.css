@@ -42,6 +42,9 @@
     .pregunta-c { grid-column: 1 / -1; }
     .marca { display: none; }
     h2 { font-size: 26px; }
+    h2 .renglon, h2 .renglon > span { display: inline; }
+    .p { display: none; }
+    .t, .grande:hover .t { transform: none; }
   }
 }
 @keyframes s-pi-panel { from { transform: translateX(60%); opacity: .4; } }

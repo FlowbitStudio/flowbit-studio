@@ -27,6 +27,7 @@
     .fija { position: static; }
     .tarjeta-c { min-height: 380px; padding: 36px 24px; border-radius: 16px; }
     h2 { font-size: 34px; }
+    h2 .renglon, h2 .renglon > span { display: inline; }
     h3 { font-size: 26px; }
   }
 }

@@ -15,7 +15,7 @@ export default function Porque({ c }: { c: PorqueContenido }) {
   const cv = useRef<HTMLCanvasElement>(null)
   const raton = useRef({ x: -9999, y: -9999 })
   const m = useRef(marco)
-  m.current = marco
+  useEffect(() => { m.current = marco }, [marco])
 
   useEffect(() => {
     if (!cv.current) return

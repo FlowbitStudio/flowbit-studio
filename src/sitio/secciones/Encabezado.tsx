@@ -14,6 +14,13 @@ const Logo = () => (
   </svg>
 )
 
+const Pastilla = ({ texto, href, onClick, clase = '' }: { texto: string; href: string; onClick: (e: React.MouseEvent) => void; clase?: string }) => (
+  <a href={href} className={`s-demo mono ${clase}`} onClick={onClick}>
+    <span className="vivo" aria-hidden="true" />
+    <span className="rotulo"><span>{texto}</span><span aria-hidden="true">{texto}</span></span>
+  </a>
+)
+
 // Header fijo: transparente sobre el hero y con velo oscuro al bajar. En teléfono el menú se pliega en una hoja.
 export default function Encabezado({ nav, onDemo }: { nav: Navegacion; onDemo: () => void }) {
   const [bajo, setBajo] = useState(false)
@@ -25,12 +32,7 @@ export default function Encabezado({ nav, onDemo }: { nav: Navegacion; onDemo: (
     return () => window.removeEventListener('scroll', lee)
   }, [])
   const demo = (e: React.MouseEvent) => { e.preventDefault(); setAbierto(false); onDemo() }
-  const Pastilla = ({ texto, clase = '' }: { texto: string; clase?: string }) => (
-    <a href={nav.demo.href ?? '#contacto'} className={`s-demo mono ${clase}`} onClick={demo}>
-      <span className="vivo" aria-hidden="true" />
-      <span className="rotulo"><span>{texto}</span><span aria-hidden="true">{texto}</span></span>
-    </a>
-  )
+  const destino = nav.demo.href ?? '#contacto'
   return (
     <header className={`s-encabezado${bajo ? ' bajo' : ''}`}>
       <a href="#" aria-label="Flowbit" className="logo cae" style={{ animationDelay: '.1s' }}><Logo /></a>
@@ -41,11 +43,11 @@ export default function Encabezado({ nav, onDemo }: { nav: Navegacion; onDemo: (
               <a href={l.href} className="enlace"><span className="punto" /><span className="rotulo"><span>{l.texto}</span><span aria-hidden="true">{l.texto}</span></span></a>
             </li>
           ))}
-          <li className="cae" style={{ animationDelay: '.56s', marginLeft: 16 }}><Pastilla texto={nav.demo.texto} /></li>
+          <li className="cae" style={{ animationDelay: '.56s', marginLeft: 16 }}><Pastilla texto={nav.demo.texto} href={destino} onClick={demo} /></li>
         </ul>
       </nav>
       <div className="telefono cae" style={{ animationDelay: '.3s' }}>
-        <Pastilla texto="Demo" clase="chica" />
+        <Pastilla texto="Demo" href={destino} onClick={demo} clase="chica" />
         <button className={`hamburguesa${abierto ? ' abierta' : ''}`} onClick={() => setAbierto(!abierto)} aria-label={abierto ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={abierto}><i /><i /></button>
       </div>
       {abierto && (
@@ -55,7 +57,7 @@ export default function Encabezado({ nav, onDemo }: { nav: Navegacion; onDemo: (
               <li key={l.href + l.texto} style={{ animationDelay: `${0.2 + i * 0.06}s` }}><a href={l.href} onClick={() => setAbierto(false)}>{l.texto}</a></li>
             ))}
           </ul>
-          <Pastilla texto={nav.demo.texto} clase="grande" />
+          <Pastilla texto={nav.demo.texto} href={destino} onClick={demo} clase="grande" />
         </nav>
       )}
     </header>

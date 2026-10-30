@@ -45,7 +45,7 @@ export default function Ethos({ c }: { c: EthosContenido }) {
 }
 
 // Reparte un título en n renglones de largo parecido (la entrada va renglón por renglón).
-export function partir(texto: string, n: number): string[] {
+function partir(texto: string, n: number): string[] {
   if (texto.includes('\n')) return texto.split('\n')
   const palabras = texto.split(' '), meta = texto.length / n, r: string[] = []
   let actual = ''

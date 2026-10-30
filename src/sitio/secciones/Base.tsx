@@ -50,7 +50,7 @@ export default function Base({ c, catalogo, onDemo }: { c: BaseContenido; catalo
       const caja = canvas.getBoundingClientRect(), W = caja.width, H = caja.height
       if (canvas.width !== Math.round(W * 2) || canvas.height !== Math.round(H * 2)) { canvas.width = Math.round(W * 2); canvas.height = Math.round(H * 2) }
       const telefono = window.innerWidth < 900
-      const s = telefono ? W / 860 : W / 1440, ox = telefono ? W / 2 - CX * s : 0, oy = telefono ? H / 2 - CY * s : (H - 1000 * s) / 2
+      const s = telefono ? W / 980 : W / 1440, ox = telefono ? W / 2 - CX * s : 0, oy = telefono ? H / 2 - CY * s : (H - 1000 * s) / 2
       g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, canvas.width, canvas.height)
       g.setTransform(2 * s, 0, 0, 2 * s, 2 * ox, 2 * oy)
       const mx = raton.current.x > -1000 ? (raton.current.x - ox) / s : -9999, my = raton.current.y > -1000 ? (raton.current.y - oy) / s : -9999
