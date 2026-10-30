@@ -96,7 +96,7 @@ a través de `sitio_contenido()` (abajo), nunca la tabla directa.
 | Nombres de los módulos en la sección Flowbit Base | `modulos` (clave, nombre, descripcion, orden, padre, categoria) | Sólo los de primer nivel (`padre is null`) |
 | Precio de cada módulo | `servicios` (tipo `modulo`, `precio`, `ciclo`) | `precio null` = por definir: el sitio no lo muestra |
 | Giros del selector y los módulos que enciende cada uno | `plantillas_giro` (clave, nombre, orden) + `giro_modulos` | Hoy el lienzo muestra 8 giros; la base tiene los suyos y manda la base |
-| Precio del diagnóstico (Soluciones, Proceso, Diagnóstico, FAQ) | `servicios` con clave `diagnostico` | **No existe todavía**: hay que darlo de alta (precio por confirmar: $5,000 o $10,000) |
+| Precio del diagnóstico (Soluciones, Proceso, Diagnóstico, FAQ) | `servicios` con clave `diagnostico` | **No existe todavía**: hay que darlo de alta, a $5,000 MXN |
 | Formulario de contacto | → `leads` (nombre, negocio, correo, telefono, giro, origen=`sitio`, notas) | El interés y el mensaje van a `notas` |
 
 `giro_modulos` y `modulos` hoy sólo se leen con sesión de plataforma (RLS). El sitio es público, así que necesita
@@ -155,7 +155,7 @@ end $$;
 grant execute on function public.sitio_registrar_lead(jsonb) to anon;
 ```
 
-**Demo automática** — la base ya tiene las piezas (`empresas.es_demo`, `demo_vence_en`, `demo_lead`, las demos sembradas
+**Demo automática (va después, en carril aparte, con correo confirmado y antiabuso; la llamada queda comentada)** — la base ya tiene las piezas (`empresas.es_demo`, `demo_vence_en`, `demo_lead`, las demos sembradas
 por giro y `base_demos_usuarios`). Falta una función `crear_demo_desde_lead(lead uuid)` que: arme la empresa demo con
 el paquete de `giro_modulos` del giro del lead (mapeando el texto del formulario a `plantillas_giro.clave`), le ponga
 `demo_vence_en`, la ligue al lead (`demo_lead`), pase el lead a etapa `demo` y le mande el acceso por correo. Protección

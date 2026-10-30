@@ -3,7 +3,7 @@ import type { CatalogoBase, SitioContenido } from './tipos'
 // Contenido por defecto: lo aprobado en el lienzo de diseño. El sitio lo usa mientras la consola
 // no tenga su propia versión publicada (ver fuente.ts). Lo que va entre [corchetes] está pendiente.
 
-const DIAGNOSTICO = '[$5,000 o $10,000 MXN]'
+const DIAGNOSTICO = '$5,000 MXN'
 
 export const contenidoPredeterminado: SitioContenido = {
   navegacion: {

@@ -29,7 +29,7 @@ export default function Sitio() {
   const [contacto, setContacto] = useState(false)
   const abrir = () => setContacto(true)
   // El precio del diagnóstico sale de la base; mientras no esté dado de alta se muestra el marcador
-  const precioDiagnostico = catalogo.precioDiagnostico != null ? `$${catalogo.precioDiagnostico.toLocaleString('es-MX')} MXN` : '[$5,000 o $10,000 MXN]'
+  const precioDiagnostico = catalogo.precioDiagnostico != null ? `$${catalogo.precioDiagnostico.toLocaleString('es-MX')} MXN` : '$5,000 MXN'
   // Al volver de una ficha (/#casos), baja hasta la sección
   const { hash } = useLocation()
   useEffect(() => {
