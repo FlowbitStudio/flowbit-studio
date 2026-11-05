@@ -38,6 +38,7 @@ import camionesAConciertos from './camiones-a-conciertos'
 import escandalo from './escandalo'
 import calzadoBlade from './calzado-blade'
 import canCanPress from './can-can-press'
+import sxuso from './sxuso'
 import type { ProposalData } from './types'
 
 // Registra aquí cada propuesta con su slug (usado en la URL)
@@ -55,4 +56,5 @@ export const proposals: Record<string, ProposalData> = {
   'escandalo': escandalo,
   'calzado-blade': calzadoBlade,
   'can-can-press': canCanPress,
+  'sxuso': sxuso,
 }
